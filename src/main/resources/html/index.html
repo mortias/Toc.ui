@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="us">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Example Page</title>
+    <link href="../themes/blitzer/jquery-ui.css" rel="stylesheet">
+    <style>
+        body {
+            font: 62.5% "Trebuchet MS", sans-serif;
+        } 
+    </style>
+</head>
+<body marginleft="0" margintop="0" marginright="0" marginbottom="0" marginwidth="0" marginheight="0" style="background-color:#eeeeee">
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">First</a></li>
+        <li><a href="#tabs-2">Second</a></li>
+        <li><a href="#tabs-3">Third</a></li>
+    </ul>
+    <div id="tabs-1">
+        <table>
+            <tr>
+                <td>
+                    <hr>
+                    <b><i>&nbsp;Java ERCEA MicroServices</i></b>
+                    <hr>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td width="120">Weblogic 158.168.55.16</td>
+                            <td><a href="file:///http://158.168.55.16:7001/console">[CONSOLE]</a></td>
+                        </tr>
+                        <tr>
+                            <td>Reporting service</td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/reporting/info">[INFO]</a></td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/reporting/rest/api-docs">[REST]</a></td>
+                        </tr>
+                        <tr>
+                            <td>Research service</td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/research/info">[INFO]</a></td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/research/rest/api-docs">[REST]</a></td>
+                        </tr>
+                        <tr>
+                            <td>Document service</td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/documents/info">[INFO]</a></td>
+                            <td><a href="file:///http://158.168.55.16:7001/backoffice/services/documents/rest/api-docs">[REST]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>JasperReports Windows</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">CF Dev/Test/Prod</td>
+                            <td><a href="file:///http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html">[HTTP]</a></td>
+                            <td><a href="file:///C:/Program Files/Windows Sidebar/Gadgets/Toc.Gadget/rdp/rdp-erc-nanut.bat">[REMOTE]</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br>
+                                <b>JasperReports Unix</b></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: green; ">Development</span></td>
+                            <td><a href="file:///http://s-erc-nanut-d.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: orange; ">Test</span></td>
+                            <td><a href="file:///http://s-erc-nanut-t.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: red; ">Production</span></td>
+                            <td><a href="file:///http://s-erc-nanut-p.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>TaskManager</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">CF Dev/Test/Prod</td>
+                            <td><a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm">[HTTP]</a></td>
+                            <td><a href="file:///http://s-erc-nerada.net1.cec.eu.int/CFIDE/administrator/index.cfm">[ADMIN]</a></td>
+                            <td><a href="file:///C:/Program Files/Windows Sidebar/Gadgets/Toc.Gadget/rdp/rdp-erc-nerada.bat">[REMOTE]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Accordion -->
+        <h2 class="demoHeaders">Accordion</h2>
+        <div id="accordion">
+            <h3>Continuous integration</h3>
+            <div>
+                <table cellpadding="1" cellspacing="2" border="0" width="270">
+                    <tr>
+                        <td width="120">Jenkins CF</td>
+                        <td><a href="file:///http://ci.ercea.cec.eu.int:8082/jenkins">[HTTP]</a></td>
+                    </tr>
+                    <tr>
+                        <td width="120">Jenkins Java</td>
+                        <td><a href="file:///http://s-erc-saratoga.net1.cec.eu.int:8080">[HTTP]</a></td>
+                    </tr>
+                </table>
+            </div>
+            <h3>Artifact repository</h3>
+            <div>
+                <table cellpadding="1" cellspacing="2" border="0" width="270">
+                    <tr>
+                        <td width="120">Nexus</td>
+                        <td><a href="https://webgate.ec.europa.eu/CITnet/nexus/index.html">[HTTP]</a></td>
+                    </tr>
+                </table>
+            </div>
+            <h3>RTD Services</h3>
+            <div>
+                <table cellpadding="1" cellspacing="2" border="0" width="270">
+                    <tr>
+                        <td width="120"><b>RTD Services</b></td>
+                        <td><a href="file:///http://www.cc.cec/wikis/display/eboss/Project+Reporting+service">[CATALOG]</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><b>CF test pages</b></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_project.cfm">[prjList]</a>
+                            <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByOfficer.cfm">[prjByOfficer]</a>
+                            <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_financial.cfm">[prjFinancial]</a><br>
+                            <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByRespDep.cfm">[prjByDepartment]</a>
+                            <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_reporting.cfm">[prjReporting]</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div id="tabs-2">
+        <table>
+        <tr>
+            <td>
+                <hr>
+                <b><i>&nbsp;EC/ERCEA Applications</i></b>
+                <hr>
+                <table cellpadding="1" cellspacing="2" border="0" width="270">
+                    <tr>
+                        <td colspan="3"><b>ARES</b></td>
+                    </tr>
+                    <tr>
+                        <td width="120"><span style="color: green; ">Dev / Test</span></td>
+                        <td><a href="file:///http://www.development.cc.cec/Ares_pg/welcome.do">[HTTP]</a></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color: red; ">Production</span></td>
+                        <td><a href="file:///http://www.cc.cec/Ares/welcome.do">[HTTP]</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><br>
+                            <b>MICE</b></td>
+                    </tr>
+                    <tr>
+                        <td><span style="color: red; ">Production</span></td>
+                        <td><a href="file:///http://intragate.ec.europa.eu/ENTR/mice/index.cfm?fuseaction=sec.main"
+                                >[HTTP]</a></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><br>
+                            <b>Other</b></td>
+                    </tr>
+                    <tr>
+                        <td>SMT Incidents</td>
+                        <td><a href="file:///http://www.cc.cec/smtes/dyncode/im/myclosedincidents?actionId=26">[HTTP]</a></td>
+                    <tr>
+                        <td>Menu Selfs</td>
+                        <td><a href="file:///http://www.eurest.be/ce/Menus/menus.asp?D2=Y&Par=EUREST">[HTTP]</a></td>
+                    </tr>
+
+                    <!--
+                    <tr><td>ABAC</td><td>ABAC file:///http://www.cc.cec/budg/its/si2/its-020_index_en.html</td></tr>
+                    <tr><td>Webmail Telenet</td><td>https://mail.telenet.be/zimbra/mail?client=advanced&null=#1</td></tr>
+                    <tr><td>Technology Radar</td><td>file:///http://www.thoughtworks.com/radar</td></tr>
+                    file:///http://www.development.cc.cec/Ares_pg/welcome.do
+                    file:///http://www.cc.cec/Ares/welcome.do
+                    file:///http://www.cc.cec/wikis/dashboard.action
+                    file:///http://www.cc.cec/wikis/dashboard.action
+                    https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates
+                    https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+CF+Client
+                    https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+for+Developers
+                    file:///http://s-erc-norkova.net1.cec.eu.int:8500/ercbackoffice/index.cfm
+                    file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm
+                    file:///http://s-erc-nerada.net1.cec.eu.int/CFIDE/administrator/index.cfm
+                    file:///http://www.cc.cec/wikis/display/HRS/HRS-WSD-1.16
+                    file:///http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html
+                    file:///http://localhost:7001/console/console.portal?_nfpb=true&_pageLabel=HomePage1
+                    file:///http://intragate.ec.europa.eu/ENTR/mice/index.cfm?fuseaction=sec.main
+                    https://webgate.ec.europa.eu/CITnet/nexus/index.html#welcome
+                    file:///http://www.cc.cec/wikis/display/eboss/Project+Reporting+service
+                    file:///http://www.cc.cec/smtes/dyncode/im/myclosedincidents?actionId=26
+                    https://webmail.ec.europa.eu/CookieAuth.dll?GetLogon?url=%2F&reason=0
+                    https://github.com/wordnik/swagger-spec
+                    file:///http://localhost:7001/console/login/LoginForm.jsp
+
+                    file:///http://www.fortuneo.be/nl/valutabestand/006/FR0004152221/beursgrafiek-global-graphics-n.html
+                    file:///http://www.fortuneo.be/nl/valutabestand/046/IT0001351383/beursgrafiek-trevi-finanz-indust.html
+                    file:///http://www.fortuneo.be/nl/valutabestand/044/DE0006614712/beursgrafiek-solar-fabrik.html
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-ART
+                    file:///http://www.boursorama.com/cours.phtml?symbole=1rPCS
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-NYR&search%5Bquery%5D=nyrstar
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-PUN&vue=full
+                    file:///http://www.boursorama.com/cours.phtml?symbole=1rPUBI&search%5Bquery%5D=ubisoft
+                    file:///http://www.standaard.be/artikel/detail.aspx?artikelid=DMF20110520_100
+                    file:///http://grafieken.tijd.be/190118645
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-DEVG
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-EURN
+                    file:///http://www.boursorama.com/cours.phtml?symbole=1rTLVE
+                    file:///http://www.boursorama.com/cours.phtml?symbole=FF11-THR
+
+                    https://webgate.ec.europa.eu/CITnet/confluence/display/RefApp/EC+HTML+bundle
+                    file:///http://java.dzone.com/articles/exporting-spring-data-jpa?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+javalobby%2Ffrontpage+%28Javalobby+%2F+Java+Zone%29
+                    file:///http://viralpatel.net/blogs/hibernate-many-to-many-annotation-mapping-tutorial/
+                    file:///http://zeroturnaround.com/rebellabs/the-state-of-logging-in-java-2013/
+                    file:///http://regex101.com/
+                    file:///http://sleeplessinslc.blogspot.be/
+                    file:///http://www.journaldev.com/2597/spring-datasource-jndi-with-tomcat-example
+                    file:///http://www.cc.cec/SYSPER2/home/menu.do?ticket=ST-156577-cZSf5zqyBKjKe2GMS3PXxPGa0zKK0fDtzq393ZSE5OL8-wkGjxchnStjMueiTZpKjZG-zPLLA46gyVAJPQFDJnNrzR
+                    https://webgate.ec.europa.eu/CITnet/jira/secure/Dashboard.jspa
+                    file:///http://www.codingpedia.org/ama/tutorial-rest-api-design-and-implementation-in-java-with-jersey-and-spring/
+                    file:///http://intranet.ercea.cec.eu.int/services/communications/products/Pages/Visual-Identity.aspx
+                    file:///http://ci.ercea.cec.eu.int:8082/jenkins/
+
+                    file:///http://cf8rtdd1.cc.cec.eu.int:6090/ercbackoffice/index.cfm
+                    file:///http://cf8rtdt1.cc.cec.eu.int:6090/ercbackoffice/index.cfm
+                    file:///http://cf8rtdp1.cc.cec.eu.int:6090/ercbackoffice/index.cfm
+                    file:///http://ci.ercea.cec.eu.int:8082/jenkins/
+                    https://webgate.ec.europa.eu/CITnet/nexus/index.html#welcome
+                    file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm
+                    file:///http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html
+                    file:///http://s-erc-sentinel.net1.cec.eu.int/svn/
+                    file:///http://www.renderhtml.com/
+                    file:///http://www.verkeerscentrum.be/verkeersinfo/camerabeelden/brussel
+                    file:///http://www.eurest.be/ce/Menus/menus.asp?D2=Y&Par=EUREST
+                    file:///http://www.digitaleradio.be/dab/hoeluisteren/pc/help/Links_streams.html
+                    file:///http://www.thoughtworks.com/radar/#/languages-and-frameworks/519
+                    file:///http://link.springer.com/
+                    -->
+                </table>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div id="tabs-3">
+        <table>
+            <tr>
+                <td>
+                    <hr>
+                    <b><i>&nbsp;ColdFusion ERCEA Portal</i></b>
+                    <hr>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td width="120"><span style="color: green; ">Development</span></td>
+                            <td><a href="file:///http://cf8rtdd1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">[HTTP]</a></td>
+                            <td>
+                                <a href="file:///C:/PrivateWS/toc/target/classes/run/ftp-erc-dev.bat">[FTP]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: orange; ">Test</span></td>
+                            <td><a href="file:///http://cf8rtdt1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">[HTTP]</a></td>
+                            <td>
+                                <a href="file:///C:/PrivateWS/toc/target/classes/run/bat/ftp-erc-test.bat">[FTP]</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: red; ">Production</span></td>
+                            <td><a href="file:///http://158.167.242.24:6090/ercbackoffice/index.cfm">[HTTP]</a></td>
+                            <td>
+                                <a href="file:///C:/PrivateWS/toc/target/classes/run/bat/ftp-erc-prod.bat">[FTP]</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>JasperReports Windows</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">CF Dev/Test/Prod</td>
+                            <td><a href="file:///http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html">[HTTP]</a></td>
+                            <td><a href="file:///C:/PrivateWS/toc/target/classes/run/rdp/rdp-erc-nanut.bat">[REMOTE]</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><br>
+                                <b>JasperReports Unix</b></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: green; ">Development</span></td>
+                            <td><a href="file:///http://s-erc-nanut-d.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: orange; ">Test</span></td>
+                            <td><a href="file:///http://s-erc-nanut-t.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                        <tr>
+                            <td><span style="color: red; ">Production</span></td>
+                            <td><a href="file:///http://s-erc-nanut-p.net1.cec.eu.int:8080/jasperserver/login.html">[HTTP]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>TaskManager</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">CF Dev/Test/Prod</td>
+                            <td><a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm">[HTTP]</a></td>
+                            <td><a href="file:///http://s-erc-nerada.net1.cec.eu.int/CFIDE/administrator/index.cfm">[ADMIN]</a></td>
+                            <td><a href="file:///C:/PrivateWS/toc/target/classes/run/rdp/rdp-erc-nerada.bat">[REMOTE]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>Continuous integration</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">Jenkins CF</td>
+                            <td><a href="file:///http://ci.ercea.cec.eu.int:8082/jenkins">[HTTP]</a></td>
+                        </tr>
+                        <tr>
+                            <td width="120">Jenkins Java</td>
+                            <td><a href="file:///http://s-erc-saratoga.net1.cec.eu.int:8080">[HTTP]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td colspan="3"><b>Artifact repository</b></td>
+                        </tr>
+                        <tr>
+                            <td width="120">Nexus</td>
+                            <td><a href="https://webgate.ec.europa.eu/CITnet/nexus/index.html">[HTTP]</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom: thin solid #000000;">&nbsp;</td>
+            </tr>
+            <tr>
+                <td>
+                    <table cellpadding="1" cellspacing="2" border="0" width="270">
+                        <tr>
+                            <td width="120"><b>RTD Services</b></td>
+                            <td><a href="file:///http://www.cc.cec/wikis/display/eboss/Project+Reporting+service">[CATALOG]</a></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><b>CF test pages</b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_project.cfm">[prjList]</a>
+                                <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByOfficer.cfm">[prjByOfficer]</a>
+                                <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_financial.cfm">[prjFinancial]</a><br>
+                                <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByRespDep.cfm">[prjByDepartment]</a>
+                                <a href="file:///http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_reporting.cfm">[prjReporting]</a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+ 
+
+<script src="../jquery-ui/jquery.js"></script>
+<script src="../jquery-ui/jquery-ui.js"></script>
+<script>
+
+    $("#accordion").accordion();
+
+
+    $("#tabs").tabs();
+
+</script>
+</body>
+</html>

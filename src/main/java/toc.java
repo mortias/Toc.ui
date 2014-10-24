@@ -1,16 +1,14 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -30,15 +28,20 @@ public class toc extends Application {
     // application stage is stored so that it can be shown and hidden based on system tray icon operations.
     private Stage stage;
 
-    private static double xOffset = 0;
-    private static double yOffset = 0;
+    public double initialX;
+    public double initialY;
 
+    public static void main(String[] args) throws IOException, java.awt.AWTException {
+        launch(args);
+    }
 
     // sets up the javafx application.
     // a tray icon is setup for the icon, but the main stage remains invisible until the user
     // interacts with the tray icon.
+
     @Override
-    public void start(final Stage stage) {
+    public void start(Stage stage) {
+
         // stores a reference to the stage.
         this.stage = stage;
 
@@ -51,33 +54,25 @@ public class toc extends Application {
         // out stage will be translucent, so give it a transparent style.
         stage.initStyle(StageStyle.UNDECORATED);
 
-        TabPane tabPane = new TabPane();
-        Tab tab1 = new Tab();
-        tab1.setClosable(false);
-        tab1.setText("ERCEA Portal");
-        tab1.setContent(new Browser("html/ercea_portal.html"));
+        Browser browser = new Browser("html/index.html");
 
-        Tab tab2 = new Tab();
-        tab2.setText("ERCEA MicroServices");
-        tab2.setContent(new Browser("html/ercea_ms.html"));
-        tab2.setClosable(false);
+        StackPane root = new StackPane();
+        root.setId("ROOTNODE");
 
-        Tab tab3 = new Tab();
-        tab3.setText("ERCEA Apps");
-        tab3.setContent(new Browser("html/ercea_apps.html"));
-        tab3.setClosable(false);
+        Rectangle rect = new Rectangle(350, 610);
+        rect.setArcHeight(5.0);
+        rect.setArcWidth(5.0);
 
-        tabPane.getTabs().add(tab1);
-        tabPane.getTabs().add(tab2);
-        tabPane.getTabs().add(tab3);
+        browser.setClip(rect);
+        root.getChildren().add(browser);
 
-        // a scene with a transparent fill is necessary to implement the translucent app window.
-        Scene scene = new Scene(tabPane, 520, 690, Color.web("#666970"));
+        Scene scene = new Scene(root, 350, 610, Color.web("#eeeeee"));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setTitle("Hello World !");
         stage.setScene(scene);
-
-        //   stage.setTitle("Web View");
-
-        addDraggableNode(tabPane);
+        stage.getScene().getStylesheets().setAll(RoundedTest.class.getResource("css/gui.css").toString());
+        stage.show();
 
     }
 
@@ -148,39 +143,22 @@ public class toc extends Application {
         }
     }
 
-    public static void main(String[] args) throws IOException, java.awt.AWTException {
-        // Just launches the JavaFX application.
-        // Due to way the application is coded, the application will remain running
-        // until the user selects the Exit menu option from the tray icon.
-        launch(args);
-    }
-
-    public double initialX;
-    public double initialY;
-
     private void addDraggableNode(final Node node) {
 
-        node.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent me) {
-                if (me.getButton() != MouseButton.MIDDLE) {
-                    initialX = me.getSceneX();
-                    initialY = me.getSceneY();
-                }
+        node.setOnMousePressed(me -> {
+            if (me.getButton() != MouseButton.MIDDLE) {
+                initialX = me.getSceneX();
+                initialY = me.getSceneY();
             }
         });
 
-        node.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent me) {
-                if (me.getButton() != MouseButton.MIDDLE) {
-                    node.getScene().getWindow().setX(me.getScreenX() - initialX);
-                    node.getScene().getWindow().setY(me.getScreenY() - initialY);
-                }
+        node.setOnMouseDragged(me -> {
+            if (me.getButton() != MouseButton.MIDDLE) {
+                node.getScene().getWindow().setX(me.getScreenX() - initialX);
+                node.getScene().getWindow().setY(me.getScreenY() - initialY);
             }
         });
     }
-
 
     class Browser extends Region {
 
@@ -189,11 +167,10 @@ public class toc extends Application {
 
         public Browser(String source) {
 
-            //apply the styles
-            getStyleClass().add("browser");
-
             URL urlHello = getClass().getResource(source);
             webEngine.load(urlHello.toExternalForm());
+
+            addDraggableNode(browser);
 
             webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
 
@@ -230,4 +207,5 @@ public class toc extends Application {
             return 500;
         }
     }
+
 }
