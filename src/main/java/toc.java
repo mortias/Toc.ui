@@ -71,7 +71,7 @@ public class toc extends Application {
         scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Hello World !");
         stage.setScene(scene);
-        stage.getScene().getStylesheets().setAll(RoundedTest.class.getResource("css/gui.css").toString());
+        stage.getScene().getStylesheets().setAll(toc.class.getResource("css/gui.css").toString());
         stage.show();
 
     }
