@@ -5,14 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import settings.Config;
 import tools.Utils;
 
 import javax.imageio.ImageIO;
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
