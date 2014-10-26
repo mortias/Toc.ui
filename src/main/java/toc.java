@@ -1,46 +1,48 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import settings.Config;
+import tools.Utils;
 
 import javax.imageio.ImageIO;
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URISyntaxException;
 
-// Java 8 code
 public class toc extends Application {
 
-    // one icon location is shared between the application tray icon and task bar icon.
-    // you could also use multiple icons to allow for clean display of tray icons on hi-dpi devices.
-    private static final String iconImageLoc = "images/icon.png";
+    private Utils utils = new Utils();
 
-    // application stage is stored so that it can be shown and hidden based on system tray icon operations.
-    private Stage stage;
+    private static final String iconImagePath = "javafx/images/icon.png";
+    private static final String configPath = "toc/settings/config.yml";
+
+    private static final String templatePath = "toc/html/template.html";
+    private static final String indexPath = "toc/html/index.html";
 
     public double initialX;
     public double initialY;
 
-    public static void main(String[] args) throws IOException, java.awt.AWTException {
+    private Stage stage;
+
+    public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
     }
 
-    // sets up the javafx application.
-    // a tray icon is setup for the icon, but the main stage remains invisible until the user
-    // interacts with the tray icon.
+    @Override
+    public void init() throws Exception {
+        utils.loadConfig(configPath);
+        utils.prepareContent(indexPath, templatePath);
+    }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws IOException, URISyntaxException {
 
         // stores a reference to the stage.
         this.stage = stage;
@@ -54,63 +56,47 @@ public class toc extends Application {
         // out stage will be translucent, so give it a transparent style.
         stage.initStyle(StageStyle.UNDECORATED);
 
-        Browser browser = new Browser("html/index.html");
+        Browser browser = new Browser(indexPath);
+        addDraggableNode(browser.getWebView());
 
         StackPane root = new StackPane();
         root.setId("ROOTNODE");
 
-        Rectangle rect = new Rectangle(350, 610);
-        rect.setArcHeight(5.0);
-        rect.setArcWidth(5.0);
-
-        browser.setClip(rect);
         root.getChildren().add(browser);
 
-        Scene scene = new Scene(root, 350, 610, Color.web("#eeeeee"));
+        Scene scene = new Scene(root, utils.config.getWidth(), utils.config.getHeight(), Color.web("#000000"));
         stage.initStyle(StageStyle.TRANSPARENT);
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.getScene().getStylesheets().setAll(toc.class.getResource("css/gui.css").toString());
         stage.show();
 
     }
 
-    /**
-     * Sets up a system tray icon for the application.
-     */
+    // Sets up a system tray icon for the application.
     private void addAppToTray() {
+
         try {
-            // ensure awt toolkit is initialized.
+
             java.awt.Toolkit.getDefaultToolkit();
 
-            // app requires system tray support, just exit if there is no support.
             if (!java.awt.SystemTray.isSupported()) {
                 System.out.println("No system tray support, application exiting.");
                 Platform.exit();
             }
 
-            // set up a system tray icon.
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
-            java.awt.Image image = ImageIO.read(ClassLoader.getSystemResource(iconImageLoc));
+            java.awt.Image image = ImageIO.read(ClassLoader.getSystemResource(iconImagePath));
             java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(image);
 
-            // if the user double-clicks on the tray icon, show the main app stage.
             trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
 
-            // if the user selects the default menu item (which includes the app name), 
-            // show the main app stage.
             java.awt.MenuItem openItem = new java.awt.MenuItem("Show TOC");
             openItem.addActionListener(event -> Platform.runLater(this::showStage));
 
-            // the convention for tray icons seems to be to set the default icon for opening
-            // the application stage in a bold font.
             java.awt.Font defaultFont = java.awt.Font.decode(null);
             java.awt.Font boldFont = defaultFont.deriveFont(java.awt.Font.BOLD);
             openItem.setFont(boldFont);
 
-            // to really exit the application, the user must go to the system tray icon
-            // and select the exit option, this will shutdown JavaFX and remove the
-            // tray icon (removing the tray icon will also shut down AWT).
             java.awt.MenuItem exitItem = new java.awt.MenuItem("Exit");
             exitItem.addActionListener(event -> {
                 Platform.exit();
@@ -126,15 +112,13 @@ public class toc extends Application {
 
             // add the application tray icon to the system tray.
             tray.add(trayIcon);
+
         } catch (java.awt.AWTException | IOException e) {
             System.out.println("Unable to init system tray");
             e.printStackTrace();
         }
     }
 
-    /**
-     * Shows the application stage and ensures that it is brought ot the front of all stages.
-     */
     private void showStage() {
         if (stage != null) {
             stage.show();
@@ -157,54 +141,6 @@ public class toc extends Application {
                 node.getScene().getWindow().setY(me.getScreenY() - initialY);
             }
         });
-    }
-
-    class Browser extends Region {
-
-        final WebView browser = new WebView();
-        final WebEngine webEngine = browser.getEngine();
-
-        public Browser(String source) {
-
-            URL urlHello = getClass().getResource(source);
-            webEngine.load(urlHello.toExternalForm());
-
-            addDraggableNode(browser);
-
-            webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
-
-                System.out.println(newLoc);
-
-                try {
-                    String[] array = {"cmd", "/C", "start", newLoc.replace("file:///", "")};
-                    Runtime.getRuntime().exec(array);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-
-            //add the web view to the scene
-            getChildren().add(browser);
-
-        }
-
-        @Override
-        protected void layoutChildren() {
-            double w = getWidth();
-            double h = getHeight();
-            layoutInArea(browser, 0, 0, w, h, 0, HPos.CENTER, VPos.CENTER);
-        }
-
-        @Override
-        protected double computePrefWidth(double height) {
-            return 750;
-        }
-
-        @Override
-        protected double computePrefHeight(double width) {
-            return 500;
-        }
     }
 
 }
