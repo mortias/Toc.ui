@@ -1,0 +1,5 @@
+config:
+      - !settings.Config
+        theme: vader
+        width: 450
+        height: 650
