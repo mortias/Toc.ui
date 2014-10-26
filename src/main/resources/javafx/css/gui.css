@@ -1,0 +1,6 @@
+#ROOTNODE {
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-width:3;
+    -fx-border-color:#000000;
+}
