@@ -16,6 +16,7 @@ public class Browser extends Region {
 
         URL url = getClass().getResource(source);
         webEngine.load(url.toExternalForm());
+        webView.setContextMenuEnabled(false);
 
         webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
 

@@ -5,6 +5,7 @@ public class Config {
     private int width;
     private int height;
     private String theme;
+    private String locale;
 
     public int getWidth() {
         return width;
@@ -30,4 +31,11 @@ public class Config {
         this.theme = theme;
     }
 
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
 }

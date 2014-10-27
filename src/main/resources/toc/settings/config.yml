@@ -1,5 +1,6 @@
 config:
       - !settings.Config
-        theme: vader
-        width: 450
-        height: 650
+        theme: cupertino
+        locale: nl_BE
+        width: 420
+        height: 600
