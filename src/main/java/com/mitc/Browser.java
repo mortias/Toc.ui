@@ -1,3 +1,5 @@
+package com.mitc;
+
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.layout.Region;
@@ -5,7 +7,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 import java.io.IOException;
-import java.net.URL;
 
 public class Browser extends Region {
 
@@ -14,8 +15,7 @@ public class Browser extends Region {
 
     public Browser(String source) {
 
-        URL url = getClass().getResource(source);
-        webEngine.load(url.toExternalForm());
+        webEngine.load(ClassLoader.getSystemResource(source).toExternalForm());
         webView.setContextMenuEnabled(false);
 
         webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {

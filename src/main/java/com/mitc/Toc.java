@@ -1,3 +1,6 @@
+package com.mitc;
+
+import com.mitc.common.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -7,19 +10,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import tools.Utils;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class Main extends Application {
+public class Toc extends Application {
 
     private Utils utils = new Utils();
 
-    private static final String iconImagePath = "toc/images/icon.png";
     private static final String configPath = "toc/settings/config.yml";
 
+    private static final String iconImagePath = "toc/images/icon.png";
     private static final String templatePath = "toc/html/template.html";
     private static final String indexPath = "toc/html/index.html";
 

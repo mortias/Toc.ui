@@ -1,10 +1,10 @@
-package tools;
+package com.mitc.common;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
+import com.mitc.settings.Config;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import settings.Config;
 
 import java.io.File;
 import java.io.FileReader;
@@ -26,13 +26,12 @@ public class Utils {
         YamlReader reader = new YamlReader(
                 new FileReader(new File(ClassLoader.getSystemResource(configPath).toURI())));
 
-        Object object = reader.read();
-        Map map = (Map) object;
-        ArrayList<Config> configs = (ArrayList<Config>) map.get("config");
-        config = configs.get(0);
+        Map map = (Map) reader.read();
+        config = ((ArrayList<Config>) map.get("config")).get(0);
 
         if (config.getLocale().contains("_"))
-            loadLanguage(config.getLocale().split("_")[0], config.getLocale().split("_")[1]);
+            setLanguage(config.getLocale().split("_")[0], config.getLocale().split("_")[1]);
+
     }
 
     public void prepareContent(String indexPath, String templatePath) throws IOException, URISyntaxException {
@@ -41,18 +40,16 @@ public class Utils {
         valuesMap.put("theme", config.getTheme());
         valuesMap.put("width", String.valueOf(config.getWidth()));
         valuesMap.put("height", String.valueOf(config.getHeight() - 60));
+        valuesMap.put("system", config.getWorkDir() + config.getPathSep() + "toc" + config.getPathSep() + "system");
 
         String raw = IOUtils.toString(ClassLoader.getSystemResource(templatePath).toURI(), charset);
-        StrSubstitutor sub = new StrSubstitutor(valuesMap);
-
-        String res = sub.replace(raw);
-        // res = res.replace("a href=\"", "a href=\"file:\\\\\\");
+        String res = new StrSubstitutor(valuesMap).replace(raw).replace("a href=\"", "a href=\"file:\\\\\\");
 
         FileUtils.writeStringToFile(new File(ClassLoader.getSystemResource(indexPath).toURI()), res);
 
     }
 
-    public void loadLanguage(String language, String country) {
+    public void setLanguage(String language, String country) {
         Locale locale = new Locale(language.toLowerCase(), country.toUpperCase());
         lang = ResourceBundle.getBundle("i18n/bundle", locale);
     }

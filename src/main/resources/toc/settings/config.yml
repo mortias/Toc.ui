@@ -1,5 +1,5 @@
 config:
-      - !settings.Config
+      - !com.mitc.settings.Config
         theme: cupertino
         locale: nl_BE
         width: 420
