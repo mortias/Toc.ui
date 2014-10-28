@@ -1,21 +1,17 @@
 package com.mitc.settings;
 
-import com.mitc.Toc;
-
-import java.io.File;
-
 public class Config {
 
     private int width;
     private int height;
+
     private String theme;
     private String locale;
     private String pathSep;
-    private String workDir;
+    private String site;
 
     public Config() {
         this.pathSep = System.getProperty("file.separator");
-        this.workDir = new File(Toc.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath();
     }
 
     public int getWidth() {
@@ -58,12 +54,12 @@ public class Config {
         this.pathSep = pathSep;
     }
 
-    public String getWorkDir() {
-        return workDir;
+    public String getSite() {
+        return site;
     }
 
-    public void setWorkDir(String workDir) {
-        this.workDir = workDir;
+    public void setSite(String site) {
+        this.site = site;
     }
 
 }

@@ -19,11 +19,11 @@ public class Toc extends Application {
 
     private Utils utils = new Utils();
 
-    private static final String configPath = "toc/settings/config.yml";
+    private static final String configPath = "config.yml";
 
-    private static final String iconImagePath = "toc/images/icon.png";
-    private static final String templatePath = "toc/html/template.html";
-    private static final String indexPath = "toc/html/index.html";
+    private static final String iconImagePath = "icon.png";
+    private static final String templatePath = "template.html";
+    private static final String indexPath = "index.html";
 
     public double initialX;
     public double initialY;
@@ -57,7 +57,7 @@ public class Toc extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle(utils.lang.getString("title"));
 
-        Browser browser = new Browser(indexPath);
+        Browser browser = new Browser(utils.config.getSite() + "html/" + indexPath);
         addDraggableNode(browser.getWebView());
 
         // create the layout for the javafx stage.
@@ -76,6 +76,7 @@ public class Toc extends Application {
      */
     private void addAppToTray() {
         try {
+
             // ensure awt toolkit is initialized.
             java.awt.Toolkit.getDefaultToolkit();
 
@@ -87,7 +88,7 @@ public class Toc extends Application {
 
             // set up a system tray icon.
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
-            java.awt.Image image = ImageIO.read(ClassLoader.getSystemResource(iconImagePath));
+            java.awt.Image image = ImageIO.read(ClassLoader.getSystemResource("./images/" + iconImagePath));
 
             java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(image);
 
@@ -107,6 +108,7 @@ public class Toc extends Application {
 
             // add the application tray icon to the system tray.
             tray.add(trayIcon);
+
         } catch (java.awt.AWTException | IOException e) {
             System.out.println(utils.lang.getString("errTrayInit"));
             e.printStackTrace();

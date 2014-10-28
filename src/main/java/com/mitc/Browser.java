@@ -6,7 +6,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Browser extends Region {
 
@@ -15,21 +18,27 @@ public class Browser extends Region {
 
     public Browser(String source) {
 
-        webEngine.load(ClassLoader.getSystemResource(source).toExternalForm());
-        webView.setContextMenuEnabled(false);
+        try {
 
-        webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
+            // todo add logging
+            URL url = new File(source).toURI().toURL();
+            System.out.println("Browsing file : " + url.toString());
 
-            System.out.println(newLoc);
+            webEngine.load(url.toString());
+            webView.setContextMenuEnabled(false);
 
-            try {
-                String[] array = {"cmd", "/C", "start", newLoc.replace("file:///", "")};
-                Runtime.getRuntime().exec(array);
+            webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
+                try {
+                    String[] array = {"cmd", "/C", "start", newLoc.replace("file:///", "")};
+                    Runtime.getRuntime().exec(array);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
 
         //add the web view to the scene
         getChildren().add(webView);
