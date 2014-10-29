@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -88,9 +88,8 @@ public class Toc extends Application {
 
             // set up a system tray icon.
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
-            java.awt.Image image = ImageIO.read(ClassLoader.getSystemResource("./images/" + iconImagePath));
-
-            java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(image);
+            ImageIcon ico = new ImageIcon(this.getClass().getResource("/images/" + iconImagePath));
+            java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(ico.getImage());
 
             // if the user double-clicks on the tray icon, show the main app stage.
             trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
@@ -109,7 +108,7 @@ public class Toc extends Application {
             // add the application tray icon to the system tray.
             tray.add(trayIcon);
 
-        } catch (java.awt.AWTException | IOException e) {
+        } catch (java.awt.AWTException e) {
             System.out.println(utils.lang.getString("errTrayInit"));
             e.printStackTrace();
         }
