@@ -35,7 +35,6 @@ public class Utils {
         if (config.getLocale().contains("_"))
             setLanguage(config.getLocale().split("_")[0], config.getLocale().split("_")[1]);
 
-
         logger.info(MessageFormat.format(lang.getString("load.config.from"), absolutePath));
 
     }

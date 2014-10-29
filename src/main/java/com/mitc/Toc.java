@@ -17,7 +17,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;import java.text.MessageFormat;
+import java.net.URL;
+import java.text.MessageFormat;
 
 public class Toc extends Application {
 
@@ -65,7 +66,7 @@ public class Toc extends Application {
         // load the site
         URL url = new File(utils.config.getSite() + "html/" + indexPath).toURI().toURL();
         logger.info(MessageFormat.format(utils.lang.getString("browsing.file"), url.toString()));
-        Browser browser = new Browser(url.toString());
+        Browser browser = new Browser(utils.lang, url.toString());
         addDraggableNode(browser.getWebView());
 
         // create the layout for the javafx stage.

@@ -13,10 +13,11 @@
 
  <div id="tabs">
   <ul>
-   <li><a name="t1" href="#tabs-1">Java Services</a></li>
-   <li><a name="t2" href="#tabs-2">ERCEA Portal</a></li>
-   <li><a name="t3" href="#tabs-3">Links</a></li>
-   <li><a name="t4" href="#tabs-4">Books</a></li>
+   <li><a name="t1" href="#tabs-1">Java Ms</a></li>
+   <li><a name="t2" href="#tabs-2">ERC Portal</a></li>
+   <li><a name="t2" href="#tabs-3">Databases</a></li>
+   <li><a name="t3" href="#tabs-4">Links</a></li>
+   <li><a name="t4" href="#tabs-5">Books</a></li>
   </ul>
 
   <!-- ------------------------------------------------- -->
@@ -255,6 +256,32 @@
     <div id="row">
      <div id="cell">
       <div id="container">
+       <div id="row"><div id="cell"><br><b>Development / APPERCD</b></div></div>
+       <div id="row">
+        <div id="cell" style="border-bottom: thin solid #000000;"></div>
+        <div id="cell" style="border-bottom: thin solid #000000;"></div>
+        <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       </div><br>
+       <div id="row">
+        <div id="cell"><button id="database"><a href="${bin}\database\reporting-appercd.bat">Reporting</a></button></div>
+        <div id="cell"></div>
+        <div id="cell"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <!-- ------------------------------------------------- -->
+  <!-- --------------------- TAB 4 --------------------- -->
+  <!-- ------------------------------------------------- -->
+
+  <div id="tabs-4" style="min-height: ${height}px;">
+   <div id="container">
+    <div id="row">
+     <div id="cell">
+      <div id="container">
        <div id="row"><div id="cell"><br><b>EC Applications</b></div></div>
        <div id="row">
         <div id="cell" style="border-bottom: thin solid #000000;"></div>
@@ -320,10 +347,10 @@
  </div>
 
   <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 4 --------------------- -->
+  <!-- --------------------- TAB 5 --------------------- -->
   <!-- ------------------------------------------------- -->
 
-   <div id="tabs-4" style="min-height: ${height}px;">
+   <div id="tabs-5" style="min-height: ${height}px;">
     <div id="container">
      <div id="row">
       <div id="cell">
@@ -393,6 +420,7 @@
    $('button[id="ftp"]').button({icons:{primary: "ui-icon-transfer-e-w"}});
    $('button[id="remote"]').button({icons:{primary: "ui-icon-wrench"}});
    $('button[id="book"]').button({icons:{primary: "ui-icon-document"}});
+   $('button[id="database"]').button({icons:{primary: "ui-icon-gear"}});
   });
 
 </script>
