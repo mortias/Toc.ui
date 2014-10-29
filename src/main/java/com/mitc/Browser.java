@@ -5,40 +5,31 @@ import javafx.geometry.VPos;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class Browser extends Region {
 
-    final WebView webView = new WebView();
-    final WebEngine webEngine = webView.getEngine();
+    private final WebView webView = new WebView();
+    private final WebEngine webEngine = webView.getEngine();
 
-    public Browser(String source) {
+    private final static Logger logger = Logger.getLogger(Browser.class);
 
-        try {
+    public Browser(String url) {
 
-            // todo add logging
-            URL url = new File(source).toURI().toURL();
-            System.out.println("Browsing file : " + url.toString());
+        webEngine.load(url);
+        webView.setContextMenuEnabled(false);
 
-            webEngine.load(url.toString());
-            webView.setContextMenuEnabled(false);
+        webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
+            try {
+                String[] array = {"cmd", "/C", "start", newLoc.replace("file:///", "")};
+                Runtime.getRuntime().exec(array);
 
-            webEngine.locationProperty().addListener((observableValue, oldLoc, newLoc) -> {
-                try {
-                    String[] array = {"cmd", "/C", "start", newLoc.replace("file:///", "")};
-                    Runtime.getRuntime().exec(array);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         //add the web view to the scene
         getChildren().add(webView);

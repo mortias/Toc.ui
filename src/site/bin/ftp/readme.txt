@@ -1,1 +1,0 @@
-here you can put all your bat files to launch an ftp tool

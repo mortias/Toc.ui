@@ -1,6 +1,6 @@
 package com.mitc;
 
-import com.mitc.common.Utils;
+import com.mitc.tools.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -10,17 +10,22 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.log4j.Logger;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;import java.text.MessageFormat;
 
 public class Toc extends Application {
 
     private Utils utils = new Utils();
 
-    private static final String configPath = "config.yml";
+    private static final Logger logger = Logger.getLogger(Toc.class);
 
+    private static final String configPath = "config.yml";
     private static final String iconImagePath = "icon.png";
     private static final String templatePath = "template.html";
     private static final String indexPath = "index.html";
@@ -57,7 +62,10 @@ public class Toc extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle(utils.lang.getString("title"));
 
-        Browser browser = new Browser(utils.config.getSite() + "html/" + indexPath);
+        // load the site
+        URL url = new File(utils.config.getSite() + "html/" + indexPath).toURI().toURL();
+        logger.info(MessageFormat.format(utils.lang.getString("browsing.file"), url.toString()));
+        Browser browser = new Browser(url.toString());
         addDraggableNode(browser.getWebView());
 
         // create the layout for the javafx stage.
@@ -71,45 +79,43 @@ public class Toc extends Application {
 
     }
 
-    /**
-     * Sets up a system tray icon for the application.
-     */
+    // Sets up a system tray icon for the application.
     private void addAppToTray() {
         try {
 
             // ensure awt toolkit is initialized.
-            java.awt.Toolkit.getDefaultToolkit();
+            Toolkit.getDefaultToolkit();
 
             // app requires system tray support, just exit if there is no support.
-            if (!java.awt.SystemTray.isSupported()) {
-                System.out.println(utils.lang.getString("errTraySupport"));
+            if (!SystemTray.isSupported()) {
+                logger.error(utils.lang.getString("errTraySupport"));
                 Platform.exit();
             }
 
             // set up a system tray icon.
-            java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+            SystemTray tray = SystemTray.getSystemTray();
             ImageIcon ico = new ImageIcon(this.getClass().getResource("/images/" + iconImagePath));
-            java.awt.TrayIcon trayIcon = new java.awt.TrayIcon(ico.getImage());
+            TrayIcon trayIcon = new TrayIcon(ico.getImage());
 
             // if the user double-clicks on the tray icon, show the main app stage.
             trayIcon.addActionListener(event -> Platform.runLater(this::showStage));
 
-            java.awt.MenuItem exitItem = new java.awt.MenuItem("Exit");
+            MenuItem exitItem = new MenuItem("Exit");
             exitItem.addActionListener(event -> {
                 Platform.exit();
                 tray.remove(trayIcon);
             });
 
             // setup the popup menu for the application.
-            final java.awt.PopupMenu popup = new java.awt.PopupMenu();
+            final PopupMenu popup = new PopupMenu();
             popup.add(exitItem);
             trayIcon.setPopupMenu(popup);
 
             // add the application tray icon to the system tray.
             tray.add(trayIcon);
 
-        } catch (java.awt.AWTException e) {
-            System.out.println(utils.lang.getString("errTrayInit"));
+        } catch (AWTException e) {
+            logger.error(utils.lang.getString("errTrayInit"));
             e.printStackTrace();
         }
     }
