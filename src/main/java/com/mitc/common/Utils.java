@@ -42,7 +42,7 @@ public class Utils {
         valuesMap.put("theme", config.getTheme());
         valuesMap.put("width", String.valueOf(config.getWidth()));
         valuesMap.put("height", String.valueOf(config.getHeight() - 60));
-        valuesMap.put("system", config.getSite() + "system");
+        valuesMap.put("bin", config.getSite() + "bin");
 
         // read
         String read = config.getSite() + "html/" + templatePath;
