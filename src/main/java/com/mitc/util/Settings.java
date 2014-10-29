@@ -1,16 +1,18 @@
-package com.mitc.tools;
+package com.mitc.util;
 
-public class Config {
+public class Settings {
 
     private int width;
     private int height;
 
+    private String site;
     private String theme;
     private String locale;
-    private String pathSep;
-    private String site;
+    private String level;
 
-    public Config() {
+    private String pathSep;
+
+    public Settings() {
         this.pathSep = System.getProperty("file.separator");
     }
 
@@ -60,6 +62,14 @@ public class Config {
 
     public void setSite(String site) {
         this.site = site;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
     }
 
 }

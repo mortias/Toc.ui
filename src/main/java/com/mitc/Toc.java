@@ -1,6 +1,7 @@
 package com.mitc;
 
-import com.mitc.tools.Utils;
+import com.mitc.util.Config;
+import com.mitc.util.Content;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -10,6 +11,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
@@ -22,11 +24,12 @@ import java.text.MessageFormat;
 
 public class Toc extends Application {
 
-    private Utils utils = new Utils();
+    public static Content content = Content.getInstance();
+    public static Config config = Config.getInstance();
 
     private static final Logger logger = Logger.getLogger(Toc.class);
 
-    private static final String configPath = "config.yml";
+    private static final String configPath = "settings.yml";
     private static final String iconImagePath = "icon.png";
     private static final String templatePath = "template.html";
     private static final String indexPath = "index.html";
@@ -42,8 +45,9 @@ public class Toc extends Application {
 
     @Override
     public void init() throws Exception {
-        utils.loadConfig(configPath);
-        utils.prepareContent(indexPath, templatePath);
+        config.load(configPath);
+        content.load(indexPath, templatePath);
+        logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
     }
 
     @Override
@@ -61,19 +65,24 @@ public class Toc extends Application {
         // out stage will be translucent, so give it a transparent style.
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle(utils.lang.getString("title"));
+        stage.setTitle(config.translate("title"));
 
         // load the site
-        URL url = new File(utils.config.getSite() + "html/" + indexPath).toURI().toURL();
-        logger.info(MessageFormat.format(utils.lang.getString("browsing.file"), url.toString()));
-        Browser browser = new Browser(utils.lang, url.toString());
+        URL url = new File(config.getSettings().getSite() + "html/" + indexPath).toURI().toURL();
+        logger.info(MessageFormat.format(
+                config.translate("browsing.file"), url.toString()));
+
+        Browser browser = new Browser(url.toString());
         addDraggableNode(browser.getWebView());
 
         // create the layout for the javafx stage.
         StackPane stackPane = new StackPane(browser);
-        stackPane.setPrefSize(utils.config.getWidth(), utils.config.getHeight());
+        stackPane.setPrefSize(config.getSettings().getWidth(),
+                config.getSettings().getHeight());
 
-        Scene scene = new Scene(stackPane, utils.config.getWidth(), utils.config.getHeight(), Color.web("#000000"));
+        Scene scene = new Scene(stackPane, config.getSettings().getWidth(),
+                config.getSettings().getHeight(), Color.web("#000000"));
+
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
@@ -89,7 +98,7 @@ public class Toc extends Application {
 
             // app requires system tray support, just exit if there is no support.
             if (!SystemTray.isSupported()) {
-                logger.error(utils.lang.getString("errTraySupport"));
+                logger.error(config.translate("errTraySupport"));
                 Platform.exit();
             }
 
@@ -116,7 +125,7 @@ public class Toc extends Application {
             tray.add(trayIcon);
 
         } catch (AWTException e) {
-            logger.error(utils.lang.getString("errTrayInit"));
+            logger.error(config.translate("errTrayInit"));
             e.printStackTrace();
         }
     }

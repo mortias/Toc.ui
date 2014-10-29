@@ -1,7 +1,0 @@
-config:
-      - !com.mitc.tools.Config
-        site: C:\PrivateWS\javafx-toc\site\
-        theme: cupertino
-        locale: nl_BE
-        width: 420
-        height: 600
