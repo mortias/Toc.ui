@@ -1,0 +1,17 @@
+body {
+    font: 62.5% "Trebuchet MS", sans-serif;
+}
+
+#container {
+    display: table;
+    width: 100%;
+    padding: 2px, 2px, 2px, 2px;
+}
+
+#row {
+    display: table-row;
+}
+
+#cell {
+    display: table-cell;
+}
