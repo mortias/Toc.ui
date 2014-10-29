@@ -1,8 +1,11 @@
 settings:
       - !com.mitc.util.Settings
+
         site: C:\PrivateWS\applications\javafx-toc\site\
         theme: cupertino
+
         locale: nl_BE
         level: trace
-        width: 420
+
         height: 600
+        width: 420
