@@ -1,6 +1,7 @@
-package com.mitc;
+package com.mitc.util;
 
-import com.mitc.util.Config;
+import com.mitc.crypto.Crypt;
+import com.mitc.crypto.Task;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -17,33 +18,59 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 public class Browser extends Region {
 
-    private final WebView webView = new WebView();
-    private final WebEngine webEngine = webView.getEngine();
+    public static Crypt crypt = Crypt.getInstance();
     public static Config config = Config.getInstance();
 
+    private final WebView webView = new WebView();
+    private final WebEngine webEngine = webView.getEngine();
+
     private final static Logger logger = Logger.getLogger(Browser.class);
+    private ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public Browser(String url) {
 
         logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
 
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+
             public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
                 if (newState == Worker.State.SUCCEEDED) {
 
                     EventListener listener = evt -> {
                         try {
-                            // todo linux command
-                            String[] array = {"cmd", "/C", "start", evt.getCurrentTarget().toString().replace("file:///", "")};
-                            logger.info(MessageFormat.format(
-                                    config.translate("running.action"), Arrays.toString(array)));
-                            Runtime.getRuntime().exec(array);
+
+                            boolean encrypt = config.getSettings().isEncrypted();
+                            String target = evt.getCurrentTarget().toString().replace("file:///", "");
+
+                            if (encrypt)
+                                target = crypt.decryptFile(new File(target + ".crypt"));
+
+                            if (target != null && target.length() > 0) {
+
+                                String[] array = {"cmd", "/C", "start", target};
+                                logger.info(MessageFormat.format(
+                                        config.translate("running.action"), Arrays.toString(array)));
+
+                                Runtime.getRuntime().exec(array);
+
+                                if (encrypt) {
+                                    // encrypt again after some time
+                                    FutureTask task = new FutureTask<>(
+                                            new Task(config.getSettings().getTimeout() * 1000, target));
+                                    executor.execute(task);
+                                }
+                            }
+
                         } catch (IOException e) {
                             logger.error(MessageFormat.format(
                                     config.translate("an.error.occured"), e.getLocalizedMessage()));

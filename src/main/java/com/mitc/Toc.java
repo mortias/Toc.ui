@@ -1,7 +1,9 @@
 package com.mitc;
 
+import com.mitc.util.Browser;
 import com.mitc.util.Config;
 import com.mitc.util.Content;
+import com.mitc.crypto.Crypt;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -24,8 +26,9 @@ import java.text.MessageFormat;
 
 public class Toc extends Application {
 
-    public static Content content = Content.getInstance();
+    public static Crypt crypt = Crypt.getInstance();
     public static Config config = Config.getInstance();
+    public static Content content = Content.getInstance();
 
     private static final Logger logger = Logger.getLogger(Toc.class);
 
@@ -45,9 +48,17 @@ public class Toc extends Application {
 
     @Override
     public void init() throws Exception {
+
+        // load the yml file
         config.load(configPath);
+
+        // uncrypt / decrypt
+        crypt.init();
+
+        // load the site
         content.load(indexPath, templatePath);
         logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
+
     }
 
     @Override
@@ -87,6 +98,11 @@ public class Toc extends Application {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    @Override
+    public void stop() throws IOException, URISyntaxException {
+        crypt.init();
     }
 
     // Sets up a system tray icon for the application.
