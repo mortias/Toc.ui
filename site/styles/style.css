@@ -1,5 +1,24 @@
 body {
     font: 62.5% "Trebuchet MS", sans-serif;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+fieldset {
+    border: 0;
+}
+
+label {
+    display: block;
+    margin: 30px 0 0 0;
+}
+
+select {
+    width: 150px;
+}
+
+.overflow {
+    height: 150px;
 }
 
 #container {

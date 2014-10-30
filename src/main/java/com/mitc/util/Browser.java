@@ -82,7 +82,7 @@ public class Browser extends Region {
                     NodeList lst = doc.getElementsByTagName("a");
                     for (int i = 0; i != lst.getLength(); i++) {
                         Element el = (Element) lst.item(i);
-                        if (!el.toString().contains("#tabs")) {
+                        if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
                             logger.trace(MessageFormat.format(config.translate("adding.eventlistener"), el.toString()));
                             ((EventTarget) el).addEventListener("mouseup", listener, false);
                         }

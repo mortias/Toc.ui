@@ -5,11 +5,11 @@ settings:
         encrypted: true
         key: Mary has one cat
 
-        site: C:\PrivateWS\javafx-toc\site\
+        site: C:\PrivateWS\applications\javafx-toc\site\
         theme: cupertino
 
         locale: en_US
         level: trace
 
-        height: 600
-        width: 420
+        height: 650
+        width: 450

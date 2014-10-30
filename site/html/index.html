@@ -11,417 +11,708 @@
 <body marginleft="0" margintop="0" marginright="0" marginbottom="0" marginwidth="0" marginheight="0"
       style="background-color:#${bgColor}">
 
- <div id="tabs">
-  <ul>
-   <li><a name="t1" href="#tabs-1">Java Ms</a></li>
-   <li><a name="t2" href="#tabs-2">ERC Portal</a></li>
-   <li><a name="t2" href="#tabs-3">Databases</a></li>
-   <li><a name="t3" href="#tabs-4">Links</a></li>
-   <li><a name="t4" href="#tabs-5">Books</a></li>
-  </ul>
+<div id="tabs">
+<ul>
+ <li><a name="t1" href="#tabs-1">Java Ms</a></li>
+ <li><a name="t2" href="#tabs-2">ERC Portal</a></li>
+ <li><a name="t3" href="#tabs-3">Databases</a></li>
+ <li><a name="t4" href="#tabs-4">Links</a></li>
+ <li><a name="t5" href="#tabs-5">Books</a></li>
+ <li><a name="t6" href="#tabs-6"><span class='ui-icon ui-icon-gear ui-closable-tab'></span></a></li>
+</ul>
 
-  <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 1 --------------------- -->
-  <!-- ------------------------------------------------- -->
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 1 --------------------- -->
+<!-- ------------------------------------------------- -->
 
-  <div id="tabs-1" style="min-height: 540px;">
-   <div id="container">
-    <div id="row">
-     <div id="cell">
-      <div id="container">
+<div id="tabs-1" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
+    <div id="container">
 
-       <div id="row"><div id="cell"><br><b>Java ERCEA MicroServices</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell" style="width:200px">Weblogic 158.168.55.15</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/console">ADMIN</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell">Reporting service</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/reporting/info">INFO</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/reporting/rest/api-docs">REST</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell">Research service</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/research/info">INFO</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/research/rest/api-docs">REST</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell">Document service</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/documents/info">INFO</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/documents/rest/api-docs">REST</a></button></div>
-        <div id="cell"></div>
-       </div>
+     <div id="row">
+      <div id="cell"><br><b>Java ERCEA MicroServices</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
 
-       <br><br>
-       <div id="row"><div id="cell"><b>JasperReports Unix</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell"><span style="color: green;">Development</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nanut-d.net1.cec.eu.int:8080/jasperserver/login.html">HTTP</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><span style="color: orange; ">Test</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nanut-t.net1.cec.eu.int:8080/jasperserver/login.html">HTTP</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><span style="color: red; ">Production</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nanut-p.net1.cec.eu.int:8080/jasperserver/login.html">HTTP P</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nanut-pm.net1.cec.eu.int:8080/jasperserver/login.html">HTTP PM</a></button></div>
-        <div id="cell"></div>
-       </div>
+     <div id="row">
+      <div id="cell" style="width:200px">Weblogic 158.168.55.15</div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://158.168.55.15:7001/console">ADMIN</a></button>
       </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell">Reporting service</div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/reporting/info">INFO</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://158.168.55.15:7001/backoffice/services/reporting/rest/api-docs">REST</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell">Research service</div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://158.168.55.15:7001/backoffice/services/research/info">INFO</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://158.168.55.15:7001/backoffice/services/research/rest/api-docs">REST</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell">Document service</div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://158.168.55.15:7001/backoffice/services/documents/info">INFO</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://158.168.55.15:7001/backoffice/services/documents/rest/api-docs">REST</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+     </div>
+
+     <br><br>
+
+     <div id="row">
+      <div id="cell"><b>JasperReports Unix</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell"><span style="color: green;">Development</span></div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nanut-d.net1.cec.eu.int:8080/jasperserver/login.html">HTTP</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><span style="color: orange; ">Test</span></div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nanut-t.net1.cec.eu.int:8080/jasperserver/login.html">HTTP</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><span style="color: red; ">Production</span></div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nanut-p.net1.cec.eu.int:8080/jasperserver/login.html">HTTP P</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nanut-pm.net1.cec.eu.int:8080/jasperserver/login.html">HTTP
+        PM</a></button>
+      </div>
+      <div id="cell"></div>
      </div>
     </div>
-    <div id="row">
-     <div id="cell">
-      <br><br><br>
-      <div id="accordion1">
-       <h3>Continuous integration</h3>
-       <div>
-        <div id="container">
-         <div id="row">
-          <div id="cell" style="width:200px">Jenkins Java</div>
-          <div id="cell"><button id="http"><a href="file:\\\http://s-erc-saratoga.net1.cec.eu.int:8080">HTTP</a></button></div>
-         </div>
+   </div>
+  </div>
+  <div id="row">
+   <div id="cell">
+    <br><br><br>
+
+    <div id="accordion1">
+     <h3>Continuous integration</h3>
+
+     <div>
+      <div id="container">
+       <div id="row">
+        <div id="cell" style="width:200px">Jenkins Java</div>
+        <div id="cell">
+         <button id="http"><a href="file:\\\http://s-erc-saratoga.net1.cec.eu.int:8080">HTTP</a>
+         </button>
         </div>
        </div>
-       <h3>Artifact repository</h3>
-       <div>
-        <div id="container">
-         <div id="row">
-         <div id="cell" style="width:200px">Nexus</div>
-         <div id="cell"><button id="http"><a href="file:\\\https://webgate.ec.europa.eu/CITnet/nexus/index.html">HTTP</a></button></div>
+      </div>
+     </div>
+     <h3>Artifact repository</h3>
+
+     <div>
+      <div id="container">
+       <div id="row">
+        <div id="cell" style="width:200px">Nexus</div>
+        <div id="cell">
+         <button id="http"><a href="file:\\\https://webgate.ec.europa.eu/CITnet/nexus/index.html">HTTP</a>
+         </button>
         </div>
        </div>
-       </div>
       </div>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 2 --------------------- -->
-  <!-- ------------------------------------------------- -->
-
-  <div id="tabs-2" style="min-height: 540px;">
-   <div id="container">
-    <div id="row">
-     <div id="cell">
-      <div id="container">
-
-       <div id="row"><div id="cell"><br><b>ColdFusion servers</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell" style="width:200px"><span style="color: green; ">Development</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://cf8rtdd1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">HTTP</a></button></div>
-        <div id="cell"><button id="ftp"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\ftp\ftp-erc-dev.bat">FTP</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><span style="color: orange; ">Test</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://cf8rtdt1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">HTTP</a></button></div>
-        <div id="cell"><button id="ftp"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\ftp\ftp-erc-test.bat">FTP</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><span style="color: red; ">Production</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://158.167.242.24:6090/ercbackoffice/index.cfm">HTTP</a></button></div>
-        <div id="cell"><button id="ftp"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\ftp\ftp-erc-prod.bat">FTP</a></button></div>
-        <div id="cell"></div>
-       </div>
-
-       <div id="row"><div id="cell"><br><b>JasperReports</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell" style="width:200px">CF Dev/Test/Prod</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html">HTTP</a></button></div>
-        <div id="cell"><button id="remote"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\remote\rdp-erc-nanut.rdp">RDP</a></button></div>
-        <div id="cell"></div>
-       </div>
-
-       <div id="row"><div id="cell"><br><b>TaskManager</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell" style="width:200px">CF Dev/Test/Prod</div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm">HTTP</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/CFIDE/administrator/index.cfm">ADMIN</a></button></div>
-       </div>
-       <div id="row">
-        <div id="cell"></div>
-        <div id="cell"><button id="remote"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\remote\rdp-erc-narada.rdp">RDP</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-
-       <div id="row"><div id="cell"><b>ARES</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell" style="width:200px"><span style="color: green; ">Dev / Test</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.development.cc.cec/Ares_pg/welcome.do">HTTP</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/wikis/display/HRS/Hermes+Repository+Services+Home">API</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><span style="color: red; ">Production</span></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/Ares/welcome.do">HTTP</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-
-      </div>
-     </div>
-    </div>
-   </div>
-
-   <br>
-   <div id="accordion2">
-    <h3>Continuous integration</h3>
-    <div>
-     <div id="container">
-      <div id="row">
-       <div id="cell" style="width:200px">Jenkins CF</div>
-       <div id="cell"><button id="http"><a href="file:\\\http://ci.ercea.cec.eu.int:8082/jenkins">HTTP</a></button></div>
-      </div>
-     </div>
-    </div>
-
-    <h3>RTD Services</h3>
-    <div>
-     <div id="container">
-      <div id="row">
-       <div id="cell" style="width:200px"><b>Research services catalog</b></div>
-       <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/wikis/display/eboss/Project+Reporting+service">CATALOG</a></button></div>
-      </div>
-      <div id="row"><div id="cell"><b>CF test pages</b></div></div>
-      <div id="row">
-       <div id="cell">
-        <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_project.cfm">prjList</a>
-        <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByOfficer.cfm">prjByOfficer</a>
-        <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_financial.cfm">prjFinancial</a><br>
-        <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByRespDep.cfm">prjByDepartment</a>
-        <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_reporting.cfm">prjReporting</a>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 3 --------------------- -->
-  <!-- ------------------------------------------------- -->
-
-  <div id="tabs-3" style="min-height: 540px;">
-   <div id="container">
-    <div id="row">
-     <div id="cell">
-      <div id="container">
-       <div id="row"><div id="cell"><br><b>Development / APPERCD</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell"><button id="database"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\database\reporting-appercd.bat">Reporting</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div>
-
-  <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 4 --------------------- -->
-  <!-- ------------------------------------------------- -->
-
-  <div id="tabs-4" style="min-height: 540px;">
-   <div id="container">
-    <div id="row">
-     <div id="cell">
-      <div id="container">
-       <div id="row"><div id="cell"><br><b>EC Applications</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\https://webmail.ec.europa.eu/CookieAuth.dll?GetLogon?url=%2F&reason=0">EC WebMail</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\https://webgate.ec.europa.eu/CITnet/confluence/display/RefApp/EC+HTML+bundle">Html Bundle</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://intranet.ercea.cec.eu.int/services/communications/products/Pages/Visual-Identity.aspx">Visual Identity</a></button></div>
-       </div>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/SYSPER2/home/menu.do">Sysper2</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/budg/its/si2/its-020_index_en.toc.html">ABAC</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.cc.cec/smtes/dyncode/im/myclosedincidents?actionId=26">SMT</a></button></div>
-       </div>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\http://intragate.ec.europa.eu/ENTR/mice/index.cfm?fuseaction=sec.main">MICE</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\https://webgate.ec.europa.eu/CITnet/jira/secure/Dashboard.jspa">Jira</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <br>
-       <div id="row"><div id="cell"><br><b>Github</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\https://github.com/mortias/javafx-toc">GitHub JavaFx Toc</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-
-       <br>
-       <div id="row"><div id="cell"><br><b>Other links</b></div></div>
-       <div id="row">
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        <div id="cell" style="border-bottom: thin solid #000000;"></div>
-       </div><br>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\https://mail.telenet.be/zimbra/mail?client=advanced&null=#1">Telenet WebMail</a></button></div>
-        <div id="cell"><button id="http"><a href="file:\\\http://www.thoughtworks.com/radar">Tech. Radar</a></button></div>
-        <div id="cell"></div>
-       </div>
-       <br>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\http://www.renderhtml.com">Render HTML</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-       <div id="row">
-        <div id="cell"><button id="http"><a href="file:\\\http://www.verkeerscentrum.be/verkeersinfo/camerabeelden/brussel">E40</a></button></div>
-        <div id="cell"></div>
-        <div id="cell"></div>
-       </div>
-
      </div>
     </div>
    </div>
   </div>
  </div>
+</div>
 
-  <!-- ------------------------------------------------- -->
-  <!-- --------------------- TAB 5 --------------------- -->
-  <!-- ------------------------------------------------- -->
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 2 --------------------- -->
+<!-- ------------------------------------------------- -->
 
-   <div id="tabs-5" style="min-height: 540px;">
+<div id="tabs-2" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
+    <div id="container">
+
+     <div id="row">
+      <div id="cell"><br><b>ColdFusion servers</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell" style="width:200px"><span style="color: green; ">Development</span></div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://cf8rtdd1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">HTTP</a></button>
+      </div>
+      <div id="cell">
+       <button id="ftp"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\ftp\ftp-erc-dev.bat">FTP</a></button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><span style="color: orange; ">Test</span></div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://cf8rtdt1.cc.cec.eu.int:6090/ercbackoffice/index.cfm">HTTP</a></button>
+      </div>
+      <div id="cell">
+       <button id="ftp"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\ftp\ftp-erc-test.bat">FTP</a></button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><span style="color: red; ">Production</span></div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://158.167.242.24:6090/ercbackoffice/index.cfm">HTTP</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="ftp"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\ftp\ftp-erc-prod.bat">FTP</a></button>
+      </div>
+      <div id="cell"></div>
+     </div>
+
+     <div id="row">
+      <div id="cell"><br><b>JasperReports</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell" style="width:200px">CF Dev/Test/Prod</div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html">HTTP</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="remote"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\remote\rdp-erc-nanut.rdp">RDP</a></button>
+      </div>
+      <div id="cell"></div>
+     </div>
+
+     <div id="row">
+      <div id="cell"><br><b>TaskManager</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell" style="width:200px">CF Dev/Test/Prod</div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nerada.net1.cec.eu.int/TaskManager/Administrator/index.cfm">HTTP</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://s-erc-nerada.net1.cec.eu.int/CFIDE/administrator/index.cfm">ADMIN</a>
+       </button>
+      </div>
+     </div>
+     <div id="row">
+      <div id="cell"></div>
+      <div id="cell">
+       <button id="remote"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\remote\rdp-erc-narada.rdp">RDP</a></button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+
+     <div id="row">
+      <div id="cell"><b>ARES</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell" style="width:200px"><span style="color: green; ">Dev / Test</span></div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://www.development.cc.cec/Ares_pg/welcome.do">HTTP</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://www.cc.cec/wikis/display/HRS/Hermes+Repository+Services+Home">API</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><span style="color: red; ">Production</span></div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://www.cc.cec/Ares/welcome.do">HTTP</a></button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+
+    </div>
+   </div>
+  </div>
+ </div>
+
+ <br>
+
+ <div id="accordion2">
+  <h3>Continuous integration</h3>
+
+  <div>
+   <div id="container">
+    <div id="row">
+     <div id="cell" style="width:200px">Jenkins CF</div>
+     <div id="cell">
+      <button id="http"><a href="file:\\\http://ci.ercea.cec.eu.int:8082/jenkins">HTTP</a></button>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <h3>RTD Services</h3>
+
+  <div>
+   <div id="container">
+    <div id="row">
+     <div id="cell" style="width:200px"><b>Research services catalog</b></div>
+     <div id="cell">
+      <button id="http"><a href="file:\\\http://www.cc.cec/wikis/display/eboss/Project+Reporting+service">CATALOG</a>
+      </button>
+     </div>
+    </div>
+    <div id="row">
+     <div id="cell"><b>CF test pages</b></div>
+    </div>
+    <div id="row">
+     <div id="cell">
+      <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_project.cfm">prjList</a>
+      <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByOfficer.cfm">prjByOfficer</a>
+      <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_financial.cfm">prjFinancial</a><br>
+      <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/getProjectByRespDep.cfm">prjByDepartment</a>
+      <a href="file:\\\http://s-erc-nerada.net1.cec.eu.int/TaskManager/_dev/rtd/get_reporting.cfm">prjReporting</a>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 3 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<div id="tabs-3" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
     <div id="container">
      <div id="row">
+      <div id="cell"><br><b>Development / APPERCD</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
       <div id="cell">
-       <div id="container">
-        <div id="row"><div id="cell"><br><b>Books</b></div></div>
-        <div id="row">
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        </div><br>
-        <div id="row">
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\camel_in_action.pdf">Camel in action</a></button></div>
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\single_page_web_applications.pdf">Single page webapps</a></button></div>
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\java_for_web_applications.pdf">Java for webapps</a></button></div>
-        </div>
-        <div id="row">
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\beginning_ejb3.pdf">Beginning EJB3</a></button></div>
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\pro_jmx.pdf">Pro JMX</a></button></div>
-         <div id="cell"><button id="book"><a href="file:\\\C:\PrivateWS\javafx-toc\site\bin\books\spring_data.pdf">Spring data</a></button></div>
-        </div>
-        <br>
-        <div id="row"><div id="cell"><br><b>Other links</b></div></div>
-        <div id="row">
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-         <div id="cell" style="border-bottom: thin solid #000000;"></div>
-        </div><br>
-        <div id="row">
-         <div id="cell"><button id="http"><a href="file:\\\http://link.springer.com">Springer link</a></button></div>
-         <div id="cell"></div>
-         <div id="cell"></div>
-        </div>
-       </div>
+       <button id="database"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\database\reporting-appercd.bat">Reporting</a></button>
       </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
      </div>
     </div>
    </div>
-
+  </div>
  </div>
+</div>
 
-  <!--
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 4 --------------------- -->
+<!-- ------------------------------------------------- -->
 
-  https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates
-  https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+CF+Client
-  https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+for+Developers
+<div id="tabs-4" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
+    <div id="container">
+     <div id="row">
+      <div id="cell"><br><b>EC Applications</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
 
-  https://github.com/Jaspersoft/jrs-rest-java-client
-  https://community.jaspersoft.com/documentation/jasperreports-server-web-services-guide/v56/rest-web-services-overview
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a
+         href="https://webmail.ec.europa.eu/CookieAuth.dll?GetLogon?url=%2F&reason=0">EC
+        WebMail</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="https://webgate.ec.europa.eu/CITnet/confluence/display/RefApp/EC+HTML+bundle">Html
+        Bundle</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://intranet.ercea.cec.eu.int/services/communications/products/Pages/Visual-Identity.aspx">Visual
+        Identity</a></button>
+      </div>
+     </div>
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://www.cc.cec/SYSPER2/home/menu.do">Sysper2</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://www.cc.cec/budg/its/si2/its-020_index_en.toc.html">ABAC</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a
+         href="http://www.cc.cec/smtes/dyncode/im/myclosedincidents?actionId=26">SMT</a>
+       </button>
+      </div>
+     </div>
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a
+         href="http://intragate.ec.europa.eu/ENTR/mice/index.cfm?fuseaction=sec.main">MICE</a>
+       </button>
+      </div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\https://webgate.ec.europa.eu/CITnet/jira/secure/Dashboard.jspa">Jira</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <br>
 
-  https://github.com/wordnik/swagger-spec
-  http://regex101.com/
+     <div id="row">
+      <div id="cell"><br><b>Github</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
 
-  -->
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a href="file:\\\https://github.com/mortias/javafx-toc">GitHub JavaFx Toc</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+
+     <br>
+
+     <div id="row">
+      <div id="cell"><br><b>Other links</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a href="file:\\\https://mail.telenet.be/zimbra/mail?client=advanced&null=#1">Telenet
+        WebMail</a></button>
+      </div>
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://www.thoughtworks.com/radar">Tech. Radar</a></button>
+      </div>
+      <div id="cell"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://www.renderhtml.com">Render HTML</a></button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a
+         href="http://www.verkeerscentrum.be/verkeersinfo/camerabeelden/brussel">E40</a>
+       </button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 5 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<div id="tabs-5" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
+    <div id="container">
+     <div id="row">
+      <div id="cell"><br><b>Books</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\camel_in_action.pdf">Camel in action</a></button>
+      </div>
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\single_page_web_applications.pdf">Single page
+        webapps</a></button>
+      </div>
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\java_for_web_applications.pdf">Java for webapps</a>
+       </button>
+      </div>
+     </div>
+     <div id="row">
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\beginning_ejb3.pdf">Beginning EJB3</a></button>
+      </div>
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\pro_jmx.pdf">Pro JMX</a></button>
+      </div>
+      <div id="cell">
+       <button id="book"><a href="file:\\\C:\PrivateWS\applications\javafx-toc\site\bin\books\spring_data.pdf">Spring data</a></button>
+      </div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell"><br><b>Other links</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <br>
+
+     <div id="row">
+      <div id="cell">
+       <button id="http"><a href="file:\\\http://link.springer.com">Springer link</a></button>
+      </div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 6 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<div id="tabs-6" style="min-height: 590px;">
+ <div id="container">
+  <div id="row">
+   <div id="cell">
+    <div id="container">
+     <div id="row">
+      <div id="cell"><br><b>Settings</b></div>
+     </div>
+     <div id="row">
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     </div>
+     <form name="settings">
+      <div id="row">
+       <div id="cell">
+        <label for="height">height</label>
+        <input id="height" name="height" value="590">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
+        <label for="width">width</label>
+        <input id="width" name="width" value="450">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <br>
+       </div>
+       <div id="cell">
+       <!-- <label for="theme">Select a skin</label> -->
+        <select name="theme" id="theme">
+         <option value="black-tie">black-tie</option>
+         <option value="blitzer">blitzer</option>
+         <option value="cupertino">cupertino</option>
+         <option value="dark-hive">dark-hive</option>
+         <option selected value="dot-luv">dot-luv</option>
+         <option value="eggplant">eggplant</option>
+         <option value="excite-bike">excite-bike</option>
+         <option value="hot-sneak">hot-sneak</option>
+         <option value="humanity">humanity</option>
+         <option value="hot-frog">hot-frog</option>
+         <option value="mint-choc">mint-choc</option>
+         <option value="overcast">overcast</option>
+         <option value="pepper-grinder">pepper-grinder</option>
+         <option value="redmond">redmond</option>
+         <option value="smoothness">smoothness</option>
+         <option value="south-street">south-street</option>
+         <option value="start">start</option>
+         <option value="sunny">sunny</option>
+         <option value="swanky-purse">swanky-purse</option>
+         <option value="trontastic">trontastic</option>
+         <option value="ui-darkness">ui-darkness</option>
+         <option value="ui-lightness">ui-lightness</option>
+         <option value="vader">vader</option>
+        </select>
+       </div>
+       <div id="cell"></div>
+      </div>
+     </form>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+
+</div>
+
+<!--
+
+https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/Downloads-Certificates
+https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+CF+Client
+https://webgate.ec.europa.eu/CITnet/confluence/display/IAM/ECAS+for+Developers
+
+https://github.com/Jaspersoft/jrs-rest-java-client
+https://community.jaspersoft.com/documentation/jasperreports-server-web-services-guide/v56/rest-web-services-overview
+
+https://github.com/wordnik/swagger-spec
+http://regex101.com/
+
+-->
 
 
- <script src="../jquery/ui/jquery.js"></script>
- <script src="../jquery/ui/jquery-ui.min.js"></script>
+<script src="../jquery/ui/jquery.js"></script>
+<script src="../jquery/ui/jquery-ui.min.js"></script>
 
- <script>
+<script>
 
-  $("#accordion1").accordion();
-  $("#accordion2").accordion();
-  $("#tabs").tabs();
+ $('#tabs').tabs();
+ $('#accordion1').accordion();
+ $('#accordion2').accordion();
 
-  $(function () {
-   $('button[id="http"]').button({icons:{primary: "ui-icon-newwin"}});
-   $('button[id="ftp"]').button({icons:{primary: "ui-icon-transfer-e-w"}});
-   $('button[id="remote"]').button({icons:{primary: "ui-icon-wrench"}});
-   $('button[id="book"]').button({icons:{primary: "ui-icon-document"}});
-   $('button[id="database"]').button({icons:{primary: "ui-icon-gear"}});
-  });
+ $('#height').spinner();
+ $('#width').spinner();
+
+// $('#theme').selectmenu().selected("vader");
+
+ $('#theme').selectmenu("value", "vader");
+ $('#theme').selectmenu("change");
+
+ $(function () {
+
+  $('button[id="http"]').button({icons: {primary: "ui-icon-newwin"}});
+  $('button[id="ftp"]').button({icons: {primary: "ui-icon-transfer-e-w"}});
+  $('button[id="remote"]').button({icons: {primary: "ui-icon-wrench"}});
+  $('button[id="book"]').button({icons: {primary: "ui-icon-document"}});
+  $('button[id="database"]').button({icons: {primary: "ui-icon-gear"}});
+
+
+  // $('select[id="theme"]').val("cupertino").attr("selected", "selected");
+
+ });
 
 </script>
 
