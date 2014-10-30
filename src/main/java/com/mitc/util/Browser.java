@@ -10,6 +10,7 @@ import javafx.geometry.VPos;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
@@ -47,21 +48,24 @@ public class Browser extends Region {
                 if (newState == Worker.State.SUCCEEDED) {
 
                     EventListener listener = evt -> {
-                        try {
 
-                            boolean encrypt = config.getSettings().isEncrypted();
-                            String target = evt.getCurrentTarget().toString().replace("file:///", "");
+                        boolean encrypt = config.getSettings().isEncrypted();
+                        String target = evt.getCurrentTarget().toString().replace("file:///", "");
+
+                        if (FilenameUtils.getExtension(target).length() == 0
+                                || target.contains("https:") || target.contains("mailto:")
+                                || target.contains("http:") || target.contains("ftp:")) {
+
+                            executeTarget(target);
+
+                        } else {
 
                             if (encrypt)
                                 target = crypt.decryptFile(new File(target + ".crypt"));
 
                             if (target != null && target.length() > 0) {
 
-                                String[] array = {"cmd", "/C", "start", target};
-                                logger.info(MessageFormat.format(
-                                        config.translate("running.action"), Arrays.toString(array)));
-
-                                Runtime.getRuntime().exec(array);
+                                executeTarget(target);
 
                                 if (encrypt) {
                                     // encrypt again after some time
@@ -70,10 +74,6 @@ public class Browser extends Region {
                                     executor.execute(task);
                                 }
                             }
-
-                        } catch (IOException e) {
-                            logger.error(MessageFormat.format(
-                                    config.translate("an.error.occured"), e.getLocalizedMessage()));
                         }
                     };
 
@@ -89,6 +89,19 @@ public class Browser extends Region {
                     }
                 }
             }
+
+            private void executeTarget(String target) {
+                try {
+                    String[] array = {"cmd", "/C", "start", target};
+                    logger.info(MessageFormat.format(
+                            config.translate("running.action"), Arrays.toString(array)));
+                    Runtime.getRuntime().exec(array);
+                } catch (IOException e) {
+                    logger.error(MessageFormat.format(
+                            config.translate("an.error.occured"), e.getLocalizedMessage()));
+                }
+            }
+
         });
 
         webView.setContextMenuEnabled(false);

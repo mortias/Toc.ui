@@ -108,20 +108,13 @@ public class Crypt {
 
     public String decryptFile(File file) {
         try {
-            String target = file.getAbsolutePath();
-            if (FilenameUtils.getExtension(target).length() == 0
-                    || target.contains("https:") || target.contains("mailto:")
-                    || target.contains("http:") || target.contains("ftp:")) {
-                // skip
-            } else {
-                String result = FilenameUtils.removeExtension(file.getAbsolutePath());
-                if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("crypt")) {
-                    cryptFile(Cipher.DECRYPT_MODE, file, new File(result));
-                    if (!file.delete())
-                        logger.error(MessageFormat.format(
-                                config.translate("could.not.delete.file"), file.getAbsolutePath()));
-                    return result;
-                }
+            String result = FilenameUtils.removeExtension(file.getAbsolutePath());
+            if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("crypt")) {
+                cryptFile(Cipher.DECRYPT_MODE, file, new File(result));
+                if (!file.delete())
+                    logger.error(MessageFormat.format(
+                            config.translate("could.not.delete.file"), file.getAbsolutePath()));
+                return result;
             }
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
