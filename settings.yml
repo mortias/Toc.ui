@@ -1,5 +1,5 @@
 settings:
-      - !com.mitc.util.Settings
+      - !com.mitc.dto.Settings
 
         timeout: 2
         encrypted: true

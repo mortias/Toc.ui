@@ -1,6 +1,7 @@
 package com.mitc;
 
 import com.mitc.crypto.Crypt;
+import com.mitc.rest.server.Server;
 import com.mitc.util.Browser;
 import com.mitc.util.Config;
 import com.mitc.util.Content;
@@ -41,6 +42,7 @@ public class Toc extends Application {
     public double initialY;
 
     private Stage stage;
+    private Process process;
 
     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
@@ -48,6 +50,9 @@ public class Toc extends Application {
 
     @Override
     public void init() throws Exception {
+
+        this.process = new Process(9090);
+        this.process.run();
 
         // load the yml file
         config.load(configPath);
@@ -57,6 +62,7 @@ public class Toc extends Application {
 
         // load the site
         content.load(indexPath, templatePath);
+
 
     }
 
@@ -167,6 +173,23 @@ public class Toc extends Application {
                 node.getScene().getWindow().setY(me.getScreenY() - initialY);
             }
         });
+    }
+
+    public class Process implements Runnable {
+
+        int port;
+        Server server;
+
+        public Process(int port) {
+            this.port = port;
+            this.server = new Server(port);
+        }
+
+        @Override
+        public void run() {
+            this.server.start();
+        }
+
     }
 
 }
