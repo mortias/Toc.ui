@@ -1,7 +1,8 @@
 package com.mitc.crypto;
 
 import com.mitc.util.Config;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -12,7 +13,7 @@ public class Task implements Callable<String> {
     public static Config config = Config.getInstance();
     public static Crypt crypt = Crypt.getInstance();
 
-    private final static Logger logger = Logger.getLogger(Task.class);
+    private static final Logger logger = LogManager.getLogger(Task.class);
 
     private long waitTime;
     private String target;

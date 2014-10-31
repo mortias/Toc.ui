@@ -1,9 +1,9 @@
 package com.mitc;
 
+import com.mitc.crypto.Crypt;
 import com.mitc.util.Browser;
 import com.mitc.util.Config;
 import com.mitc.util.Content;
-import com.mitc.crypto.Crypt;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -13,8 +13,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +30,7 @@ public class Toc extends Application {
     public static Config config = Config.getInstance();
     public static Content content = Content.getInstance();
 
-    private static final Logger logger = Logger.getLogger(Toc.class);
+    private static final Logger logger = LogManager.getLogger(Toc.class);
 
     private static final String configPath = "settings.yml";
     private static final String iconImagePath = "icon.png";
@@ -57,7 +57,6 @@ public class Toc extends Application {
 
         // load the site
         content.load(indexPath, templatePath);
-        logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
 
     }
 

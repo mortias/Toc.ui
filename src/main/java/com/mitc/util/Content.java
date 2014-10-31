@@ -1,13 +1,15 @@
 package com.mitc.util;
 
 import com.mitc.Toc;
+import com.mitc.dto.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
@@ -18,7 +20,7 @@ import java.util.Map;
 
 public class Content {
 
-    private final static Logger logger = Logger.getLogger(Content.class);
+    private static final Logger logger = LogManager.getLogger(Content.class);
     private Charset charset = StandardCharsets.UTF_8;
 
     private static Content instance = null;
@@ -35,9 +37,8 @@ public class Content {
     }
 
     public void load(String indexPath, String templatePath) throws IOException, URISyntaxException {
-        
+
         Settings settings = Toc.config.getSettings();
-        logger.setLevel(Level.toLevel(settings.getLevel()));
 
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("theme", settings.getTheme());
@@ -49,7 +50,7 @@ public class Content {
         // read
         String read = settings.getSite() + "html/" + templatePath;
         logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), read));
-        String raw = IOUtils.toString(new File(read).toURI(), charset);
+        String raw = IOUtils.toString(new FileInputStream(new File(read)), charset.toString());
 
         // parse
         String res = new StrSubstitutor(valuesMap).replace(raw).replace("a href=\"", "a href=\"file:\\\\\\");

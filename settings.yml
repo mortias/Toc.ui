@@ -9,7 +9,6 @@ settings:
         theme: cupertino
 
         locale: en_US
-        level: trace
 
         height: 650
         width: 450

@@ -1,4 +1,4 @@
-package com.mitc.util;
+package com.mitc.dto;
 
 public class Settings {
 
@@ -6,7 +6,6 @@ public class Settings {
     private String site;
     private String theme;
     private String locale;
-    private String level;
     private String pathSep;
 
     private int width;
@@ -65,14 +64,6 @@ public class Settings {
 
     public void setSite(String site) {
         this.site = site;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
     }
 
     public String getKey() {

@@ -1,8 +1,9 @@
 package com.mitc.util;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import com.mitc.dto.Settings;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
 public class Config {
 
     private ResourceBundle resourceBundle;
-    private final static Logger logger = Logger.getLogger(Config.class);
+    private static final Logger logger = LogManager.getLogger(Config.class);
 
     private static Config instance = null;
     private Settings settings;
@@ -42,7 +43,6 @@ public class Config {
         if (settings.getLocale().contains("_"))
             setLanguage(settings.getLocale().split("_")[0], settings.getLocale().split("_")[1]);
 
-        logger.setLevel(Level.toLevel(getSettings().getLevel()));
         logger.info(MessageFormat.format(resourceBundle.getString("load.config.from"), absolutePath));
 
     }

@@ -2,8 +2,8 @@ package com.mitc.crypto;
 
 import com.mitc.util.Config;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -24,7 +24,7 @@ public class Crypt {
     private final String ALGORITHM = "AES";
     private final String TRANSFORMATION = "AES";
 
-    private final static Logger logger = Logger.getLogger(Crypt.class);
+    private static final Logger logger = LogManager.getLogger(Crypt.class);
     public static Config config = Config.getInstance();
 
     private static Crypt instance = null;
@@ -41,7 +41,6 @@ public class Crypt {
         try {
             if (inputFile.exists() && !inputFile.isDirectory()) {
 
-                logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
                 logger.trace(inputFile.getName() + (cipherMode == 1 ? " >> " : " << ") + outputFile.getName());
 
                 Key secretKey = new SecretKeySpec(config.getSettings().getKey().getBytes(), ALGORITHM);

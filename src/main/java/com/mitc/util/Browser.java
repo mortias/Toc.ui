@@ -11,8 +11,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import org.apache.commons.io.FilenameUtils;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -35,12 +35,10 @@ public class Browser extends Region {
     private final WebView webView = new WebView();
     private final WebEngine webEngine = webView.getEngine();
 
-    private final static Logger logger = Logger.getLogger(Browser.class);
+    private static final Logger logger = LogManager.getLogger(Browser.class);
     private ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public Browser(String url) {
-
-        logger.setLevel(Level.toLevel(config.getSettings().getLevel()));
 
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
 
