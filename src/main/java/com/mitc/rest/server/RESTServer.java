@@ -1,10 +1,13 @@
 package com.mitc.rest.server;
 
+import com.mitc.Toc;
 import com.mitc.dto.Settings;
+import com.mitc.util.Config;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import com.wordnik.swagger.servlet.config.ServletScanner;
 import com.wordnik.swagger.servlet.listing.ApiDeclarationServlet;
+import javafx.application.Application;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -14,17 +17,31 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.FilterRegistration;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.concurrent.Executor;
 
-public class Server {
+public class RESTServer {
 
-    private static final Logger logger = LogManager.getLogger(Server.class);
+    private static final Logger logger = LogManager.getLogger(RESTServer.class);
 
     private org.eclipse.jetty.server.Server jetty;
-    private Settings settings;
 
-    public Server(int port) {
+    public static Config config = Config.getInstance();
+    private Settings settings = config.getSettings();
 
-        jetty = new org.eclipse.jetty.server.Server(port);
+    private static RESTServer instance = null;
+
+    public static RESTServer getInstance() {
+        if (instance == null) {
+            instance = new RESTServer();
+        }
+        return instance;
+    }
+
+    public RESTServer() {
+
+        jetty = new org.eclipse.jetty.server.Server(settings.getPort());
 
         ServletHolder jersey = new ServletHolder(ServletContainer.class);
         jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.rest.resources");

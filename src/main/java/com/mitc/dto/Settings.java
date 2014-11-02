@@ -12,6 +12,8 @@ public class Settings {
     private int height;
     private int timeout;
 
+    private int port;
+
     private boolean encrypted;
 
     public Settings() {
@@ -88,6 +90,14 @@ public class Settings {
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
 }

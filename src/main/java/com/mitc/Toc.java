@@ -1,7 +1,7 @@
 package com.mitc;
 
 import com.mitc.crypto.Crypt;
-import com.mitc.rest.server.Server;
+import com.mitc.rest.server.RESTServer;
 import com.mitc.util.Browser;
 import com.mitc.util.Config;
 import com.mitc.util.Content;
@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.concurrent.Executor;
 
 public class Toc extends Application {
 
@@ -41,8 +44,9 @@ public class Toc extends Application {
     public double initialX;
     public double initialY;
 
-    private Stage stage;
-    private Process process;
+    private Executor executor;
+    private JaxRsServer jaxRsServer;
+    public static Stage stage;
 
     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
@@ -51,18 +55,19 @@ public class Toc extends Application {
     @Override
     public void init() throws Exception {
 
-        this.process = new Process(9090);
-        this.process.run();
-
         // load the yml file
         config.load(configPath);
 
         // uncrypt / decrypt
         crypt.init();
 
+        // setup the rest server
+        jaxRsServer = new JaxRsServer();
+        executor = new SequentialExecutor();
+        executor.execute(jaxRsServer);
+
         // load the site
         content.load(indexPath, templatePath);
-
 
     }
 
@@ -107,6 +112,7 @@ public class Toc extends Application {
 
     @Override
     public void stop() throws IOException, URISyntaxException {
+        jaxRsServer.stop();
         crypt.init();
     }
 
@@ -158,6 +164,10 @@ public class Toc extends Application {
         }
     }
 
+    public Stage getStage() {
+        return this.stage;
+    }
+
     private void addDraggableNode(final Node node) {
 
         node.setOnMousePressed(me -> {
@@ -175,14 +185,40 @@ public class Toc extends Application {
         });
     }
 
-    public class Process implements Runnable {
 
-        int port;
-        Server server;
+    /* Server runnable clesses */
+    class SequentialExecutor implements Executor {
+        final Queue<Runnable> queue = new ArrayDeque<Runnable>();
+        Runnable task;
 
-        public Process(int port) {
-            this.port = port;
-            this.server = new Server(port);
+        public synchronized void execute(final Runnable r) {
+            queue.offer(new Runnable() {
+                public void run() {
+                    try {
+                        r.run();
+                    } finally {
+                        next();
+                    }
+                }
+            });
+            if (task == null) {
+                next();
+            }
+        }
+
+        private synchronized void next() {
+            if ((task = queue.poll()) != null) {
+                new Thread(task).start();
+            }
+        }
+    }
+
+    class JaxRsServer implements Runnable {
+
+        private RESTServer server;
+
+        public JaxRsServer() {
+            this.server = new RESTServer();
         }
 
         @Override
@@ -190,6 +226,8 @@ public class Toc extends Application {
             this.server.start();
         }
 
+        public void stop() {
+            this.server.stop();
+        }
     }
-
 }

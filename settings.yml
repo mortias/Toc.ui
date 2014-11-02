@@ -12,3 +12,5 @@ settings:
 
         height: 650
         width: 450
+
+        port: 9090

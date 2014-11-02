@@ -483,7 +483,7 @@
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
      </div>
-     <form name="settings" method="post" action="http://localhost:9090/api/toc/settings">
+     <form id="settingsForm"  action="http://localhost:9090/api/toc/settings">
       <div id="row">
        <div id="cell">
         <label for="height">height</label>
@@ -568,6 +568,30 @@ http://regex101.com/
   $('button[id="remote"]').button({icons: {primary: "ui-icon-wrench"}});
   $('button[id="book"]').button({icons: {primary: "ui-icon-document"}});
   $('button[id="database"]').button({icons: {primary: "ui-icon-gear"}});
+
+  $('#settingsForm').submit(function(event) {
+
+   var height = $('#height').val();
+   var width = $('#width').val();
+   var json = { "height" : height, "width" : width};
+
+   $.ajax({
+    url: $("#settingsForm").attr( "action"),
+    data: JSON.stringify(json),
+    type: "POST",
+
+    beforeSend: function(xhr) {
+     xhr.setRequestHeader("Accept", "application/json");
+     xhr.setRequestHeader("Content-Type", "application/json");
+    },
+    success: function(response) {
+     alert("done");
+    }
+   });
+
+   event.preventDefault();
+  });
+
  });
 
 </script>
