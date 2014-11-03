@@ -14,7 +14,7 @@ label {
 }
 
 select {
-    width: 150px;
+    width: 120px;
 }
 
 .overflow {
@@ -24,7 +24,6 @@ select {
 #container {
     display: table;
     width: 100%;
-    padding: 2px, 2px, 2px, 2px;
 }
 
 #row {

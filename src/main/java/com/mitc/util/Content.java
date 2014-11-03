@@ -42,7 +42,7 @@ public class Content {
         Map<String, String> valuesMap = new HashMap<>();
         valuesMap.put("theme", settings.getTheme());
         valuesMap.put("width", String.valueOf(settings.getWidth()));
-        valuesMap.put("height", String.valueOf(settings.getHeight() - 60));
+        valuesMap.put("height", String.valueOf(settings.getHeight()));
         valuesMap.put("theme", settings.getTheme());
         valuesMap.put("bin", settings.getSite() + "bin");
         valuesMap.put("server", settings.getServer());

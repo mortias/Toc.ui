@@ -114,18 +114,18 @@ public class Browser extends Region {
 
     @Override
     protected void layoutChildren() {
-        double w = getWidth();
-        double h = getHeight();
+        double w = config.getSettings().getWidth();
+        double h = config.getSettings().getHeight();
         layoutInArea(webView, 0, 0, w, h, 0, HPos.CENTER, VPos.CENTER);
     }
 
     @Override
     protected double computePrefWidth(double height) {
-        return 750;
+        return config.getSettings().getHeight();
     }
 
     @Override
     protected double computePrefHeight(double width) {
-        return 500;
+        return config.getSettings().getWidth();
     }
 }
