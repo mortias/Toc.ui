@@ -1,13 +1,11 @@
 package com.mitc.rest.server;
 
-import com.mitc.Toc;
-import com.mitc.dto.Settings;
+import com.mitc.util.Settings;
 import com.mitc.util.Config;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import com.wordnik.swagger.servlet.config.ServletScanner;
 import com.wordnik.swagger.servlet.listing.ApiDeclarationServlet;
-import javafx.application.Application;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -17,9 +15,6 @@ import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.FilterRegistration;
-import java.util.ArrayDeque;
-import java.util.Queue;
-import java.util.concurrent.Executor;
 
 public class RESTServer {
 

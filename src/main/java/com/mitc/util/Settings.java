@@ -1,4 +1,9 @@
-package com.mitc.dto;
+package com.mitc.util;
+
+import org.apache.commons.io.FilenameUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Settings {
 
@@ -19,6 +24,12 @@ public class Settings {
 
     public Settings() {
         this.pathSep = System.getProperty("file.separator");
+        try {
+            this.site = FilenameUtils.getFullPath(
+                    new File("test.txt").getCanonicalPath())+"site"+getPathSep();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getWidth() {
