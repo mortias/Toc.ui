@@ -4,7 +4,7 @@
 
 <head>
  <meta charset="utf-8">
- <link href="../jquery/ui/themes/${theme}/jquery-ui.min.css" rel="stylesheet">
+ <link id="stylesheet" href="../jquery/ui/themes/${theme}/jquery-ui.min.css" rel="stylesheet">
  <link href="../styles/style.css" rel="stylesheet">
 </head>
 
@@ -483,7 +483,7 @@
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
      </div>
-     <form id="settingsForm"  action="http://localhost:9090/api/toc/settings">
+     <form id="settingsForm"  action="http://${server}:${port}/api/toc/settings">
       <div id="row">
        <div id="cell">
         <label for="height">height</label>
@@ -496,37 +496,43 @@
         <br>
        </div>
        <div id="cell">
-        <!-- <label for="theme">Select a skin</label> -->
+        <label for="theme">Select a skin</label>
         <select name="theme" id="theme">
-         <option value="black-tie">black-tie</option>
-         <option value="blitzer">blitzer</option>
-         <option value="cupertino">cupertino</option>
-         <option value="dark-hive">dark-hive</option>
-         <option selected value="dot-luv">dot-luv</option>
-         <option value="eggplant">eggplant</option>
-         <option value="excite-bike">excite-bike</option>
-         <option value="hot-sneak">hot-sneak</option>
-         <option value="humanity">humanity</option>
-         <option value="hot-frog">hot-frog</option>
-         <option value="mint-choc">mint-choc</option>
-         <option value="overcast">overcast</option>
-         <option value="pepper-grinder">pepper-grinder</option>
-         <option value="redmond">redmond</option>
-         <option value="smoothness">smoothness</option>
-         <option value="south-street">south-street</option>
-         <option value="start">start</option>
-         <option value="sunny">sunny</option>
-         <option value="swanky-purse">swanky-purse</option>
-         <option value="trontastic">trontastic</option>
-         <option value="ui-darkness">ui-darkness</option>
-         <option value="ui-lightness">ui-lightness</option>
-         <option value="vader">vader</option>
+         <option value="../jquery/ui/themes/black-tie/jquery-ui.css">black-tie</option>
+         <option value="../jquery/ui/themes/blitzer/jquery-ui.css">blitzer</option>
+         <option value="../jquery/ui/themes/cupertino/jquery-ui.css">cupertino</option>
+         <option value="../jquery/ui/themes/dark-hive/jquery-ui.css">dark-hive</option>
+         <option value="../jquery/ui/themes/dot-luv/jquery-ui.css">dot-luv</option>
+         <option value="../jquery/ui/themes/eggplant/jquery-ui.css">eggplant</option>
+         <option value="../jquery/ui/themes/excite-bike/jquery-ui.css">excite-bike</option>
+         <option value="../jquery/ui/themes/hot-sneak/jquery-ui.css">hot-sneak</option>
+         <option value="../jquery/ui/themes/humanity/jquery-ui.css">humanity</option>
+         <option value="../jquery/ui/themes/hot-frog/jquery-ui.css">hot-frog</option>
+         <option value="../jquery/ui/themes/mint-choc/jquery-ui.css">mint-choc</option>
+         <option value="../jquery/ui/themes/overcast/jquery-ui.css">overcast</option>
+         <option value="../jquery/ui/themes/pepper-grinder/jquery-ui.css">pepper-grinder</option>
+         <option value="../jquery/ui/themes/redmond/jquery-ui.css">redmond</option>
+         <option value="../jquery/ui/themes/smoothness/jquery-ui.css">smoothness</option>
+         <option value="../jquery/ui/themes/south-street/jquery-ui.css">south-street</option>
+         <option value="../jquery/ui/themes/start/jquery-ui.css">start</option>
+         <option value="../jquery/ui/themes/sunny/jquery-ui.css">sunny</option>
+         <option value="../jquery/ui/themes/swanky-purse/jquery-ui.css">swanky-purse</option>
+         <option value="../jquery/ui/themes/trontastic/jquery-ui.css">trontastic</option>
+         <option value="../jquery/ui/themes/ui-darkness/jquery-ui.css">ui-darkness</option>
+         <option value="../jquery/ui/themes/ui-lightness/jquery-ui.css">ui-lightness</option>
+         <option value="../jquery/ui/themes/vader/jquery-ui.css">vader</option>
         </select>
        </div>
        <div id="cell"><input type="submit"></div>
       </div>
      </form>
     </div>
+    <div id="row">
+     <div id="cell">HealthCheck</div>
+     <div id="cell"><span id="info">...</span></div>
+     <div id="cell"></div>
+    </div>
+    <br>
    </div>
   </div>
  </div>
@@ -569,6 +575,10 @@ http://regex101.com/
   $('button[id="book"]').button({icons: {primary: "ui-icon-document"}});
   $('button[id="database"]').button({icons: {primary: "ui-icon-gear"}});
 
+  $('#theme').change(function(){
+    $("#stylesheet").attr({href : $('#theme').find(":selected").val()});
+  });
+
   $('#settingsForm').submit(function(event) {
 
    var height = $('#height').val();
@@ -579,17 +589,28 @@ http://regex101.com/
     url: $("#settingsForm").attr( "action"),
     data: JSON.stringify(json),
     type: "POST",
-
     beforeSend: function(xhr) {
      xhr.setRequestHeader("Accept", "application/json");
      xhr.setRequestHeader("Content-Type", "application/json");
     },
     success: function(response) {
-     alert("done");
     }
    });
-
    event.preventDefault();
+  });
+
+  // get the version info
+  // also used as a health check
+  $.ajax({
+   type: "GET",
+   dataType: "html",
+   url: "http://${server}:${port}/api/toc/info",
+   beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/html");
+   },
+   success: function(response) {
+    $('span[id="info"]').text(response);
+   }
   });
 
  });

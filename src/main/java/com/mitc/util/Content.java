@@ -46,6 +46,8 @@ public class Content {
         valuesMap.put("height", String.valueOf(settings.getHeight() - 60));
         valuesMap.put("theme", settings.getTheme());
         valuesMap.put("bin", settings.getSite() + "bin");
+        valuesMap.put("server", settings.getServer());
+        valuesMap.put("port", String.valueOf(settings.getPort()));
 
         // read
         String read = settings.getSite() + "html/" + templatePath;

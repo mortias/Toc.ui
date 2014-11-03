@@ -12,6 +12,7 @@ public class Settings {
     private int height;
     private int timeout;
 
+    private String server;
     private int port;
 
     private boolean encrypted;
@@ -100,4 +101,11 @@ public class Settings {
         this.port = port;
     }
 
+    public String getServer() {
+        return server;
+    }
+
+    public void setServer(String server) {
+        this.server = server;
+    }
 }

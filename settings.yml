@@ -1,11 +1,12 @@
 settings:
+
       - !com.mitc.dto.Settings
 
         timeout: 2
         encrypted: true
         key: Mary has one cat
 
-        site: C:\PrivateWS\applications\javafx-toc\site\
+        site: C:\PrivateWS\javafx-toc\site\
         theme: cupertino
 
         locale: en_US
@@ -13,4 +14,5 @@ settings:
         height: 650
         width: 450
 
-        port: 9090
+        server: localhost
+        port: 9876
