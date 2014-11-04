@@ -49,26 +49,34 @@ public class Content {
         siteMap.put("bin", site + "bin");
         siteMap.put("host", settings.getHost());
         siteMap.put("port", String.valueOf(settings.getPort()));
-        handleFile(site + "html" + settings.getPathSep() + templatePath, siteMap, true);
+        handleFile(
+                site + "html" + settings.getPathSep() + templatePath,
+                site + "html" + settings.getPathSep() + indexPath, siteMap, true);
 
         String swagger = settings.getRoot() + "swagger" + settings.getPathSep();
         Map<String, String> swaggerMap = new HashMap<>();
         swaggerMap.put("host", settings.getHost());
         swaggerMap.put("port", String.valueOf(settings.getPort()));
-        handleFile(swagger + "index.html", swaggerMap, false);
+        handleFile(swagger + "index.html", swagger + "index.html", swaggerMap, false);
 
     }
 
-    private void handleFile(String filePath, Map<String, String> props, boolean handleFiles) throws IOException, URISyntaxException {
+    private void handleFile(String in, String out, Map<String, String> props, boolean handleFiles) throws IOException, URISyntaxException {
+
         // read
-        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), filePath));
-        String res = IOUtils.toString(new FileInputStream(new File(filePath)), charset.toString());
-        // parse
+        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), in));
+
+        String res = IOUtils.toString(new FileInputStream(new File(in)), charset.toString());
+        res = new StrSubstitutor(props).replace(res);
+
+        // parse a hrefs
         if (handleFiles)
-            res = new StrSubstitutor(props).replace(res).replace("a href=\"", "a href=\"file:\\\\\\");
+            res = res.replace("a href=\"", "a href=\"file:\\\\\\");
+
         // write
-        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), filePath));
-        FileUtils.writeStringToFile(new File(filePath), res);
+        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), out));
+        FileUtils.writeStringToFile(new File(out), res);
+
     }
 
 
