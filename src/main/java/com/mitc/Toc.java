@@ -89,7 +89,7 @@ public class Toc extends Application {
         stage.setTitle(config.translate("title"));
 
         // load the site
-        URL url = new File(config.getSettings().getSite() + "html/" + indexPath).toURI().toURL();
+        URL url = new File(config.getSettings().getRoot() + "site/html/" + indexPath).toURI().toURL();
         logger.info(MessageFormat.format(
                 config.translate("browsing.file"), url.toString()));
 

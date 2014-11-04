@@ -39,28 +39,36 @@ public class Content {
 
         Settings settings = Toc.config.getSettings();
 
-        Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("theme", settings.getTheme());
-        valuesMap.put("width", String.valueOf(settings.getWidth()));
-        valuesMap.put("height", String.valueOf(settings.getHeight()));
-        valuesMap.put("theme", settings.getTheme());
-        valuesMap.put("bin", settings.getSite() + "bin");
-        valuesMap.put("server", settings.getServer());
-        valuesMap.put("port", String.valueOf(settings.getPort()));
+        String site = settings.getRoot() + "site" + settings.getPathSep();
 
+        Map<String, String> siteMap = new HashMap<>();
+        siteMap.put("theme", settings.getTheme());
+        siteMap.put("width", String.valueOf(settings.getWidth()));
+        siteMap.put("height", String.valueOf(settings.getHeight()));
+        siteMap.put("theme", settings.getTheme());
+        siteMap.put("bin", site + "bin");
+        siteMap.put("host", settings.getHost());
+        siteMap.put("port", String.valueOf(settings.getPort()));
+        handleFile(site + "html" + settings.getPathSep() + templatePath, siteMap, true);
+
+        String swagger = settings.getRoot() + "swagger" + settings.getPathSep();
+        Map<String, String> swaggerMap = new HashMap<>();
+        swaggerMap.put("host", settings.getHost());
+        swaggerMap.put("port", String.valueOf(settings.getPort()));
+        handleFile(swagger + "index.html", swaggerMap, false);
+
+    }
+
+    private void handleFile(String filePath, Map<String, String> props, boolean handleFiles) throws IOException, URISyntaxException {
         // read
-        String read = settings.getSite() + "html/" + templatePath;
-        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), read));
-        String raw = IOUtils.toString(new FileInputStream(new File(read)), charset.toString());
-
+        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), filePath));
+        String res = IOUtils.toString(new FileInputStream(new File(filePath)), charset.toString());
         // parse
-        String res = new StrSubstitutor(valuesMap).replace(raw).replace("a href=\"", "a href=\"file:\\\\\\");
-
+        if (handleFiles)
+            res = new StrSubstitutor(props).replace(res).replace("a href=\"", "a href=\"file:\\\\\\");
         // write
-        String write = settings.getSite() + "html" + settings.getPathSep() + indexPath;
-        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), write));
-        FileUtils.writeStringToFile(new File(write), res);
-
+        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), filePath));
+        FileUtils.writeStringToFile(new File(filePath), res);
     }
 
 

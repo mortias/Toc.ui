@@ -4,11 +4,12 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Inet4Address;
 
 public class Settings {
 
     private String key;
-    private String site;
+    private String root;
     private String theme;
     private String locale;
     private String pathSep;
@@ -17,16 +18,16 @@ public class Settings {
     private int height;
     private int timeout;
 
-    private String server;
-    private int port;
+    private String host;
+    private int port = 9876;
 
     private boolean encrypted;
 
     public Settings() {
-        this.pathSep = System.getProperty("file.separator");
         try {
-            this.site = FilenameUtils.getFullPath(
-                    new File("test.txt").getCanonicalPath())+"site"+getPathSep();
+            pathSep = System.getProperty("file.separator");
+            root = FilenameUtils.getFullPath(new File("test.txt").getCanonicalPath());
+            host = Inet4Address.getLocalHost().getHostAddress();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -72,12 +73,8 @@ public class Settings {
         this.pathSep = pathSep;
     }
 
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
+    public String getRoot() {
+        return root;
     }
 
     public String getKey() {
@@ -104,19 +101,11 @@ public class Settings {
         this.timeout = timeout;
     }
 
+    public String getHost() {
+        return host;
+    }
+
     public int getPort() {
         return port;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public String getServer() {
-        return server;
-    }
-
-    public void setServer(String server) {
-        this.server = server;
     }
 }

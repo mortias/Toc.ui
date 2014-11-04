@@ -1,7 +1,7 @@
 package com.mitc.rest.server;
 
-import com.mitc.util.Settings;
 import com.mitc.util.Config;
+import com.mitc.util.Settings;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import com.wordnik.swagger.servlet.config.ServletScanner;
@@ -77,6 +77,7 @@ public class RESTServer {
 
         final BeanConfig config = new BeanConfig();
         config.setVersion("1.0.0");
+        config.setBasePath("http://" + settings.getHost() + ":" + settings.getPort() + "/api");
         config.setResourcePackage("com.mitc.rest.resources");
         config.setScan(true);
 

@@ -1,7 +1,6 @@
 package com.mitc.rest.resources;
 
 import com.mitc.Toc;
-import com.mitc.util.Settings;
 import com.mitc.dto.SettingsForm;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -14,7 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("toc")
+@Path("/toc")
 @Api(value = "Toc service", description = "Use the following service to change the settings of the TOC application.")
 public class TocServiceRest {
 
@@ -24,7 +23,7 @@ public class TocServiceRest {
     @Path(RestURIConstants.INFO)
     @Produces(MediaType.TEXT_HTML)
     @ApiOperation(
-            value = "Application information", httpMethod = "GET", response = Settings.class,
+            value = "Application information", httpMethod = "GET", response = String.class,
             notes = "Use the following service to get the server version.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "This request should always succeed when the server is running and " +
@@ -46,7 +45,7 @@ public class TocServiceRest {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(
-            value = "Server information", httpMethod = "POST", response = SettingsForm.class,
+            value = "Server information", httpMethod = "POST", response = String.class,
             notes = "Use the following service to verify the server information, the same as the About " +
                     "JasperReports Server link in the user interface.")
     @ApiResponses(value = {
@@ -65,6 +64,7 @@ public class TocServiceRest {
             return Response.status(200)
                     .entity("settings is called, height: " + form.getHeight() + ", width : " + form.getWidth())
                     .build();
+
         } catch (Exception e) {
             logger.error("RestService error {}", e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();

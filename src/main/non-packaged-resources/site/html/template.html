@@ -483,7 +483,7 @@
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
      </div>
-     <form id="settingsForm"  action="http://${server}:${port}/api/toc/settings">
+     <form id="settingsForm"  action="http://${host}:${port}/api/toc/settings">
       <div id="row">
        <div id="cell">
         <label for="height">height</label>
@@ -613,7 +613,7 @@ http://regex101.com/
   $.ajax({
    type: "GET",
    dataType: "html",
-   url: "http://${server}:${port}/api/toc/info",
+   url: "http://${host}:${port}/api/toc/info",
    beforeSend: function(xhr) {
     xhr.setRequestHeader("Accept", "text/html");
    },

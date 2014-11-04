@@ -12,6 +12,3 @@ settings:
 
         height: 680
         width: 500
-
-        server: localhost
-        port: 9876

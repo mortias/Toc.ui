@@ -123,13 +123,10 @@ public class Crypt {
 
     // scan the site root to encrypt / decrypt the bin folder
     public void init() {
-        if (config.getSettings().isEncrypted()) {
-            File[] root = new File(config.getSettings().getSite() + "bin").listFiles();
-            scanFiles(Cipher.ENCRYPT_MODE, root);
-        } else {
-            File[] root = new File(config.getSettings().getSite() + "bin").listFiles();
-            scanFiles(Cipher.DECRYPT_MODE, root);
-        }
+        String binPath = config.getSettings().getRoot() +
+                "site" + config.getSettings().getPathSep() + "bin";
+        File[] root = new File(binPath).listFiles();
+        scanFiles(config.getSettings().isEncrypted() ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
     }
 }
 
