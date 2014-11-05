@@ -1,17 +1,20 @@
 package com.mitc;
 
-import com.mitc.crypto.Crypt;
-import com.mitc.rest.server.RESTServer;
-import com.mitc.util.Browser;
-import com.mitc.util.Config;
-import com.mitc.util.Content;
+import com.mitc.crypto.FileEncryptor;
+import com.mitc.server.JettyServer;
+import com.mitc.javafx.Browser;
+import com.mitc.config.Config;
+import com.mitc.javafx.Content;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.logging.log4j.LogManager;
@@ -30,13 +33,12 @@ import java.util.concurrent.Executor;
 
 public class Toc extends Application {
 
-    public static Crypt crypt = Crypt.getInstance();
+    public static FileEncryptor crypt = FileEncryptor.getInstance();
     public static Config config = Config.getInstance();
     public static Content content = Content.getInstance();
 
     private static final Logger logger = LogManager.getLogger(Toc.class);
 
-    private static final String configPath = "settings.yml";
     private static final String iconImagePath = "icon.png";
     private static final String templatePath = "template.html";
     private static final String indexPath = "index.html";
@@ -56,7 +58,7 @@ public class Toc extends Application {
     public void init() throws Exception {
 
         // load the yml file
-        config.load(configPath);
+        config.loadSettings();
 
         // uncrypt / decrypt
         crypt.init();
@@ -75,7 +77,7 @@ public class Toc extends Application {
     public void start(Stage stage) throws IOException, URISyntaxException {
 
         // stores a reference to the stage.
-        this.stage = stage;
+        Toc.stage = stage;
 
         // instructs the javafx system not to exit implicitly when the last application window is shut.
         Platform.setImplicitExit(false);
@@ -83,31 +85,35 @@ public class Toc extends Application {
         // sets up the tray icon (using awt code run on the swing thread).
         javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
 
-        // out stage will be translucent, so give it a transparent style.
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle(config.translate("title"));
-
         // load the site
-        URL url = new File(config.getSettings().getRoot() + "site/html/" + indexPath).toURI().toURL();
+        URL url = new File(config.getTocSettings().getRoot() + "site/html/" + indexPath).toURI().toURL();
         logger.info(MessageFormat.format(
                 config.translate("browsing.file"), url.toString()));
 
         Browser browser = new Browser(url.toString());
-        addDraggableNode(browser.getWebView());
+
+        if(config.getTocSettings().getUndecorated()) {
+            // out stage will be translucent, so give it a transparent style.
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(config.translate("title"));
+
+            addDraggableNode(browser.getWebView());
+        }
 
         // create the layout for the javafx stage.
         StackPane stackPane = new StackPane(browser);
-        stackPane.setPrefSize(config.getSettings().getWidth(),
-                config.getSettings().getHeight());
+        stackPane.setPrefSize(config.getTocSettings().getWidth(),
+                config.getTocSettings().getHeight());
 
-        Scene scene = new Scene(stackPane, config.getSettings().getWidth(),
-                config.getSettings().getHeight(), Color.web("#000000"));
+        Scene scene = new Scene(stackPane, config.getTocSettings().getWidth(),
+                config.getTocSettings().getHeight(), Color.web("#000000"));
 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
 
+        config.saveSettings();
     }
 
     @Override
@@ -165,7 +171,7 @@ public class Toc extends Application {
     }
 
     public Stage getStage() {
-        return this.stage;
+        return stage;
     }
 
     private void addDraggableNode(final Node node) {
@@ -215,10 +221,10 @@ public class Toc extends Application {
 
     class JaxRsServer implements Runnable {
 
-        private RESTServer server;
+        private JettyServer server;
 
         public JaxRsServer() {
-            this.server = new RESTServer();
+            this.server = new JettyServer();
         }
 
         @Override

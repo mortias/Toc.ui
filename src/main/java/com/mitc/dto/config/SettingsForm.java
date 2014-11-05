@@ -1,4 +1,4 @@
-package com.mitc.dto;
+package com.mitc.dto.config;
 
 public class SettingsForm {
 

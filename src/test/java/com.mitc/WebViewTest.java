@@ -21,7 +21,7 @@ public class WebViewTest extends Application {
         final WebEngine webEngine = webView.getEngine();
 
         webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
-        webEngine.load("http://cf8rtdd1.cc.cec.eu.int:6090/ercbackoffice/index.cfm");
+        webEngine.load("http://www.netflix.be");
 
         Scene scene = new Scene(webView);
 

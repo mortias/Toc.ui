@@ -1,4 +1,4 @@
-package com.mitc.rest.server;
+package com.mitc.server;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

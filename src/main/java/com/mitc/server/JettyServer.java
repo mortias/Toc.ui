@@ -1,7 +1,7 @@
-package com.mitc.rest.server;
+package com.mitc.server;
 
-import com.mitc.util.Config;
-import com.mitc.util.Settings;
+import com.mitc.config.Config;
+import com.mitc.config.RestSettings;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import com.wordnik.swagger.servlet.config.ServletScanner;
@@ -16,27 +16,27 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import javax.servlet.FilterRegistration;
 
-public class RESTServer {
+public class JettyServer {
 
-    private static final Logger logger = LogManager.getLogger(RESTServer.class);
+    private static final Logger logger = LogManager.getLogger(JettyServer.class);
 
     private org.eclipse.jetty.server.Server jetty;
 
     public static Config config = Config.getInstance();
-    private Settings settings = config.getSettings();
+    private RestSettings restSettings = config.getRestSettings();
 
-    private static RESTServer instance = null;
+    private static JettyServer instance = null;
 
-    public static RESTServer getInstance() {
+    public static JettyServer getInstance() {
         if (instance == null) {
-            instance = new RESTServer();
+            instance = new JettyServer();
         }
         return instance;
     }
 
-    public RESTServer() {
+    public JettyServer() {
 
-        jetty = new org.eclipse.jetty.server.Server(settings.getPort());
+        jetty = new org.eclipse.jetty.server.Server(restSettings.getPort());
 
         ServletHolder jersey = new ServletHolder(ServletContainer.class);
         jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.rest.resources");
@@ -77,7 +77,7 @@ public class RESTServer {
 
         final BeanConfig config = new BeanConfig();
         config.setVersion("1.0.0");
-        config.setBasePath("http://" + settings.getHost() + ":" + settings.getPort() + "/api");
+        config.setBasePath("http://" + restSettings.getHost() + ":" + restSettings.getPort() + "/api");
         config.setResourcePackage("com.mitc.rest.resources");
         config.setScan(true);
 

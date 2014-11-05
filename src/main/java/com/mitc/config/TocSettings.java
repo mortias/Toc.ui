@@ -1,12 +1,11 @@
-package com.mitc.util;
+package com.mitc.config;
 
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.Inet4Address;
 
-public class Settings {
+public class TocSettings {
 
     private String key;
     private String root;
@@ -17,17 +16,17 @@ public class Settings {
     private int width;
     private int height;
     private int timeout;
-
-    private String host;
-    private int port = 9876;
-
     private boolean encrypted;
+    private boolean undecorated;
 
-    public Settings() {
+    public TocSettings() {
         try {
+            timeout = 2;
+            theme = "cupertino";
+            undecorated = true;
+            locale = "en_US";
             pathSep = System.getProperty("file.separator");
             root = FilenameUtils.getFullPath(new File("test.txt").getCanonicalPath());
-            host = Inet4Address.getLocalHost().getHostAddress();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,6 +76,10 @@ public class Settings {
         return root;
     }
 
+    public void setRoot(String root) {
+        this.root = root;
+    }
+
     public String getKey() {
         return key;
     }
@@ -101,11 +104,11 @@ public class Settings {
         this.timeout = timeout;
     }
 
-    public String getHost() {
-        return host;
+    public boolean getUndecorated() {
+        return undecorated;
     }
 
-    public int getPort() {
-        return port;
+    public void setUndecorated(boolean undecorated) {
+        this.undecorated = undecorated;
     }
 }

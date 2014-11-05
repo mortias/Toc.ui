@@ -1,0 +1,11 @@
+!toc
+  # timeout: 2
+  encrypted: true
+  key: Mary has one cat
+
+  # undecorated: false
+  # theme: cupertino
+  # locale: en_US
+
+  height: 680
+  width: 500

@@ -1,7 +1,7 @@
 package com.mitc.rest.resources;
 
 import com.mitc.Toc;
-import com.mitc.dto.SettingsForm;
+import com.mitc.dto.config.SettingsForm;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiResponse;

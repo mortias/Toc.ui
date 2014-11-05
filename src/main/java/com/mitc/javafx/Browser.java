@@ -1,12 +1,15 @@
-package com.mitc.util;
+package com.mitc.javafx;
 
-import com.mitc.crypto.Crypt;
-import com.mitc.crypto.Task;
+import com.mitc.config.Config;
+import com.mitc.crypto.AutoEncrypt;
+import com.mitc.crypto.FileEncryptor;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -23,13 +26,14 @@ import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 public class Browser extends Region {
 
-    public static Crypt crypt = Crypt.getInstance();
+    public static FileEncryptor crypt = FileEncryptor.getInstance();
     public static Config config = Config.getInstance();
 
     private final WebView webView = new WebView();
@@ -47,7 +51,7 @@ public class Browser extends Region {
 
                     EventListener listener = evt -> {
 
-                        boolean encrypt = config.getSettings().isEncrypted();
+                        boolean encrypt = config.getTocSettings().isEncrypted();
                         String target = evt.getCurrentTarget().toString().replace("file:///", "");
 
                         if (FilenameUtils.getExtension(target).length() == 0
@@ -68,7 +72,7 @@ public class Browser extends Region {
                                 if (encrypt) {
                                     // encrypt again after some time
                                     FutureTask task = new FutureTask<>(
-                                            new Task(config.getSettings().getTimeout() * 1000, target));
+                                            new AutoEncrypt(config.getTocSettings().getTimeout() * 1000, target));
                                     executor.execute(task);
                                 }
                             }
@@ -108,24 +112,19 @@ public class Browser extends Region {
         getChildren().add(webView);
     }
 
+    @Override
+    protected void layoutChildren() {
+        List<Node> managed = getManagedChildren();
+        for (Node child : managed) {
+            layoutInArea(child, getInsets().getLeft(), getInsets().getTop(),
+                    getWidth() - getInsets().getLeft() - getInsets().getRight(),
+                    getHeight() - getInsets().getTop() - getInsets().getBottom(),
+                    0, Insets.EMPTY, true, true, HPos.CENTER, VPos.CENTER);
+        }
+    }
+
     public WebView getWebView() {
         return webView;
     }
 
-    @Override
-    protected void layoutChildren() {
-        double w = config.getSettings().getWidth();
-        double h = config.getSettings().getHeight();
-        layoutInArea(webView, 0, 0, w, h, 0, HPos.CENTER, VPos.CENTER);
-    }
-
-    @Override
-    protected double computePrefWidth(double height) {
-        return config.getSettings().getHeight();
-    }
-
-    @Override
-    protected double computePrefHeight(double width) {
-        return config.getSettings().getWidth();
-    }
 }
