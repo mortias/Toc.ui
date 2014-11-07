@@ -37,12 +37,13 @@ public class Config {
                 new InputStreamReader(new FileInputStream(new File(tocSettingsPath).getCanonicalPath())));
         yamlReader.getConfig().setClassTag("toc", TocSettings.class);
         this.tocSettings = yamlReader.read(TocSettings.class);
-        if (tocSettings.getLocale().contains("_"))
-            setLanguage(tocSettings.getLocale().split("_")[0], tocSettings.getLocale().split("_")[1]);
         yamlReader.close();
 
+        // set the language
+        if (tocSettings.getLocale().contains("_"))
+            setLanguage(tocSettings.getLocale().split("_")[0], tocSettings.getLocale().split("_")[1]);
+
         logger.info(MessageFormat.format(resourceBundle.getString("load.config.from"), tocSettingsPath));
-        System.out.println(this.tocSettings.getKey());
 
         yamlReader = new YamlReader(
                 new InputStreamReader(new FileInputStream(new File(restSettingsPath).getCanonicalPath())));
@@ -50,19 +51,18 @@ public class Config {
         RestSettings yamlRestSettings = yamlReader.read(RestSettings.class);
         this.restSettings = yamlRestSettings != null ? yamlRestSettings : new RestSettings();
         yamlReader.close();
-
         logger.info(MessageFormat.format(resourceBundle.getString("load.config.from"), restSettingsPath));
 
     }
 
     public void saveSettings() throws IOException, URISyntaxException {
 
-        YamlWriter yamlWriter = new YamlWriter(new FileWriter(new File(new File("2" + tocSettingsPath).getCanonicalPath())));
+        YamlWriter yamlWriter = new YamlWriter(new FileWriter(new File(new File(tocSettingsPath).getCanonicalPath())));
         yamlWriter.getConfig().setClassTag("toc", TocSettings.class);
         yamlWriter.write(tocSettings);
         yamlWriter.close();
 
-        yamlWriter = new YamlWriter(new FileWriter(new File(new File("2" + restSettingsPath).getCanonicalPath())));
+        yamlWriter = new YamlWriter(new FileWriter(new File(new File(restSettingsPath).getCanonicalPath())));
         yamlWriter.getConfig().setClassTag("rest", RestSettings.class);
         yamlWriter.write(restSettings);
         yamlWriter.close();
