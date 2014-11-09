@@ -20,8 +20,9 @@ public class WebViewTest extends Application {
         final WebView webView = new WebView();
         final WebEngine webEngine = webView.getEngine();
 
-        webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
-        webEngine.load("http://www.netflix.be");
+        // webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
+        System.out.println(webEngine.getUserAgent());
+        webEngine.load("http://s-erc-nanut.net1.cec.eu.int:8090/jasperserver/login.html");
 
         Scene scene = new Scene(webView);
 
