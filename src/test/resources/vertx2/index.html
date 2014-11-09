@@ -1,0 +1,107 @@
+<html>
+
+<head>
+ <title></title>
+ <script src="jquery.min.js"></script>
+ <script src="sockjs-0.3.4.min.js"></script>
+ <script src="vertxbus.js"></script>
+</head>
+
+
+<body>
+
+<div id="send" class="box" style="position:absolute;left:0px;top:0px">
+
+ <form onsubmit="return false;">
+  Address:<input type="text" id="sendAddress" value="someaddress"/><br>
+  Message:<input type="text" id="sendMessage" value="Hello, World!"/>
+  <input type="button" id="sendButton" value="Send message"/>
+ </form>
+
+ <br>
+ Sent messages:<br>
+
+ <div id="sent" class="innerbox" style="width: 400px; height: 205px;">
+ </div>
+</div>
+
+
+
+<br>
+
+<div id="receive" class="box" style="position:absolute;left:0px;top:350px">
+
+ Received messages:<br>
+
+ <div id="received" class="innerbox" style="width: 400px; height: 275px;">
+ </div>
+
+</div>
+
+<div id="status" class="box" style="position:absolute;left:450px;top:350px">
+ Connection Status:&nbsp;
+ <div id="status_info">Not connected</div>
+</div>
+
+<script>
+
+ var eb = null;
+
+ function publish(address, message) {
+  if (eb) {
+   var json = {text: message};
+   eb.publish(address, json);
+   $('#sent').append($("<code>").text("Address:" + address + " Message:" + message));
+   $('#sent').append($("</code><br>"));
+  }
+ }
+
+ function subscribe(address) {
+  if (eb) {
+   eb.registerHandler(address, function (msg, replyTo) {
+    $('#received').append("Address:" + address + " Message:" + msg.text + "<br>");
+   });
+  }
+ }
+
+ function closeConn() {
+  if (eb) {
+   eb.close();
+  }
+ }
+
+ function openConn() {
+  if (!eb) {
+   eb = new vertx.EventBus("http://localhost:9356/eventbus");
+
+   eb.onopen = function () {
+    $("#status_info").text("Connected");
+    subscribe("someaddress");
+   };
+
+   eb.onclose = function () {
+    $("#status_info").text("Not connected");
+    eb = null;
+   };
+  }
+ }
+
+ $(document).ready(function () {
+  $("#sendButton").click(function () {
+   publish($("#sendAddress").val(), $("#sendMessage").val());
+  });
+
+  $("#subscribeButton").click(function () {
+   subscribe($("#subscribeAddress").val());
+  });
+
+
+
+  openConn();
+
+ });
+
+</script>
+
+</body>
+</html>
