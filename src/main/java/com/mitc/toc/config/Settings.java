@@ -1,35 +1,54 @@
-package com.mitc.config;
+package com.mitc.toc.config;
 
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.Inet4Address;
 
-public class TocSettings {
+public class Settings {
+
+    private int width;
+    private int height;
+    private int timeout;
+    private int restPort;
+    private int vertxPort;
 
     private String key;
     private String root;
     private String theme;
     private String locale;
     private String pathSep;
+    private String host;
 
-    private int width;
-    private int height;
-    private int timeout;
     private boolean encrypted;
     private boolean undecorated;
 
-    public TocSettings() {
+    public Settings() {
+
+        timeout = 2;
+        theme = "cupertino";
+        undecorated = true;
+        locale = "en_US";
+        restPort = 9999;
+        vertxPort = 8888;
+
         try {
-            timeout = 2;
-            theme = "cupertino";
-            undecorated = true;
-            locale = "en_US";
             pathSep = System.getProperty("file.separator");
             root = FilenameUtils.getFullPath(new File("test.txt").getCanonicalPath());
+            host = Inet4Address.getLocalHost().getHostAddress();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
     }
 
     public int getWidth() {
@@ -110,5 +129,21 @@ public class TocSettings {
 
     public void setUndecorated(boolean undecorated) {
         this.undecorated = undecorated;
+    }
+
+    public int getVertxPort() {
+        return vertxPort;
+    }
+
+    public void setVertxPort(int vertxPort) {
+        this.vertxPort = vertxPort;
+    }
+
+    public int getRestPort() {
+        return restPort;
+    }
+
+    public void setRestPort(int restPort) {
+        this.restPort = restPort;
     }
 }

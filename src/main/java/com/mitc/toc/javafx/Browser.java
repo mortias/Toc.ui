@@ -1,6 +1,6 @@
-package com.mitc.javafx;
+package com.mitc.toc.javafx;
 
-import com.mitc.config.Config;
+import com.mitc.toc.config.Config;
 import com.mitc.crypto.AutoEncrypt;
 import com.mitc.crypto.FileEncryptor;
 import javafx.beans.value.ChangeListener;
@@ -51,7 +51,7 @@ public class Browser extends Region {
 
                     EventListener listener = evt -> {
 
-                        boolean encrypt = config.getTocSettings().isEncrypted();
+                        boolean encrypt = config.getSettings().isEncrypted();
                         String target = evt.getCurrentTarget().toString().replace("file:///", "");
 
                         if (FilenameUtils.getExtension(target).length() == 0
@@ -72,7 +72,7 @@ public class Browser extends Region {
                                 if (encrypt) {
                                     // encrypt again after some time
                                     FutureTask task = new FutureTask<>(
-                                            new AutoEncrypt(config.getTocSettings().getTimeout() * 1000, target));
+                                            new AutoEncrypt(config.getSettings().getTimeout() * 1000, target));
                                     executor.execute(task);
                                 }
                             }

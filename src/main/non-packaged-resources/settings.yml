@@ -1,4 +1,4 @@
-!toc
+!settings
 
   # timeout: 2
   encrypted: true
@@ -10,3 +10,7 @@
 
   height: 680
   width: 500
+
+  host: localhost
+  # restPort: 9999
+  # vertxPort: 8888

@@ -1,10 +1,10 @@
-package com.mitc.server;
+package com.mitc.servers.rest.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ApiOriginFilter implements javax.servlet.Filter {
+public class CORSFilter implements javax.servlet.Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,

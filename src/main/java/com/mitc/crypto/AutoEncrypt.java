@@ -1,6 +1,6 @@
 package com.mitc.crypto;
 
-import com.mitc.config.Config;
+import com.mitc.toc.config.Config;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -31,7 +31,7 @@ public class AutoEncrypt implements Callable<String> {
         logger.info(MessageFormat.format(
                 config.translate("stopping.action"), target));
 
-        if (config.getTocSettings().isEncrypted())
+        if (config.getSettings().isEncrypted())
             target = crypt.encryptFile(new File(target));
 
         return Thread.currentThread().getName();

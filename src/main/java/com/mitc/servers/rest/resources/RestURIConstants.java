@@ -1,4 +1,4 @@
-package com.mitc.rest.resources;
+package com.mitc.servers.rest.resources;
 
 public class RestURIConstants {
 

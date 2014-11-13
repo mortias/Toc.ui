@@ -1,20 +1,19 @@
 package com.mitc;
 
 import com.mitc.crypto.FileEncryptor;
-import com.mitc.server.JettyServer;
-import com.mitc.javafx.Browser;
-import com.mitc.config.Config;
-import com.mitc.javafx.Content;
+import com.mitc.servers.rest.RestServer;
+import com.mitc.servers.vertx.VertxServer;
+import com.mitc.toc.config.Config;
+import com.mitc.toc.config.Settings;
+import com.mitc.toc.javafx.Browser;
+import com.mitc.toc.javafx.Content;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.web.WebEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.apache.logging.log4j.LogManager;
@@ -27,15 +26,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.Executor;
 
 public class Toc extends Application {
-
-    public static FileEncryptor crypt = FileEncryptor.getInstance();
-    public static Config config = Config.getInstance();
-    public static Content content = Content.getInstance();
 
     private static final Logger logger = LogManager.getLogger(Toc.class);
 
@@ -43,15 +36,29 @@ public class Toc extends Application {
     private static final String templatePath = "template.html";
     private static final String indexPath = "index.html";
 
-    public double initialX;
-    public double initialY;
+    public static FileEncryptor crypt = FileEncryptor.getInstance();
+
+    private static Stage stage;
+    private double initialX;
+    private double initialY;
+
+    public static Config config;
+    public static Content content;
+    public static Settings settings;
+
+    static {
+        config = Config.getInstance();
+        content = Content.getInstance();
+    }
 
     private Executor executor;
-    private JaxRsServer jaxRsServer;
-    public static Stage stage;
 
     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 
     @Override
@@ -59,14 +66,14 @@ public class Toc extends Application {
 
         // load the yml file
         config.loadSettings();
+        settings = config.getSettings();
 
-        // uncrypt / decrypt
+        // encrypt / decrypt
         crypt.init();
 
-        // setup the rest server
-        jaxRsServer = new JaxRsServer();
-        executor = new SequentialExecutor();
-        executor.execute(jaxRsServer);
+        executor = new ThreadPerTaskExecutor();
+        executor.execute(new RestServer(settings));
+        executor.execute(new VertxServer(settings));
 
         // load the site
         content.load(indexPath, templatePath);
@@ -86,13 +93,13 @@ public class Toc extends Application {
         javax.swing.SwingUtilities.invokeLater(this::addAppToTray);
 
         // load the site
-        URL url = new File(config.getTocSettings().getRoot() + "site/html/" + indexPath).toURI().toURL();
+        URL url = new File(settings.getRoot() + "site/html/" + indexPath).toURI().toURL();
         logger.info(MessageFormat.format(
                 config.translate("browsing.file"), url.toString()));
 
         Browser browser = new Browser(url.toString());
 
-        if(config.getTocSettings().getUndecorated()) {
+        if (settings.getUndecorated()) {
             // out stage will be translucent, so give it a transparent style.
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initStyle(StageStyle.UNDECORATED);
@@ -103,11 +110,11 @@ public class Toc extends Application {
 
         // create the layout for the javafx stage.
         StackPane stackPane = new StackPane(browser);
-        stackPane.setPrefSize(config.getTocSettings().getWidth(),
-                config.getTocSettings().getHeight());
+        stackPane.setPrefSize(settings.getWidth(),
+                settings.getHeight());
 
-        Scene scene = new Scene(stackPane, config.getTocSettings().getWidth(),
-                config.getTocSettings().getHeight(), Color.web("#000000"));
+        Scene scene = new Scene(stackPane, settings.getWidth(),
+                settings.getHeight(), Color.web("#000000"));
 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
@@ -118,7 +125,6 @@ public class Toc extends Application {
 
     @Override
     public void stop() throws IOException, URISyntaxException {
-        jaxRsServer.stop();
         crypt.init();
     }
 
@@ -170,10 +176,6 @@ public class Toc extends Application {
         }
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     private void addDraggableNode(final Node node) {
 
         node.setOnMousePressed(me -> {
@@ -191,49 +193,10 @@ public class Toc extends Application {
         });
     }
 
-
-    /* Server runnable clesses */
-    class SequentialExecutor implements Executor {
-        final Queue<Runnable> queue = new ArrayDeque<Runnable>();
-        Runnable task;
-
-        public synchronized void execute(final Runnable r) {
-            queue.offer(new Runnable() {
-                public void run() {
-                    try {
-                        r.run();
-                    } finally {
-                        next();
-                    }
-                }
-            });
-            if (task == null) {
-                next();
-            }
-        }
-
-        private synchronized void next() {
-            if ((task = queue.poll()) != null) {
-                new Thread(task).start();
-            }
+    class ThreadPerTaskExecutor implements Executor {
+        public void execute(Runnable r) {
+            new Thread(r).start();
         }
     }
 
-    class JaxRsServer implements Runnable {
-
-        private JettyServer server;
-
-        public JaxRsServer() {
-            this.server = new JettyServer();
-        }
-
-        @Override
-        public void run() {
-            this.server.start();
-        }
-
-        public void stop() {
-            this.server.stop();
-        }
-    }
 }

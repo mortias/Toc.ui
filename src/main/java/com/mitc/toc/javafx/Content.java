@@ -1,8 +1,7 @@
-package com.mitc.javafx;
+package com.mitc.toc.javafx;
 
-import com.mitc.Toc;
-import com.mitc.config.TocSettings;
-import com.mitc.config.RestSettings;
+import com.mitc.Toc; 
+import com.mitc.toc.config.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
@@ -39,28 +38,27 @@ public class Content {
 
     public void load(String indexPath, String templatePath) throws IOException, URISyntaxException {
 
-        TocSettings tocSettings = Toc.config.getTocSettings();
-        RestSettings restSettings = Toc.config.getRestSettings();
+        Settings settings = Toc.config.getSettings(); 
 
-        String site = tocSettings.getRoot() + "site" + tocSettings.getPathSep();
+        String site = settings.getRoot() + "site" + settings.getPathSep();
 
         Map<String, String> siteMap = new HashMap<>();
-        siteMap.put("theme", tocSettings.getTheme());
-        siteMap.put("width", String.valueOf(tocSettings.getWidth()));
-        siteMap.put("height", String.valueOf(tocSettings.getHeight()));
-        siteMap.put("theme", tocSettings.getTheme());
+        siteMap.put("theme", settings.getTheme());
+        siteMap.put("width", String.valueOf(settings.getWidth()));
+        siteMap.put("height", String.valueOf(settings.getHeight()));
+        siteMap.put("theme", settings.getTheme());
         siteMap.put("bin", site + "bin");
-        siteMap.put("host", restSettings.getHost());
-        siteMap.put("port", String.valueOf(restSettings.getPort()));
+        siteMap.put("host", settings.getHost());
+        siteMap.put("restPort", String.valueOf(settings.getRestPort()));
 
         handleFile(
-                site + "html" + tocSettings.getPathSep() + templatePath,
-                site + "html" + tocSettings.getPathSep() + indexPath, siteMap, true);
+                site + "html" + settings.getPathSep() + templatePath,
+                site + "html" + settings.getPathSep() + indexPath, siteMap, true);
 
-        String swagger = tocSettings.getRoot() + "swagger" + tocSettings.getPathSep();
+        String swagger = settings.getRoot() + "swagger" + settings.getPathSep();
         Map<String, String> swaggerMap = new HashMap<>();
-        swaggerMap.put("host", restSettings.getHost());
-        swaggerMap.put("port", String.valueOf(restSettings.getPort()));
+        swaggerMap.put("host", settings.getHost());
+        swaggerMap.put("restPort", String.valueOf(settings.getRestPort()));
 
         handleFile(swagger + "index.html", swagger + "index.html", swaggerMap, false);
 

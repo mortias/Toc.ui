@@ -1,5 +1,6 @@
-package vertx;
+package com.mitc.servers.vertx;
 
+import com.mitc.toc.config.Settings;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.VertxFactory;
@@ -9,20 +10,26 @@ import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
 import org.vertx.java.core.sockjs.SockJSServer;
 
-public class BridgeServer {
+public class VertxServer implements Runnable {
 
-    public static synchronized void main(String[] args) throws Exception {
+    private int port;
+    private Vertx vertx;
+    private HttpServer httpServer;
+    private SockJSServer sockServer;
 
-        Vertx vertx = VertxFactory.newVertx();
+    public VertxServer(Settings settings) {
 
+        vertx = VertxFactory.newVertx();
+        port = settings.getVertxPort();
+
+        // Let everything through
         JsonArray permitted = new JsonArray();
-        permitted.add(new JsonObject()); // Let everything through
+        permitted.add(new JsonObject());
 
-        HttpServer server = vertx.createHttpServer();
+        httpServer = vertx.createHttpServer();
 
-        SockJSServer sockServer = vertx.createSockJSServer(server);
+        sockServer = vertx.createSockJSServer(httpServer);
         sockServer.bridge(new JsonObject().putString("prefix", "/eventbus"), permitted, permitted);
-        server.listen(9356);
 
         vertx.eventBus().registerHandler("someaddress", new Handler<Message>() {
             @Override
@@ -40,8 +47,13 @@ public class BridgeServer {
             }
         });
 
-        // Prevent the JVM from exiting
-        System.in.read();
-
     }
+
+    @Override
+    public void run() {
+        System.out.println("vertx server launched " + port );
+        httpServer.listen(port);
+    }
+
 }
+

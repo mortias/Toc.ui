@@ -107,7 +107,7 @@
 
  function openConn() {
   if (!eb) {
-   eb = new vertx.EventBus("http://localhost:9356/eventbus");
+   eb = new vertx.EventBus("http://localhost:8888/eventbus");
 
    eb.onopen = function () {
     $("#status_info").text("Connected");

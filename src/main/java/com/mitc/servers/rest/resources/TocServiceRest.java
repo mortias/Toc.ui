@@ -1,4 +1,4 @@
-package com.mitc.rest.resources;
+package com.mitc.servers.rest.resources;
 
 import com.mitc.Toc;
 import com.mitc.dto.config.SettingsForm;
@@ -58,8 +58,8 @@ public class TocServiceRest {
 
             System.out.println("settings is called, height: " + form.getHeight() + ", width : " + form.getWidth());
 
-            Toc.stage.setWidth(form.getWidth());
-            Toc.stage.setHeight(form.getHeight());
+            Toc.getStage().setWidth(form.getWidth());
+            Toc.getStage().setHeight(form.getHeight());
 
             return Response.status(200)
                     .entity("settings is called, height: " + form.getHeight() + ", width : " + form.getWidth())
