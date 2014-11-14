@@ -15,3 +15,4 @@
   # restPort: 9999
   # vertxPort: 8888
   # hawtioPort: 7777
+  hawtio: false;

@@ -4,10 +4,10 @@ import com.mitc.crypto.FileEncryptor;
 import com.mitc.servers.hawtio.HawtioServer;
 import com.mitc.servers.rest.RestServer;
 import com.mitc.servers.vertx.VertxServer;
-import com.mitc.toc.config.Config;
-import com.mitc.toc.config.Settings;
-import com.mitc.toc.javafx.Browser;
-import com.mitc.toc.javafx.Content;
+import com.mitc.toc.Config;
+import com.mitc.toc.Settings;
+import com.mitc.toc.Browser;
+import com.mitc.toc.Content;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -51,7 +51,7 @@ public class Toc extends Application {
         content = Content.getInstance();
     }
 
-    private Executor executor;
+    private static Executor executor;
 
     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
@@ -74,11 +74,20 @@ public class Toc extends Application {
         executor = new ThreadPerTaskExecutor();
         executor.execute(new RestServer(settings));
         executor.execute(new VertxServer(settings));
-        executor.execute(new HawtioServer(settings));
+
+        if (settings.getHawtio()) {
+            startHawtIoServer();
+        }
 
         // load the site
         content.load(indexPath, templatePath);
 
+    }
+
+    public static void startHawtIoServer() {
+        if (!settings.getHawtio()) {
+            executor.execute(new HawtioServer(settings));
+        }
     }
 
     @Override
@@ -117,7 +126,7 @@ public class Toc extends Application {
 
     }
 
-    public static void reform(){
+    public static void reform() {
         stage.setWidth(settings.getWidth());
         stage.setHeight(settings.getHeight());
     }

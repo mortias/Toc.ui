@@ -629,7 +629,7 @@
      </div>
      <div id="row">
       <div id="cell"><label for="ui">Select a skin</label></div>
-      <div id="cell">
+      <div id="cell" name="ui">
        <select name="ui" id="ui">
         <option value="black-tie">black-tie</option>
         <option value="blitzer">blitzer</option>
@@ -678,7 +678,7 @@
     <br>
     <div id="row">
      <div id="cell"><button id="http"><a href="../../tools/swagger/index.html">Swagger</a></button></div>
-     <div id="cell"><button id="http"><a href="http://${host}:${hawtioPort}/hawtio">Hawt.io</a></button></div>
+     <div id="cell"><button id="http"><a id="hawtio">Hawt.io</a></button></div>
      <div id="cell"></div>
      <div id="cell"></div>
     </div>
@@ -696,16 +696,22 @@
     <br>
     <div id="row">
      <div id="cell">Rest</div>
-     <div id="cell"><span id="rest_info">...</span></div>
+     <div id="cell"><span id="rest_info">Not connected</span></div>
      <div id="cell"></div>
      <div id="cell"></div>
     </div>
     <div id="row">
      <div id="cell">Vertx</div>
-     <div id="cell"><span id="vertx_info">...</span></div>
+     <div id="cell"><span id="vertx_info">Not connected</span></div>
      <div id="cell"></div>
      <div id="cell"></div>
     </div>
+     <div id="row">
+      <div id="cell">Hawt.io</div>
+      <div id="cell"><span id="hawt_info">Not connected</span></div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
    </div>
   </div>
  </div>
@@ -734,10 +740,25 @@ http://regex101.com/
 <script src="../scripts/vertx/vertxbus.js"></script>
 <script src="../scripts/vertx/eventbus.js"></script>
 
-<div id="dialog-message" title="Save complete">
+<div id="dialog-save-complete" title="Save complete">
  <p>
   <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
   Your settings have been saved successfully.
+ </p>
+</div>
+
+<div id="dialog-start-hawtio" title="Hawt.io disabled">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Hawt.io is currently not running,<br>would you like to start it?
+ </p>
+</div>
+
+<div id="dialog-link-hawtio" title="Hawt.io started">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Hawt.io is started you can browse it here:<br>
+  <a href="http://${host}:${hawtioPort}/hawtio">http://${host}:${hawtioPort}/hawtio</a>
  </p>
 </div>
 
@@ -777,10 +798,17 @@ http://regex101.com/
   // Call to the settings form via SockJs/Vertx
   $('#save').click(function() {
      var json = {
+       "action" : "saveCustomSettings",
        "height" : $('#height').val(),
        "width" : $('#width').val(),
        "theme" : $('#ui').val()};
      boWrite(json);
+  });
+
+  // Check if hawt.io is running
+  $('#hawtio').click(function() {
+   var json = {"action" : "checkIfHawtIoIsRunning"};
+   boWrite(json);
   });
 
   // Get the toc version via REST

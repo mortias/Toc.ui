@@ -1,7 +1,6 @@
-package com.mitc.toc.javafx;
+package com.mitc.toc;
 
 import com.mitc.Toc;
-import com.mitc.toc.config.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;

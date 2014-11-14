@@ -1,7 +1,7 @@
 package com.mitc.servers.rest;
 
 import com.mitc.servers.filters.CORSFilter;
-import com.mitc.toc.config.Settings;
+import com.mitc.toc.Settings;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
 import com.wordnik.swagger.servlet.config.ServletScanner;

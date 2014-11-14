@@ -1,8 +1,7 @@
-package com.mitc.toc.javafx;
+package com.mitc.toc;
 
 import com.mitc.crypto.AutoEncrypt;
 import com.mitc.crypto.FileEncryptor;
-import com.mitc.toc.config.Config;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;

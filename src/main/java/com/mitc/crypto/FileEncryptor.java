@@ -1,6 +1,6 @@
 package com.mitc.crypto;
 
-import com.mitc.toc.config.Config;
+import com.mitc.toc.Config;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

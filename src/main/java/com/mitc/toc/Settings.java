@@ -1,4 +1,4 @@
-package com.mitc.toc.config;
+package com.mitc.toc;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -14,7 +14,9 @@ public class Settings {
 
     private int restPort;
     private int vertxPort;
+
     private int hawtioPort;
+    private boolean hawtio;
 
     private String key;
     private String root;
@@ -35,6 +37,8 @@ public class Settings {
 
         restPort = 9999;
         vertxPort = 8888;
+
+        hawtio = false;
         hawtioPort = 7777;
 
         try {
@@ -151,11 +155,19 @@ public class Settings {
         this.restPort = restPort;
     }
 
-     public int getHawtioPort() {
+    public int getHawtioPort() {
         return hawtioPort;
     }
 
     public void setHawtioPort(int hawtioPort) {
         this.hawtioPort = hawtioPort;
+    }
+
+    public boolean getHawtio() {
+        return hawtio;
+    }
+
+    public void setHawtio(boolean hawtio) {
+        this.hawtio = hawtio;
     }
 }

@@ -1,4 +1,4 @@
-package com.mitc.toc.config;
+package com.mitc.toc;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
