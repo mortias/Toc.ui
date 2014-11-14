@@ -1,6 +1,6 @@
 package com.mitc.toc.javafx;
 
-import com.mitc.Toc; 
+import com.mitc.Toc;
 import com.mitc.toc.config.Settings;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -38,7 +38,7 @@ public class Content {
 
     public void load(String indexPath, String templatePath) throws IOException, URISyntaxException {
 
-        Settings settings = Toc.config.getSettings(); 
+        Settings settings = Toc.config.getSettings();
 
         String site = settings.getRoot() + "site" + settings.getPathSep();
 
@@ -50,12 +50,14 @@ public class Content {
         siteMap.put("bin", site + "bin");
         siteMap.put("host", settings.getHost());
         siteMap.put("restPort", String.valueOf(settings.getRestPort()));
+        siteMap.put("vertxPort", String.valueOf(settings.getVertxPort()));
+        siteMap.put("hawtioPort", String.valueOf(settings.getHawtioPort()));
 
         handleFile(
                 site + "html" + settings.getPathSep() + templatePath,
                 site + "html" + settings.getPathSep() + indexPath, siteMap, true);
 
-        String swagger = settings.getRoot() + "swagger" + settings.getPathSep();
+        String swagger = settings.getRoot() + "tools" + settings.getPathSep() + "swagger" + settings.getPathSep();
         Map<String, String> swaggerMap = new HashMap<>();
         swaggerMap.put("host", settings.getHost());
         swaggerMap.put("restPort", String.valueOf(settings.getRestPort()));

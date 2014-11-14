@@ -1,8 +1,8 @@
 package com.mitc.toc.javafx;
 
-import com.mitc.toc.config.Config;
 import com.mitc.crypto.AutoEncrypt;
 import com.mitc.crypto.FileEncryptor;
+import com.mitc.toc.config.Config;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker;
@@ -42,71 +42,75 @@ public class Browser extends Region {
     private static final Logger logger = LogManager.getLogger(Browser.class);
     private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-    public Browser(String url) {
+    public Browser(String url, boolean handleEvents) {
 
-        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+        if (handleEvents) {
+            webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
 
-            public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
-                if (newState == Worker.State.SUCCEEDED) {
+                public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
+                    if (newState == Worker.State.SUCCEEDED) {
 
-                    EventListener listener = evt -> {
 
-                        boolean encrypt = config.getSettings().isEncrypted();
-                        String target = evt.getCurrentTarget().toString().replace("file:///", "");
+                        EventListener listener = evt -> {
 
-                        if (FilenameUtils.getExtension(target).length() == 0
-                                || target.contains("https:") || target.contains("mailto:")
-                                || target.contains("http:") || target.contains("ftp:")) {
+                            boolean encrypt = config.getSettings().isEncrypted();
+                            String target = evt.getCurrentTarget().toString().replace("file:///", "");
 
-                            executeTarget(target);
-
-                        } else {
-
-                            if (encrypt)
-                                target = crypt.decryptFile(new File(target + ".crypt"));
-
-                            if (target != null && target.length() > 0) {
+                            if (FilenameUtils.getExtension(target).length() == 0
+                                    || target.contains("https:") || target.contains("mailto:")
+                                    || target.contains("http:") || target.contains("ftp:")) {
 
                                 executeTarget(target);
 
-                                if (encrypt) {
-                                    // encrypt again after some time
-                                    FutureTask task = new FutureTask<>(
-                                            new AutoEncrypt(config.getSettings().getTimeout() * 1000, target));
-                                    executor.execute(task);
+                            } else {
+
+                                if (encrypt)
+                                    target = crypt.decryptFile(new File(target + ".crypt"));
+
+                                if (target != null && target.length() > 0) {
+
+                                    executeTarget(target);
+
+                                    if (encrypt) {
+                                        // encrypt again after some time
+                                        FutureTask task = new FutureTask<>(
+                                                new AutoEncrypt(config.getSettings().getTimeout() * 1000, target));
+                                        executor.execute(task);
+                                    }
                                 }
                             }
-                        }
-                    };
+                        };
 
-                    // add event listeners to all links
-                    Document doc = webEngine.getDocument();
-                    NodeList lst = doc.getElementsByTagName("a");
-                    for (int i = 0; i != lst.getLength(); i++) {
-                        Element el = (Element) lst.item(i);
-                        if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
-                            logger.trace(MessageFormat.format(config.translate("adding.eventlistener"), el.toString()));
-                            ((EventTarget) el).addEventListener("mouseup", listener, false);
+                        // add event listeners to all links
+                        Document doc = webEngine.getDocument();
+                        NodeList lst = doc.getElementsByTagName("a");
+                        for (int i = 0; i != lst.getLength(); i++) {
+                            Element el = (Element) lst.item(i);
+                            if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
+                                logger.trace(MessageFormat.format(config.translate("adding.eventlistener"), el.toString()));
+                                ((EventTarget) el).addEventListener("mouseup", listener, false);
+                            }
                         }
                     }
                 }
-            }
 
-            private void executeTarget(String target) {
-                try {
-                    String[] array = {"cmd", "/C", "start", target};
-                    logger.info(MessageFormat.format(
-                            config.translate("running.action"), Arrays.toString(array)));
-                    Runtime.getRuntime().exec(array);
-                } catch (IOException e) {
-                    logger.error(MessageFormat.format(
-                            config.translate("an.error.occured"), e.getLocalizedMessage()));
+
+                private void executeTarget(String target) {
+                    try {
+                        String[] array = {"cmd", "/C", "start", target};
+                        logger.info(MessageFormat.format(
+                                config.translate("running.action"), Arrays.toString(array)));
+                        Runtime.getRuntime().exec(array);
+                    } catch (IOException e) {
+                        logger.error(MessageFormat.format(
+                                config.translate("an.error.occured"), e.getLocalizedMessage()));
+                    }
                 }
-            }
 
-        });
+            });
+        }
 
-        webView.setContextMenuEnabled(false);
+        //  webView.setContextMenuEnabled(false);
         webEngine.load(url);
 
         getChildren().add(webView);

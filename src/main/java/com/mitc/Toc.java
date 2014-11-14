@@ -1,6 +1,7 @@
 package com.mitc;
 
 import com.mitc.crypto.FileEncryptor;
+import com.mitc.servers.hawtio.HawtioServer;
 import com.mitc.servers.rest.RestServer;
 import com.mitc.servers.vertx.VertxServer;
 import com.mitc.toc.config.Config;
@@ -12,7 +13,6 @@ import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -74,6 +74,7 @@ public class Toc extends Application {
         executor = new ThreadPerTaskExecutor();
         executor.execute(new RestServer(settings));
         executor.execute(new VertxServer(settings));
+        executor.execute(new HawtioServer(settings));
 
         // load the site
         content.load(indexPath, templatePath);
@@ -97,30 +98,28 @@ public class Toc extends Application {
         logger.info(MessageFormat.format(
                 config.translate("browsing.file"), url.toString()));
 
-        Browser browser = new Browser(url.toString());
+        Browser browser = new Browser(url.toString(), true);
 
         if (settings.getUndecorated()) {
             // out stage will be translucent, so give it a transparent style.
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle(config.translate("title"));
-
             addDraggableNode(browser.getWebView());
         }
 
-        // create the layout for the javafx stage.
-        StackPane stackPane = new StackPane(browser);
-        stackPane.setPrefSize(settings.getWidth(),
-                settings.getHeight());
-
-        Scene scene = new Scene(stackPane, settings.getWidth(),
+        Scene scene = new Scene(browser, settings.getWidth(),
                 settings.getHeight(), Color.web("#000000"));
 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.show();
 
-        config.saveSettings();
+    }
+
+    public static void reform(){
+        stage.setWidth(settings.getWidth());
+        stage.setHeight(settings.getHeight());
     }
 
     @Override

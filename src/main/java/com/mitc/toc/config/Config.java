@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.net.URISyntaxException;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -47,13 +46,16 @@ public class Config {
         }
     }
 
-    public void saveSettings() throws IOException, URISyntaxException {
-
-        YamlWriter yamlWriter = new YamlWriter(new FileWriter(new File(new File(settingsPath).getCanonicalPath())));
-        yamlWriter.getConfig().setClassTag("settings", Settings.class);
-        yamlWriter.write(settings);
-        yamlWriter.close();
-
+    public void saveSettings() {
+        try {
+            YamlWriter yamlWriter = new YamlWriter(new FileWriter(new File(new File(settingsPath).getCanonicalPath())));
+            yamlWriter.getConfig().setClassTag("settings", Settings.class);
+            yamlWriter.write(settings);
+            yamlWriter.close();
+            logger.info(MessageFormat.format(resourceBundle.getString("saving.configuration.to"), settingsPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setLanguage(String language, String country) {

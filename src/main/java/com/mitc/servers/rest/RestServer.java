@@ -1,6 +1,6 @@
 package com.mitc.servers.rest;
 
-import com.mitc.servers.rest.filters.CORSFilter;
+import com.mitc.servers.filters.CORSFilter;
 import com.mitc.toc.config.Settings;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
@@ -54,8 +54,8 @@ public class RestServer implements Runnable {
     @Override
     public void run() {
         try {
-            jetty.start();
             jetty.join();
+            jetty.start();
         } catch (Exception e) {
             e.printStackTrace();
         }

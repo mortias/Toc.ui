@@ -1,5 +1,7 @@
 package com.mitc.servers.vertx;
 
+import com.mitc.Toc;
+import com.mitc.toc.config.Config;
 import com.mitc.toc.config.Settings;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
@@ -13,12 +15,18 @@ import org.vertx.java.core.sockjs.SockJSServer;
 public class VertxServer implements Runnable {
 
     private int port;
+    private Config config;
+
     private Vertx vertx;
     private HttpServer httpServer;
     private SockJSServer sockServer;
 
+    private final String boReadChannel = "boReadChannel";
+    private final String boWriteChannel = "boWriteChannel";
+
     public VertxServer(Settings settings) {
 
+        config = Config.getInstance();
         vertx = VertxFactory.newVertx();
         port = settings.getVertxPort();
 
@@ -31,27 +39,38 @@ public class VertxServer implements Runnable {
         sockServer = vertx.createSockJSServer(httpServer);
         sockServer.bridge(new JsonObject().putString("prefix", "/eventbus"), permitted, permitted);
 
-        vertx.eventBus().registerHandler("someaddress", new Handler<Message>() {
+        vertx.eventBus().registerHandler(boWriteChannel, new Handler<Message>() {
             @Override
             public void handle(Message event) {
 
-                System.out.println("aa" + event.body().toString());
+                JsonObject receivedMsg = new JsonObject(event.body().toString());
 
-                JsonObject msg = new JsonObject();
-                msg.putString("height", "550")
-                        .putString("width", "560")
-                        .putString("text", "zzzz")
-                        .putString("skin", "cupertino");
+                Settings settings = Config.getInstance().getSettings();
+                settings.setWidth(Integer.parseInt(receivedMsg.getString("width")));
+                settings.setHeight(Integer.parseInt(receivedMsg.getString("height")));
+                settings.setTheme(receivedMsg.getString("theme"));
 
-                vertx.eventBus().publish("someaddress2", msg);
+                config.saveSettings();
+                Toc.reform();
+
+                JsonObject sendMsg = new JsonObject();
+                sendMsg.putString("text", "save successfull");
+
+                sendMessage(boReadChannel, sendMsg);
+
             }
         });
 
     }
 
+    public void sendMessage(String channel, JsonObject msg) {
+        if (vertx != null) {
+            vertx.eventBus().publish(channel, msg);
+        }
+    }
+
     @Override
     public void run() {
-        System.out.println("vertx server launched " + port );
         httpServer.listen(port);
     }
 

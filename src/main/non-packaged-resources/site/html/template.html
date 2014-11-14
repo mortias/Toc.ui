@@ -4,7 +4,7 @@
 
 <head>
  <meta charset="utf-8">
- <link id="stylesheet" href="../jquery/ui/themes/${theme}/jquery-ui.min.css" rel="stylesheet">
+ <link href="../scripts/jquery/ui/themes/${theme}/jquery-ui.min.css" id="stylesheet" rel="stylesheet">
  <link href="../styles/style.css" rel="stylesheet">
 </head>
 
@@ -600,6 +600,7 @@
 <!-- --------------------- TAB 6 --------------------- -->
 <!-- ------------------------------------------------- -->
 
+<form onsubmit="return false;">
 <div id="tabs-6" style="min-height: ${height}px;">
  <div id="container">
   <div id="row">
@@ -614,60 +615,103 @@
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
       <div id="cell" style="border-bottom: thin solid #000000;"></div>
      </div>
-     <form id="settingsForm"  action="http://${host}:${restPort}/api/toc/settings">
-      <div id="row">
-       <div id="cell">
-        <label for="height">height</label>
-        <input id="height" name="height" value="${height}">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <br>
-        <label for="width">width</label>
-        <input id="width" name="width" value="${width}">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <br>
-       </div>
-       <div id="cell" name="ui">
-        <label for="ui">Select a skin</label>
-        <select name="ui" id="ui">
-         <option value="black-tie">black-tie</option>
-         <option value="blitzer">blitzer</option>
-         <option value="cupertino">cupertino</option>
-         <option value="dark-hive">dark-hive</option>
-         <option value="dot-luv">dot-luv</option>
-         <option value="eggplant">eggplant</option>
-         <option value="excite-bike">excite-bike</option>
-         <option value="hot-sneaks">hot-sneaks</option>
-         <option value="humanity">humanity</option>
-         <option value="le-frog">le-frog</option>
-         <option value="mint-choc">mint-choc</option>
-         <option value="overcast">overcast</option>
-         <option value="pepper-grinder">pepper-grinder</option>
-         <option value="redmond">redmond</option>
-         <option value="smoothness">smoothness</option>
-         <option value="south-street">south-street</option>
-         <option value="start">start</option>
-         <option value="sunny">sunny</option>
-         <option value="swanky-purse">swanky-purse</option>
-         <option value="trontastic">trontastic</option>
-         <option value="ui-darkness">ui-darkness</option>
-         <option value="ui-lightness">ui-lightness</option>
-         <option value="vader">vader</option>
-        </select>
-       </div>
-       <div id="cell"><button type="submit" id="submit">Save</button></div>
-      </div>
-     </form>
+     <div id="row">
+      <div id="cell"><label for="width">Width</label></div>
+      <div id="cell"><input id="width" name="width" value="${width}"></div>
+      <div id="cell"></div>
+      <div id="cell" style="width: 200px"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><label for="height">Height</label></div>
+      <div id="cell"><input id="height" name="height" value="${height}"></div>
+      <div id="cell"></div>
+      <div id="cell"></div>
+     </div>
+     <div id="row">
+      <div id="cell"><label for="ui">Select a skin</label></div>
+      <div id="cell">
+       <select name="ui" id="ui">
+        <option value="black-tie">black-tie</option>
+        <option value="blitzer">blitzer</option>
+        <option value="cupertino">cupertino</option>
+        <option value="dark-hive">dark-hive</option>
+        <option value="dot-luv">dot-luv</option>
+        <option value="eggplant">eggplant</option>
+        <option value="excite-bike">excite-bike</option>
+        <option value="hot-sneaks">hot-sneaks</option>
+        <option value="humanity">humanity</option>
+        <option value="le-frog">le-frog</option>
+        <option value="mint-choc">mint-choc</option>
+        <option value="overcast">overcast</option>
+        <option value="pepper-grinder">pepper-grinder</option>
+        <option value="redmond">redmond</option>
+        <option value="smoothness">smoothness</option>
+        <option value="south-street">south-street</option>
+        <option value="start">start</option>
+        <option value="sunny">sunny</option>
+        <option value="swanky-purse">swanky-purse</option>
+        <option value="trontastic">trontastic</option>
+        <option value="ui-darkness">ui-darkness</option>
+        <option value="ui-lightness">ui-lightness</option>
+        <option value="vader">vader</option>
+       </select>
+     </div>
+     <div id="cell"></div>
+     <div id="cell"></div>
     </div>
+    <br><br>
     <div id="row">
-     <div id="cell">HealthCheck</div>
-     <div id="cell"><span id="info">...</span></div>
+     <div id="cell"></div>
+     <div id="cell"><button id="save"><a>Save</a></button></div>
+     <div id="cell"></div>
      <div id="cell"></div>
     </div>
     <br>
+    <div id="row">
+     <div id="cell"><br><b>Embedded tools</b></div>
+    </div>
+    <div id="row">
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+    </div>
+    <br>
+    <div id="row">
+     <div id="cell"><button id="http"><a href="../../tools/swagger/index.html">Swagger</a></button></div>
+     <div id="cell"><button id="http"><a href="http://${host}:${hawtioPort}/hawtio">Hawt.io</a></button></div>
+     <div id="cell"></div>
+     <div id="cell"></div>
+    </div>
+    <br>
+    <br>
+    <div id="row">
+     <div id="cell"><br><b>Health checks</b></div>
+    </div>
+    <div id="row">
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+     <div id="cell" style="border-bottom: thin solid #000000;"></div>
+    </div>
+    <br>
+    <div id="row">
+     <div id="cell">Rest</div>
+     <div id="cell"><span id="rest_info">...</span></div>
+     <div id="cell"></div>
+     <div id="cell"></div>
+    </div>
+    <div id="row">
+     <div id="cell">Vertx</div>
+     <div id="cell"><span id="vertx_info">...</span></div>
+     <div id="cell"></div>
+     <div id="cell"></div>
+    </div>
    </div>
   </div>
  </div>
 </div>
+</form>
 
 </div>
 
@@ -685,8 +729,18 @@ http://regex101.com/
 
 -->
 
-<script src="../jquery/ui/jquery.js"></script>
-<script src="../jquery/ui/jquery-ui.min.js"></script>
+<script src="../scripts/jquery/ui/jquery.js"></script>
+<script src="../scripts/jquery/ui/jquery-ui.min.js"></script>
+<script src="../scripts/vertx/sockjs-0.3.4.min.js"></script>
+<script src="../scripts/vertx/vertxbus.js"></script>
+<script src="../scripts/vertx/eventbus.js"></script>
+
+<div id="dialog-message" title="Save complete">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Your settings have been saved successfully.
+ </p>
+</div>
 
 <script>
 
@@ -694,52 +748,43 @@ http://regex101.com/
  $('#accordion2').accordion();
 
  $('#tabs').tabs();
+ $('#height').spinner();
+ $('#width').spinner();
+
+ $(document).ready(function () {
+  openConn("http://${host}:${vertxPort}/eventbus");
+ });
 
  $(function () {
+
   $('button[id="http"]').button({icons: {primary: "ui-icon-newwin"}});
   $('button[id="ftp"]').button({icons: {primary: "ui-icon-transfer-e-w"}});
   $('button[id="remote"]').button({icons: {primary: "ui-icon-wrench"}});
   $('button[id="book"]').button({icons: {primary: "ui-icon-document"}});
   $('button[id="database"]').button({icons: {primary: "ui-icon-gear"}});
-  $('button[id="submit"]').button({icons: {primary: "ui-icon-gear"}});
- });
+  $('button[id="save"]').button({icons: {primary: "ui-icon-check"}});
 
- // Config screen
- $('#height').spinner();
- $('#width').spinner();
-
- $(function () {
+  // Set the preconfigured skin
   $('div[name="ui"] select').val("${theme}");
+
+  // Change the skin on runtime
   $('#ui')
    .selectmenu({
     change: function( event, ui ) {
-     $("#stylesheet").attr({href : "../jquery/ui/themes/"+ui.item.value+"/jquery-ui.min.css"});
+     $("#stylesheet").attr({href : "../scripts/jquery/ui/themes/"+ui.item.value+"/jquery-ui.min.css"});
     }
   });
 
-  // rest call to the settings form
-  $('#settingsForm').submit(function(event) {
-
-   var height = $('#height').val();
-   var width = $('#width').val();
-   var json = { "height" : height, "width" : width};
-
-   $.ajax({
-    url: $("#settingsForm").attr( "action"),
-    data: JSON.stringify(json),
-    type: "POST",
-    beforeSend: function(xhr) {
-     xhr.setRequestHeader("Accept", "application/json");
-     xhr.setRequestHeader("Content-Type", "application/json");
-    },
-    success: function(response) {
-    }
-   });
-   event.preventDefault();
+  // Call to the settings form via SockJs/Vertx
+  $('#save').click(function() {
+     var json = {
+       "height" : $('#height').val(),
+       "width" : $('#width').val(),
+       "theme" : $('#ui').val()};
+     boWrite(json);
   });
 
-  // get the version info
-  // also used as a health check
+  // Get the toc version via REST
   $.ajax({
    type: "GET",
    dataType: "html",
@@ -748,7 +793,7 @@ http://regex101.com/
     xhr.setRequestHeader("Accept", "text/html");
    },
    success: function(response) {
-    $('span[id="info"]').text(response);
+    $('span[id="rest_info"]').text(response);
    }
   });
 

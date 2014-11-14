@@ -11,8 +11,10 @@ public class Settings {
     private int width;
     private int height;
     private int timeout;
+
     private int restPort;
     private int vertxPort;
+    private int hawtioPort;
 
     private String key;
     private String root;
@@ -30,8 +32,10 @@ public class Settings {
         theme = "cupertino";
         undecorated = true;
         locale = "en_US";
+
         restPort = 9999;
         vertxPort = 8888;
+        hawtioPort = 7777;
 
         try {
             pathSep = System.getProperty("file.separator");
@@ -145,5 +149,13 @@ public class Settings {
 
     public void setRestPort(int restPort) {
         this.restPort = restPort;
+    }
+
+     public int getHawtioPort() {
+        return hawtioPort;
+    }
+
+    public void setHawtioPort(int hawtioPort) {
+        this.hawtioPort = hawtioPort;
     }
 }
