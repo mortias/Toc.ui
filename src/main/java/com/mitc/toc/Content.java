@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +40,6 @@ public class Content {
     public void load(String indexPath, String templatePath) throws IOException, URISyntaxException {
 
         Settings settings = Toc.config.getSettings();
-
         String site = settings.getRoot() + "site" + settings.getPathSep();
 
         Map<String, String> siteMap = new HashMap<>();
@@ -52,36 +53,47 @@ public class Content {
         siteMap.put("vertxPort", String.valueOf(settings.getVertxPort()));
         siteMap.put("hawtioPort", String.valueOf(settings.getHawtioPort()));
 
-        handleFile(
-                site + "html" + settings.getPathSep() + templatePath,
-                site + "html" + settings.getPathSep() + indexPath, siteMap, true);
+        handleFile(site + "html" + settings.getPathSep(), templatePath, indexPath, siteMap, true);
 
         String swagger = settings.getRoot() + "tools" + settings.getPathSep() + "swagger" + settings.getPathSep();
         Map<String, String> swaggerMap = new HashMap<>();
         swaggerMap.put("host", settings.getHost());
         swaggerMap.put("restPort", String.valueOf(settings.getRestPort()));
 
-        handleFile(swagger + "index.html", swagger + "index.html", swaggerMap, false);
+        handleFile(swagger, "index.html", "index.html", swaggerMap, false);
 
     }
 
-    private void handleFile(String in, String out, Map<String, String> props, boolean handleFiles) throws IOException, URISyntaxException {
+    private void handleFile(String path, String in, String out, Map<String, String> props, boolean merge) throws IOException, URISyntaxException {
 
-        // read
-        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), in));
+        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), path + in));
+        String res = IOUtils.toString(new FileInputStream(new File(path + in)), charset.toString());
 
-        String res = IOUtils.toString(new FileInputStream(new File(in)), charset.toString());
+        if (merge) {
+            Map<String, String> files = new HashMap<>();
+            Files.walk(Paths.get(path))
+                    .filter((filePath)
+                            -> filePath.toFile().getName().startsWith("tab")
+                            && Files.isRegularFile(filePath)
+                            && filePath.toFile().getAbsolutePath().endsWith(".html"))
+                    .forEach(filePath -> {
+                        try {
+                            files.put(filePath.getFileName().toString(),
+                                    IOUtils.toString(new FileInputStream(filePath.toFile()), charset.toString()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+            res = new StrSubstitutor(files).replace(res);
+            res = res.replace("a href=\"", "a href=\"file:\\\\\\");
+        }
+
         res = new StrSubstitutor(props).replace(res);
 
-        // parse a hrefs
-        if (handleFiles)
-            res = res.replace("a href=\"", "a href=\"file:\\\\\\");
-
         // write
-        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), out));
-        FileUtils.writeStringToFile(new File(out), res);
+        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), path + out));
+        FileUtils.writeStringToFile(new File(path + out), res);
 
     }
-
 
 }

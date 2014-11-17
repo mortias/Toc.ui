@@ -34,7 +34,7 @@ public class Toc extends Application {
     private static final Logger logger = LogManager.getLogger(Toc.class);
 
     private static final String iconImagePath = "icon.png";
-    private static final String templatePath = "template.html";
+    private static final String templatePath = "site.html";
     private static final String indexPath = "index.html";
 
     public static FileEncryptor crypt = FileEncryptor.getInstance();

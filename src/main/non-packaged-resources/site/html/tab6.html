@@ -1,0 +1,229 @@
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 6 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<script src="../scripts/vertx/sockjs-0.3.4.min.js"></script>
+<script src="../scripts/vertx/vertxbus.js"></script>
+<script src="../scripts/vertx/eventbus.js"></script>
+
+<script src="../scripts/d3js/d3.v3.min.js"></script>
+
+<form onsubmit="return false;">
+ <div id="tabs-6" style="min-height: ${height}px;">
+  <div id="container">
+   <div id="row">
+    <div id="cell">
+     <div id="container">
+      <div id="row">
+       <div id="cell"><br><b>Settings</b></div>
+      </div>
+      <div id="row">
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      </div>
+      <div id="row">
+       <div id="cell"><label for="width">Width</label></div>
+       <div id="cell"><input id="width" name="width" value="${width}"></div>
+       <div id="cell" style="width: 200px"></div>
+       <div id="cell"></div>
+       <div id="cell"></div>
+      </div>
+      <div id="row">
+       <div id="cell"><label for="height">Height</label></div>
+       <div id="cell"><input id="height" name="height" value="${height}"></div>
+       <div id="cell"></div>
+       <div id="cell"></div>
+      </div>
+      <div id="row">
+       <div id="cell"><label for="ui">Select a skin</label></div>
+       <div id="cell" name="ui">
+        <select name="ui" id="ui">
+         <option value="black-tie">black-tie</option>
+         <option value="blitzer">blitzer</option>
+         <option value="cupertino">cupertino</option>
+         <option value="dark-hive">dark-hive</option>
+         <option value="dot-luv">dot-luv</option>
+         <option value="eggplant">eggplant</option>
+         <option value="excite-bike">excite-bike</option>
+         <option value="hot-sneaks">hot-sneaks</option>
+         <option value="le-frog">le-frog</option>
+         <option value="mint-choc">mint-choc</option>
+         <option value="overcast">overcast</option>
+         <option value="pepper-grinder">pepper-grinder</option>
+         <option value="redmond">redmond</option>
+         <option value="smoothness">smoothness</option>
+         <option value="south-street">south-street</option>
+         <option value="start">start</option>
+         <option value="sunny">sunny</option>
+         <option value="swanky-purse">swanky-purse</option>
+         <option value="trontastic">trontastic</option>
+         <option value="ui-darkness">ui-darkness</option>
+         <option value="ui-lightness">ui-lightness</option>
+         <option value="vader">vader</option>
+        </select>
+       </div>
+       <div id="cell"></div>
+       <div id="cell"></div>
+      </div>
+      <br><br>
+      <div id="row">
+       <div id="cell"></div>
+       <div id="cell"><button id="save"><a>Save</a></button></div>
+       <div id="cell"></div>
+       <div id="cell"></div>
+      </div>
+      <br>
+      <div id="row">
+       <div id="cell"><br><b>Embedded tools</b></div>
+      </div>
+      <div id="row">
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      </div>
+      <br>
+      <div id="row">
+       <div id="cell"><button id="http"><a href="../../tools/swagger/index.html">Swagger</a></button></div>
+       <div id="cell"><button id="hawtio"><a>Hawt.io</a></button></div>
+       <div id="cell"></div>
+       <div id="cell"></div>
+      </div>
+      <br>
+      <br>
+      <div id="row">
+       <div id="cell"><br><b>Health checks</b></div>
+       <div id="cell"></div>
+       <div id="cell"><br><b>CPU Monitoring</b></div>
+       <div id="cell"></div>
+      </div>
+      <div id="row">
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+       <div id="cell" style="border-bottom: thin solid #000000;"></div>
+      </div>
+      <br>
+      <div id="row">
+       <div id="cell" style="vertical-align: top">
+        Rest <span id="rest_info">Not connected</span><br>
+        Vertx <span id="vertx_info">Not connected</span><br>
+        Hawt.io <span id="hawt_info">Not connected</span><br>
+        <br>
+        Process Uptime <span id="system_info3">Not connected</span>
+       </div>
+       <div id="cell"></div>
+       <div id="cell">
+        <svg width="85" height="85">
+         <defs>
+          <clipPath id="clip1"><rect x="-30" y="-30" width="100" height="100"></rect></clipPath>
+         </defs>
+         <g transform="translate(35,35)">
+          <circle fill="steelblue" clip-path="url(#clip1)" r="30"></circle>
+          <circle fill="none" stroke="black" stroke-width="1.5" r="30"></circle>
+         </g>
+        </svg>
+        <br>
+        System CPU
+        <span id="system_info1">Not connected</span>
+       </div>
+       <div id="cell">
+        <svg width="85" height="85">
+         <defs>
+          <clipPath id="clip2"><rect x="-30" y="-30" width="100" height="100"></rect></clipPath>
+         </defs>
+         <g transform="translate(35,35)">
+          <circle fill="steelblue" clip-path="url(#clip2)" r="30"></circle>
+          <circle fill="none" stroke="black" stroke-width="1.5" r="30"></circle>
+         </g>
+        </svg>
+        <br>
+        Process CPU
+        <span id="system_info2">Not connected</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+</form>
+
+<!-- Scripts -->
+<script>
+
+ $(document).ready(function () {
+  openConn("http://${host}:${vertxPort}/eventbus");
+ });
+
+ $(function () {
+
+  // Set the preconfigured skin
+  $('div[name="ui"] select').val("${theme}");
+
+  $('#ui')
+    .selectmenu({
+     change: function( event, ui ) {
+      // Change the skin on runtime
+      $("#stylesheet").attr({href : "../scripts/jquery/ui/themes/"+ui.item.value+"/jquery-ui.min.css"});
+     }
+    });
+
+  // Call to the settings form via SockJs/Vertx
+  $('#save').click(function() {
+   var json = {
+    "action" : "saveCustomSettings",
+    "height" : $('#height').val(),
+    "width" : $('#width').val(),
+    "theme" : $('#ui').val()};
+   boWrite(json);
+  });
+
+  // Check if hawt.io is running
+  $('#hawtio').click(function() {
+   var json = {"action" : "checkIfHawtIoIsRunning"};
+   boWrite(json);
+  });
+
+  // Get the toc version via REST
+  $.ajax({
+   type: "GET",
+   dataType: "html",
+   url: "http://${host}:${restPort}/api/toc/info",
+   beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/html");
+   },
+   success: function(response) {
+    $('span[id="rest_info"]').text(response);
+   }
+  });
+
+ });
+
+ // D3Js
+ var r = 30;
+
+ function change(k,idx) {
+
+  var clip = d3.select("#clip"+idx+" rect");
+
+  var t0, t1 = k * 2 * Math.PI;
+  if (k > 0 && k < 1) {
+   t1 = Math.pow(12 * k * Math.PI, 1 / 3);
+   for (var i = 0; i < 10; ++i) {
+    t0 = t1;
+    t1 = (Math.sin(t0) - t0 * Math.cos(t0) + 2 * k * Math.PI) / (1 - Math.cos(t0));
+   }
+   k = (1 - Math.cos(t1 / 2)) / 2;
+  }
+
+  var h = 2 * r * k,
+    y = r - h;
+
+  clip.attr("y", y).attr("height", h);
+
+ }
+
+</script>

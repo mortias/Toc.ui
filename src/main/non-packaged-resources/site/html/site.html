@@ -1,0 +1,81 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+ <meta charset="utf-8">
+
+ <link href="../scripts/jquery/ui/themes/${theme}/jquery-ui.min.css" id="stylesheet" rel="stylesheet">
+ <link href="../styles/style.css" rel="stylesheet">
+
+ <script src="../scripts/jquery/ui/jquery.js"></script>
+ <script src="../scripts/jquery/ui/jquery-ui.min.js"></script>
+
+</head>
+
+<body marginleft="0" margintop="0" marginright="0" marginbottom="0" marginwidth="0" marginheight="0"
+      style="background-color:#${bgColor}">
+
+<div id="tabs">
+
+ <ul>
+  <li><a name="t1" href="#tabs-1">Java Ms</a></li>
+  <li><a name="t2" href="#tabs-2">ERC Portal</a></li>
+  <li><a name="t3" href="#tabs-3">Databases</a></li>
+  <li><a name="t4" href="#tabs-4">Links</a></li>
+  <li><a name="t5" href="#tabs-5">Books</a></li>
+  <li><a name="t6" href="#tabs-6"><span class='ui-icon ui-icon-gear ui-closable-tab'></span></a></li>
+ </ul>
+
+ ${tab1.html} ${tab2.html} ${tab3.html}
+ ${tab4.html} ${tab5.html} ${tab6.html}
+
+</div>
+
+<!-- Dialogs -->
+<div id="dialog-save-complete" title="Save complete">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Your settings have been saved successfully.
+ </p>
+</div>
+
+<div id="dialog-start-hawtio" title="Hawt.io disabled">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Hawt.io is currently not running,<br>would you like to start it?
+ </p>
+</div>
+
+<div id="dialog-link-hawtio" title="Hawt.io started">
+ <p>
+  <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+  Hawt.io is started you can browse it here:<br>
+  <a href="http://${host}:${hawtioPort}/hawtio">http://${host}:${hawtioPort}/hawtio</a>
+ </p>
+</div>
+
+<script>
+
+ $('#accordion1').accordion();
+ $('#accordion2').accordion();
+
+ $('#tabs').tabs();
+ $('#height').spinner();
+ $('#width').spinner();
+
+ $(function () {
+  $('button[id="http"]').button({icons: {primary: "ui-icon-newwin"}});
+  $('button[id="ftp"]').button({icons: {primary: "ui-icon-transfer-e-w"}});
+  $('button[id="remote"]').button({icons: {primary: "ui-icon-wrench"}});
+  $('button[id="book"]').button({icons: {primary: "ui-icon-document"}});
+  $('button[id="database"]').button({icons: {primary: "ui-icon-gear"}});
+  $('button[id="save"]').button({icons: {primary: "ui-icon-check"}});
+  $('button[id="hawtio"]').button({icons: {primary: "ui-icon-newwin"}});
+ });
+
+</script>
+
+</body>
+</html>
