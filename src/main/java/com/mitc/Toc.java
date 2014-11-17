@@ -3,11 +3,12 @@ package com.mitc;
 import com.mitc.crypto.FileEncryptor;
 import com.mitc.servers.hawtio.HawtioServer;
 import com.mitc.servers.rest.RestServer;
+import com.mitc.servers.system.SystemStatusServer;
 import com.mitc.servers.vertx.VertxServer;
-import com.mitc.toc.Config;
-import com.mitc.toc.Settings;
 import com.mitc.toc.Browser;
+import com.mitc.toc.Config;
 import com.mitc.toc.Content;
+import com.mitc.toc.Settings;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Node;
@@ -74,6 +75,7 @@ public class Toc extends Application {
         executor = new ThreadPerTaskExecutor();
         executor.execute(new RestServer(settings));
         executor.execute(new VertxServer(settings));
+        executor.execute(new SystemStatusServer(settings));
 
         if (settings.getHawtio()) {
             startHawtIoServer();

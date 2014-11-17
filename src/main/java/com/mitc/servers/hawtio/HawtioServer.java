@@ -1,6 +1,6 @@
 package com.mitc.servers.hawtio;
 
-import com.mitc.servers.vertx.Channel;
+import com.mitc.servers.vertx.resources.Channel;
 import com.mitc.servers.vertx.VertxServer;
 import com.mitc.toc.Settings;
 import org.eclipse.jetty.server.Server;

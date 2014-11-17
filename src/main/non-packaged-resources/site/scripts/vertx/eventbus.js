@@ -31,6 +31,14 @@
                         });
                         break;
 
+                    case "showSystemStatus":
+                        $('span[id="system_info1"]').text(Math.round((msg.systemCpuLoad.toFixed(2)*100)) + "%");
+                        $('span[id="system_info2"]').text(Math.round((msg.processCpuLoad.toFixed(2)*100)) + "%");
+                        $('span[id="system_info3"]').text(Math.round(msg.processCpuTime) + " seconds");
+                        change(msg.systemCpuLoad,1);
+                        change(msg.processCpuLoad,2);
+                        break;
+
                     case "showHawtIoStatus":
                         $('span[id="hawt_info"]').text(msg.text);
                         break;

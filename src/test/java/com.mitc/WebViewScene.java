@@ -22,7 +22,7 @@ public class WebViewScene extends Application {
 
         // webEngine.setUserAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0");
         System.out.println(webEngine.getUserAgent());
-        webEngine.load("http://localhost:7777/hawtio/");
+        webEngine.load("file:///C:/PrivateWS/javafx-toc/src/test/resources/d3js/index.html");
 
         Scene scene = new Scene(webView);
 

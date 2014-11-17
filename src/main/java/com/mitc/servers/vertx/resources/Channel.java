@@ -1,4 +1,4 @@
-package com.mitc.servers.vertx;
+package com.mitc.servers.vertx.resources;
 
 public enum Channel {
 
