@@ -1,4 +1,4 @@
-package com.mitc.servers.rest.resources;
+package com.mitc.services.rest.resources;
 
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;

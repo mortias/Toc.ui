@@ -1,6 +1,6 @@
-package com.mitc.servers.rest;
+package com.mitc.services.rest;
 
-import com.mitc.servers.filters.CORSFilter;
+import com.mitc.services.filters.CORSFilter;
 import com.mitc.toc.Settings;
 import com.wordnik.swagger.config.ScannerFactory;
 import com.wordnik.swagger.jaxrs.config.BeanConfig;
@@ -37,18 +37,18 @@ public class RestService implements Executor {
             jetty = new Server(settings.getRestPort());
 
             ServletHolder jersey = new ServletHolder(ServletContainer.class);
-            jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.servers.rest.resources");
+            jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.services.rest.resources");
             jersey.setInitOrder(1);
 
             // Init Swagger
             BeanConfig config = new BeanConfig();
             config.setVersion("1.0.0");
             config.setBasePath("http://" + settings.getHost() + ":" + settings.getRestPort() + "/api");
-            config.setResourcePackage("com.mitc.servers.rest.resources");
+            config.setResourcePackage("com.mitc.services.rest.resources");
             config.setScan(true);
 
             ServletScanner scanner = new ServletScanner();
-            scanner.setResourcePackage("com.mitc.servers.rest.resources");
+            scanner.setResourcePackage("com.mitc.services.rest.resources");
             ScannerFactory.setScanner(scanner);
             // --
 

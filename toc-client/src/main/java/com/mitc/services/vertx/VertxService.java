@@ -1,7 +1,7 @@
-package com.mitc.servers.vertx;
+package com.mitc.services.vertx;
 
 import com.mitc.Toc;
-import com.mitc.servers.vertx.resources.Channel;
+import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Config;
 import com.mitc.toc.Settings;
 import org.apache.logging.log4j.LogManager;

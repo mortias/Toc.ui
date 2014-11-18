@@ -1,7 +1,7 @@
-package com.mitc.servers.system;
+package com.mitc.services.system;
 
-import com.mitc.servers.vertx.VertxService;
-import com.mitc.servers.vertx.resources.Channel;
+import com.mitc.services.vertx.VertxService;
+import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Settings;
 import com.sun.management.OperatingSystemMXBean;
 import org.vertx.java.core.json.JsonObject;

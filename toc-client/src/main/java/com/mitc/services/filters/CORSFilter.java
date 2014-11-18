@@ -1,4 +1,4 @@
-package com.mitc.servers.filters;
+package com.mitc.services.filters;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;

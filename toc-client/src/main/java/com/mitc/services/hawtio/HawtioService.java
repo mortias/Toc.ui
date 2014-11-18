@@ -1,7 +1,7 @@
-package com.mitc.servers.hawtio;
+package com.mitc.services.hawtio;
 
-import com.mitc.servers.vertx.VertxService;
-import com.mitc.servers.vertx.resources.Channel;
+import com.mitc.services.vertx.VertxService;
+import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Settings;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.vertx.java.core.json.JsonObject;

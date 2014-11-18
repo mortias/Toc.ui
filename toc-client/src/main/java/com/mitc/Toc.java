@@ -1,10 +1,10 @@
 package com.mitc;
 
 import com.mitc.crypto.FileEncryptor;
-import com.mitc.servers.hawtio.HawtioService;
-import com.mitc.servers.rest.RestService;
-import com.mitc.servers.system.SystemStatusService;
-import com.mitc.servers.vertx.VertxService;
+import com.mitc.services.hawtio.HawtioService;
+import com.mitc.services.rest.RestService;
+import com.mitc.services.system.SystemStatusService;
+import com.mitc.services.vertx.VertxService;
 import com.mitc.toc.Browser;
 import com.mitc.toc.Config;
 import com.mitc.toc.Content;
