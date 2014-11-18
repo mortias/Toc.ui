@@ -4,6 +4,10 @@ body {
     overflow-y: hidden;
 }
 
+div {
+    white-space: nowrap;
+}
+
 fieldset {
     border: 0;
 }

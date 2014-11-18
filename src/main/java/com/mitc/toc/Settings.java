@@ -18,6 +18,8 @@ public class Settings {
     private int hawtioPort;
     private boolean hawtio;
 
+    private boolean monitoring;
+
     private String key;
     private String root;
     private String theme;
@@ -170,4 +172,13 @@ public class Settings {
     public void setHawtio(boolean hawtio) {
         this.hawtio = hawtio;
     }
+
+    public boolean getMonitoring() {
+        return monitoring;
+    }
+
+    public void setMonitoring(boolean monitoring) {
+        this.monitoring = monitoring;
+    }
+
 }
