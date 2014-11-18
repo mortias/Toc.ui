@@ -16,8 +16,5 @@
   # vertxPort: 8888
   # hawtioPort: 7777
 
-  hawtio: false;
-  monitoring: false;
-
-
-
+  hawtio: false
+  monitoring: false

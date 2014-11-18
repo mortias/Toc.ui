@@ -1,10 +1,10 @@
 package com.mitc;
 
 import com.mitc.crypto.FileEncryptor;
-import com.mitc.servers.hawtio.HawtioServer;
-import com.mitc.servers.rest.RestServer;
-import com.mitc.servers.system.SystemStatusServer;
-import com.mitc.servers.vertx.VertxServer;
+import com.mitc.servers.hawtio.HawtioService;
+import com.mitc.servers.rest.RestService;
+import com.mitc.servers.system.SystemStatusService;
+import com.mitc.servers.vertx.VertxService;
 import com.mitc.toc.Browser;
 import com.mitc.toc.Config;
 import com.mitc.toc.Content;
@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
-import java.util.concurrent.Executor;
 
 public class Toc extends Application {
 
@@ -42,9 +41,7 @@ public class Toc extends Application {
         content = Content.getInstance();
     }
 
-    private static Executor executor;
-
-    public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
+     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
     }
 
@@ -62,12 +59,11 @@ public class Toc extends Application {
         // encrypt / decrypt
         crypt.init();
 
-        executor = new ThreadPerTaskExecutor();
-        executor.execute(new RestServer(settings));
-        executor.execute(new VertxServer(settings));
+        new RestService(settings);
+        new VertxService(settings);
 
         if (settings.getMonitoring()) {
-            executor.execute(new SystemStatusServer(settings));
+            new SystemStatusService(settings);
         }
 
         if (settings.getHawtio()) {
@@ -81,7 +77,7 @@ public class Toc extends Application {
 
     public static void startHawtIoServer() {
         if (!settings.getHawtio()) {
-            executor.execute(new HawtioServer(settings));
+           new HawtioService(settings);
         }
     }
 
@@ -115,12 +111,6 @@ public class Toc extends Application {
     @Override
     public void stop() throws IOException, URISyntaxException {
         crypt.init();
-    }
-
-    class ThreadPerTaskExecutor implements Executor {
-        public void execute(Runnable r) {
-            new Thread(r).start();
-        }
     }
 
 }
