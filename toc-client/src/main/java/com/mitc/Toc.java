@@ -57,7 +57,7 @@ public class Toc extends Application {
             System.exit(0);
         });
 
-        stage.setTitle("Table of contents v.1");
+        stage.setTitle("Table Of Contents v0.1");
         stage.setScene(scene);
         stage.show();
 
