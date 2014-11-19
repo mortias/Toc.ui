@@ -105,7 +105,7 @@ public class VertxService implements Executor {
 
         protected void sendMessage(String channel, JsonObject msg) {
             if (vertx != null) {
-                logger.debug(MessageFormat.format(config.translate("vertx.message.received"), msg));
+                logger.debug(MessageFormat.format("Vertx message: {0}", msg));
                 vertx.eventBus().publish(channel, msg);
             }
         }

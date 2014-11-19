@@ -30,9 +30,6 @@ public class Toc extends Application {
     public static Content content;
     public static Settings settings;
 
-    private static final String templatePath = "site.html";
-    private static final String indexPath = "index.html";
-
     private static final Logger logger = LogManager.getLogger(Toc.class);
     public static FileEncryptor crypt = FileEncryptor.getInstance();
 
@@ -41,12 +38,8 @@ public class Toc extends Application {
         content = Content.getInstance();
     }
 
-     public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
+    public static void main(String[] args) throws IOException, java.awt.AWTException, URISyntaxException {
         launch(args);
-    }
-
-    public static Stage getStage() {
-        return stage;
     }
 
     @Override
@@ -62,22 +55,19 @@ public class Toc extends Application {
         new RestService(settings);
         new VertxService(settings);
 
-        if (settings.getMonitoring()) {
+        if (settings.getMonitoring())
             new SystemStatusService(settings);
-        }
-
-        if (settings.getHawtio()) {
+        if (settings.getHawtio())
             startHawtIoServer();
-        }
 
         // load the site
-        content.load(indexPath, templatePath);
+        content.load();
 
     }
 
     public static void startHawtIoServer() {
         if (!settings.getHawtio()) {
-           new HawtioService(settings);
+            new HawtioService(settings);
         }
     }
 
@@ -87,17 +77,15 @@ public class Toc extends Application {
         Toc.stage = stage;
 
         // load the site
-        URL url = new File(settings.getRoot() + "site/html/" + indexPath).toURI().toURL();
-        logger.info(MessageFormat.format(
-                config.translate("browsing.file"), url.toString()));
-
-        stage.setTitle(config.translate("title"));
+        URL url = new File(settings.getRoot() + "site/html/index.html").toURI().toURL();
+        logger.info(MessageFormat.format("Browsing file: {0}", url.toString()));
 
         Browser browser = new Browser(url.toString(), true);
-        Scene scene = new Scene(browser, settings.getWidth(),
-                settings.getHeight(), Color.web("#000000"));
-
+        Scene scene = new Scene(browser, settings.getWidth(), settings.getHeight(), Color.web("#000000"));
         scene.setFill(Color.TRANSPARENT);
+
+        stage.setOnCloseRequest(we -> crypt.init());
+        stage.setTitle("Table of contents v.1");
         stage.setScene(scene);
         stage.show();
 
@@ -106,11 +94,6 @@ public class Toc extends Application {
     public static void reform() {
         stage.setWidth(settings.getWidth());
         stage.setHeight(settings.getHeight());
-    }
-
-    @Override
-    public void stop() throws IOException, URISyntaxException {
-        crypt.init();
     }
 
 }

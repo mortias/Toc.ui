@@ -24,6 +24,9 @@ public class Content {
     private static final Logger logger = LogManager.getLogger(Content.class);
     private Charset charset = StandardCharsets.UTF_8;
 
+    private final String templatePath = "site.html";
+    private final String indexPath = "index.html";
+
     private static Content instance = null;
 
     public static Content getInstance() {
@@ -37,7 +40,7 @@ public class Content {
         // Exists only to defeat instantiation.
     }
 
-    public void load(String indexPath, String templatePath) throws IOException, URISyntaxException {
+    public void load() throws IOException, URISyntaxException {
 
         Settings settings = Toc.config.getSettings();
         String site = settings.getRoot() + "site" + settings.getPathSep();
@@ -66,7 +69,7 @@ public class Content {
 
     private void handleFile(String path, String in, String out, Map<String, String> props, boolean merge) throws IOException, URISyntaxException {
 
-        logger.info(MessageFormat.format(Toc.config.translate("read.template.from"), path + in));
+        logger.info(MessageFormat.format("Read template from: {0}", path + in));
         String res = IOUtils.toString(new FileInputStream(new File(path + in)), charset.toString());
 
         if (merge) {
@@ -91,7 +94,7 @@ public class Content {
         res = new StrSubstitutor(props).replace(res);
 
         // write
-        logger.info(MessageFormat.format(Toc.config.translate("write.results.to"), path + out));
+        logger.info(MessageFormat.format("Write results to: {0}", path + out));
         FileUtils.writeStringToFile(new File(path + out), res);
 
     }

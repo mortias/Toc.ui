@@ -7,14 +7,10 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.text.MessageFormat;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class Config {
 
-    private ResourceBundle resourceBundle;
     private static final Logger logger = LogManager.getLogger(Config.class);
-
     private static Config instance = null;
 
     private Settings settings;
@@ -36,11 +32,8 @@ public class Config {
             this.settings = yamlReader.read(Settings.class);
             yamlReader.close();
 
-            // set the language
-            if (settings.getLocale().contains("_"))
-                setLanguage(settings.getLocale().split("_")[0], settings.getLocale().split("_")[1]);
+            logger.info(MessageFormat.format("Load config from: {0}", settingsPath));
 
-            logger.info(MessageFormat.format(resourceBundle.getString("load.config.from"), settingsPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,19 +45,10 @@ public class Config {
             yamlWriter.getConfig().setClassTag("settings", Settings.class);
             yamlWriter.write(settings);
             yamlWriter.close();
-            logger.info(MessageFormat.format(resourceBundle.getString("saving.configuration.to"), settingsPath));
+            logger.info(MessageFormat.format("Saving configuration to: {0}", settingsPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setLanguage(String language, String country) {
-        Locale locale = new Locale(language.toLowerCase(), country.toUpperCase());
-        resourceBundle = ResourceBundle.getBundle("i18n/bundle", locale);
-    }
-
-    public String translate(String key) {
-        return this.resourceBundle.getString(key);
     }
 
     public Settings getSettings() {

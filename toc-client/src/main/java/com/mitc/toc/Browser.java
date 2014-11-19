@@ -86,23 +86,20 @@ public class Browser extends Region {
                         for (int i = 0; i != lst.getLength(); i++) {
                             Element el = (Element) lst.item(i);
                             if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
-                                logger.trace(MessageFormat.format(config.translate("adding.eventlistener"), el.toString()));
+                                logger.trace(MessageFormat.format("Adding eventListener to: {0}", el.toString()));
                                 ((EventTarget) el).addEventListener("mouseup", listener, false);
                             }
                         }
                     }
                 }
 
-
                 private void executeTarget(String target) {
                     try {
                         String[] array = {"cmd", "/C", "start", target};
-                        logger.info(MessageFormat.format(
-                                config.translate("running.action"), Arrays.toString(array)));
+                        logger.info(MessageFormat.format("Running action: {0}", Arrays.toString(array)));
                         Runtime.getRuntime().exec(array);
                     } catch (IOException e) {
-                        logger.error(MessageFormat.format(
-                                config.translate("an.error.occured"), e.getLocalizedMessage()));
+                        logger.error(MessageFormat.format("An error occured: {0}", e.getLocalizedMessage()));
                     }
                 }
 

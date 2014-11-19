@@ -28,8 +28,7 @@ public class AutoEncrypt implements Callable<String> {
 
         Thread.sleep(waitTime);
 
-        logger.info(MessageFormat.format(
-                config.translate("stopping.action"), target));
+        logger.info(MessageFormat.format("Stopping action: {0}", target));
 
         if (config.getSettings().isEncrypted())
             target = crypt.encryptFile(new File(target));

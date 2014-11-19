@@ -23,7 +23,6 @@ public class Settings {
     private String key;
     private String root;
     private String theme;
-    private String locale;
     private String pathSep;
     private String host;
 
@@ -35,7 +34,6 @@ public class Settings {
         timeout = 2;
         theme = "cupertino";
         undecorated = true;
-        locale = "en_US";
 
         restPort = 9999;
         vertxPort = 8888;
@@ -83,14 +81,6 @@ public class Settings {
 
     public void setTheme(String theme) {
         this.theme = theme;
-    }
-
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
     }
 
     public String getPathSep() {
