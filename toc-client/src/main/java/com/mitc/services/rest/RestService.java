@@ -12,14 +12,22 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ServerProperties;
 import org.glassfish.jersey.servlet.ServletContainer;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterRegistration;
 import java.util.concurrent.Executor;
 
+@Component("RestService")
 public class RestService implements Executor {
 
-    public RestService(Settings settings) {
-        execute(new RestServer(settings));
+    private RestServer restServer;
+
+    public RestService() {
+    }
+
+    public void init(Settings settings) {
+        restServer = new RestServer(settings);
+        execute(restServer);
     }
 
     @Override

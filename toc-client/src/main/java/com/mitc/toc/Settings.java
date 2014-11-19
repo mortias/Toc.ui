@@ -1,16 +1,17 @@
 package com.mitc.toc;
 
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.Inet4Address;
 
+@Component("Settings")
 public class Settings {
 
     private int width;
     private int height;
-    private int timeout;
 
     private int restPort;
     private int vertxPort;
@@ -31,7 +32,6 @@ public class Settings {
 
     public Settings() {
 
-        timeout = 2;
         theme = "cupertino";
         undecorated = true;
 
@@ -113,14 +113,6 @@ public class Settings {
 
     public void setEncrypted(boolean encrypted) {
         this.encrypted = encrypted;
-    }
-
-    public int getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(int timeout) {
-        this.timeout = timeout;
     }
 
     public boolean getUndecorated() {

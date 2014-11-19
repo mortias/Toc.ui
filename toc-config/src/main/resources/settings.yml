@@ -1,6 +1,5 @@
 !settings
 
-  # timeout: 2
   encrypted: true
   key: Mary has one cat
 

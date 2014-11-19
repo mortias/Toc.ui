@@ -1,6 +1,5 @@
 package com.mitc.crypto;
 
-import com.mitc.toc.Config;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,12 +20,11 @@ import java.text.MessageFormat;
 
 public class FileEncryptor {
 
+    private String key, path;
     private final String ALGORITHM = "AES";
     private final String TRANSFORMATION = "AES";
 
     private static final Logger logger = LogManager.getLogger(FileEncryptor.class);
-    private static Config config = Config.getInstance();
-
     private static FileEncryptor instance = null;
 
     public static FileEncryptor getInstance() {
@@ -43,7 +41,7 @@ public class FileEncryptor {
 
                 logger.trace(inputFile.getName() + (cipherMode == 1 ? " >> " : " << ") + outputFile.getName());
 
-                Key secretKey = new SecretKeySpec(config.getSettings().getKey().getBytes(), ALGORITHM);
+                Key secretKey = new SecretKeySpec(getKey().getBytes(), ALGORITHM);
                 Cipher cipher = Cipher.getInstance(TRANSFORMATION);
                 cipher.init(cipherMode, secretKey);
 
@@ -118,12 +116,25 @@ public class FileEncryptor {
     }
 
     // scan the site root to encrypt / decrypt the bin folder
-    public void init() {
-        String binPath = config.getSettings().getRoot() +
-                "site" + config.getSettings().getPathSep() + "bin";
-        File[] root = new File(binPath).listFiles();
-        scanFiles(config.getSettings().isEncrypted() ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
+    public void init(boolean isEncrypted) {
+        File[] root = new File(getPath()).listFiles();
+        scanFiles(isEncrypted ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
 

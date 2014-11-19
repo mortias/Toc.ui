@@ -4,15 +4,23 @@ import com.mitc.services.vertx.VertxService;
 import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Settings;
 import com.sun.management.OperatingSystemMXBean;
+import org.springframework.stereotype.Component;
 import org.vertx.java.core.json.JsonObject;
 
 import java.lang.management.ManagementFactory;
 import java.util.concurrent.Executor;
 
+@Component("SystemStatusService")
 public class SystemStatusService implements Executor {
 
-    public SystemStatusService(Settings settings) {
-        execute(new SystemStatusServer(settings));
+    private SystemStatusServer systemStatusServer;
+
+    public SystemStatusService() {
+    }
+
+    public void init(Settings settings) {
+        systemStatusServer = new SystemStatusServer(settings);
+        execute(systemStatusServer);
     }
 
     @Override

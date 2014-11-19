@@ -4,42 +4,38 @@ import com.esotericsoftware.yamlbeans.YamlReader;
 import com.esotericsoftware.yamlbeans.YamlWriter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.io.*;
 import java.text.MessageFormat;
 
+@Component("Config")
 public class Config {
 
-    private static final Logger logger = LogManager.getLogger(Config.class);
-    private static Config instance = null;
-
-    private Settings settings;
     private String settingsPath = "settings.yml";
+    private static final Logger logger = LogManager.getLogger(Config.class);
 
-    public static Config getInstance() {
-        if (instance == null) {
-            instance = new Config();
-        }
-        return instance;
-    }
+    public Config() {}
 
-    public void loadSettings() {
+    public Settings load() {
         try {
 
             YamlReader yamlReader = new YamlReader(
                     new InputStreamReader(new FileInputStream(new File(settingsPath).getCanonicalPath())));
             yamlReader.getConfig().setClassTag("settings", Settings.class);
-            this.settings = yamlReader.read(Settings.class);
+            Settings settings = yamlReader.read(Settings.class);
             yamlReader.close();
 
             logger.info(MessageFormat.format("Load config from: {0}", settingsPath));
+            return settings;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void saveSettings() {
+    public void save(Settings settings) {
         try {
             YamlWriter yamlWriter = new YamlWriter(new FileWriter(new File(new File(settingsPath).getCanonicalPath())));
             yamlWriter.getConfig().setClassTag("settings", Settings.class);
@@ -49,10 +45,6 @@ public class Config {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public Settings getSettings() {
-        return this.settings;
     }
 
 }

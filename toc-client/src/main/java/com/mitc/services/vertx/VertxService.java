@@ -1,11 +1,14 @@
 package com.mitc.services.vertx;
 
 import com.mitc.Toc;
+import com.mitc.services.hawtio.HawtioService;
 import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Config;
 import com.mitc.toc.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
 import org.vertx.java.core.VertxFactory;
@@ -18,11 +21,21 @@ import org.vertx.java.core.sockjs.SockJSServer;
 import java.text.MessageFormat;
 import java.util.concurrent.Executor;
 
+@Component("VertxService")
 public class VertxService implements Executor {
+
+    @Autowired
+    Config config;
+
+    @Autowired
+    HawtioService hawtioService;
 
     private static VertxServer vertxServer;
 
-    public VertxService(Settings settings) {
+    public VertxService() {
+    }
+
+    public void init(Settings settings) {
         vertxServer = new VertxServer(settings);
         execute(vertxServer);
     }
@@ -33,14 +46,15 @@ public class VertxService implements Executor {
     }
 
     public static void sendMessage(String name, JsonObject replyMsg) {
-        vertxServer.sendMessage(name,replyMsg);
+        vertxServer.sendMessage(name, replyMsg);
     }
 
     // embedded server class
     private class VertxServer implements Runnable {
 
         private int port;
-        private Config config;
+
+        private Settings settings;
 
         private Vertx vertx;
         private HttpServer httpServer;
@@ -50,8 +64,6 @@ public class VertxService implements Executor {
 
         public VertxServer(Settings settings) {
 
-
-            config = Config.getInstance();
             vertx = VertxFactory.newVertx();
             port = settings.getVertxPort();
 
@@ -74,12 +86,11 @@ public class VertxService implements Executor {
                     switch (receivedMsg.getString("action")) {
 
                         case "saveCustomSettings":
-                            Settings settings = Config.getInstance().getSettings();
                             settings.setWidth(Integer.parseInt(receivedMsg.getString("width")));
                             settings.setHeight(Integer.parseInt(receivedMsg.getString("height")));
                             settings.setTheme(receivedMsg.getString("theme"));
 
-                            config.saveSettings();
+                            config.save(settings);
                             Toc.reform();
 
                             replyMsg.putString("action", "saveCustomSettings");
@@ -87,11 +98,11 @@ public class VertxService implements Executor {
 
                         case "checkIfHawtIoIsRunning":
                             replyMsg.putString("action", "checkIfHawtIoIsRunning");
-                            replyMsg.putBoolean("isRunning", config.getSettings().getHawtio());
+                            replyMsg.putBoolean("isRunning", settings.getHawtio());
                             break;
 
                         case "startHawtIoServer":
-                            Toc.startHawtIoServer();
+                            hawtioService.init(settings);
                             break;
 
                     }

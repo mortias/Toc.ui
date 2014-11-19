@@ -33,7 +33,6 @@ import java.util.concurrent.FutureTask;
 public class Browser extends Region {
 
     public static FileEncryptor crypt = FileEncryptor.getInstance();
-    public static Config config = Config.getInstance();
 
     private final WebView webView = new WebView();
     private final WebEngine webEngine = webView.getEngine();
@@ -41,7 +40,7 @@ public class Browser extends Region {
     private static final Logger logger = LogManager.getLogger(Browser.class);
     private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-    public Browser(String url, boolean handleEvents) {
+    public Browser(String url, boolean isEncrypted, boolean handleEvents) {
 
         if (handleEvents) {
             webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
@@ -52,7 +51,6 @@ public class Browser extends Region {
 
                         EventListener listener = evt -> {
 
-                            boolean encrypt = config.getSettings().isEncrypted();
                             String target = evt.getCurrentTarget().toString().replace("file:///", "");
 
                             if (FilenameUtils.getExtension(target).length() == 0
@@ -63,17 +61,17 @@ public class Browser extends Region {
 
                             } else {
 
-                                if (encrypt)
+                                if (isEncrypted)
                                     target = crypt.decryptFile(new File(target + ".crypt"));
 
                                 if (target != null && target.length() > 0) {
 
                                     executeTarget(target);
 
-                                    if (encrypt) {
+                                    if (isEncrypted) {
                                         // encrypt again after some time
                                         FutureTask task = new FutureTask<>(
-                                                new AutoEncrypt(config.getSettings().getTimeout() * 1000, target));
+                                                new AutoEncrypt(2 * 1000, target, isEncrypted));
                                         executor.execute(task);
                                     }
                                 }

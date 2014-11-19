@@ -4,16 +4,24 @@ import com.mitc.services.vertx.VertxService;
 import com.mitc.services.vertx.resources.Channel;
 import com.mitc.toc.Settings;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.springframework.stereotype.Component;
 import org.vertx.java.core.json.JsonObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
+@Component("HawtioService")
 public class HawtioService implements Executor {
 
-    public HawtioService(Settings settings) {
-        execute(new HawtioServer(settings));
+    private HawtioServer hawtioServer;
+
+    public HawtioService() {
+    }
+
+    public void init(Settings settings) {
+        hawtioServer = new HawtioServer(settings);
+        execute(hawtioServer);
     }
 
     @Override
