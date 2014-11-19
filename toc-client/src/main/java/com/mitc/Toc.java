@@ -1,8 +1,10 @@
 package com.mitc;
 
-import com.mitc.crypto.FileEncryptor;
-import com.mitc.toc.Browser;
-import com.mitc.toc.Settings;
+import com.mitc.spring.AppConfig;
+import com.mitc.spring.AppContext;
+import com.mitc.util.crypto.FileEncryptor;
+import com.mitc.javafx.Browser;
+import com.mitc.config.Settings;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -22,18 +24,16 @@ public class Toc extends Application {
 
     private static Stage stage;
     private static Settings settings;
-    private static ApplicationContext context;
 
-    private static final Logger logger = LogManager.getLogger(Toc.class);
+    private Logger logger = LogManager.getLogger(Toc.class);
 
     public static void main(String[] args) {
 
-        context = new AnnotationConfigApplicationContext(AppConfig.class);
+        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        AppContext ctx = (AppContext) context.getBean("AppContext");
+        ctx.launch();
 
-        AppBoot appBoot = (AppBoot) context.getBean("AppBoot");
-        appBoot.launch();
-
-        settings = appBoot.getSettings();
+        settings = ctx.getSettings();
 
         launch(args);
     }
@@ -48,6 +48,7 @@ public class Toc extends Application {
         logger.info(MessageFormat.format("Browsing file: {0}", url.toString()));
 
         Browser browser = new Browser(url.toString(), settings.isEncrypted(), true);
+
         Scene scene = new Scene(browser, settings.getWidth(), settings.getHeight(), Color.web("#000000"));
         scene.setFill(Color.TRANSPARENT);
 

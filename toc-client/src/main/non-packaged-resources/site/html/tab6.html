@@ -25,18 +25,6 @@
        <div id="cell" style="border-bottom: thin solid #000000;"></div>
       </div>
       <div id="row">
-       <div id="cell" style="width: 200px"><label for="width">Width</label></div>
-       <div id="cell" style="width: 200px"><input id="width" name="width" value="${width}"></div>
-       <div id="cell"></div>
-       <div id="cell"></div>
-      </div>
-      <div id="row">
-       <div id="cell"><label for="height">Height</label></div>
-       <div id="cell"><input id="height" name="height" value="${height}"></div>
-       <div id="cell"></div>
-       <div id="cell"></div>
-      </div>
-      <div id="row">
        <div id="cell"><label for="ui">Select a skin</label></div>
        <div id="cell" name="ui">
         <select name="ui" id="ui">
@@ -67,7 +55,7 @@
        <div id="cell"></div>
        <div id="cell"></div>
       </div>
-      <br><br>
+      <br>
       <div id="row">
        <div id="cell"></div>
        <div id="cell"><button id="save"><a>Save</a></button></div>
@@ -183,8 +171,6 @@
   $('#save').click(function() {
    var json = {
     "action" : "saveCustomSettings",
-    "height" : $('#height').val(),
-    "width" : $('#width').val(),
     "theme" : $('#ui').val()};
    boWrite(json);
   });

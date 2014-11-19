@@ -27,8 +27,10 @@
     </properties>
 
     <modules>
-        <module>../toc-config</module>
+        <module>../toc-utils</module>
         <module>../toc-client</module>
+        <module>../toc-config</module>
+        <module>../toc-services</module>
     </modules>
 
     <dependencies>

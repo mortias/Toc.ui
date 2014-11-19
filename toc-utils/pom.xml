@@ -12,7 +12,7 @@
         <relativePath>../toc-modules/pom.xml</relativePath>
     </parent>
 
-    <artifactId>toc-config</artifactId>
+    <artifactId>toc-utils</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -23,29 +23,6 @@
             <version>${commons-io.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <!-- Yaml parser -->
-        <dependency>
-            <groupId>com.esotericsoftware.yamlbeans</groupId>
-            <artifactId>yamlbeans</artifactId>
-            <version>${yamlbeans.version}</version>
-        </dependency>
-
     </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <resources>
-          <resource>
-            <directory>src/main/resources</directory>
-            <filtering>true</filtering>
-          </resource>
-        </resources>
-    </build>
 
 </project>
