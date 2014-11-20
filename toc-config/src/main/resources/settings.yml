@@ -1,7 +1,7 @@
 !settings
 
   encrypted: true
-  key: Mary has one cat
+  # key: Mary has one cat
 
   # undecorated: false
   # theme: cupertino

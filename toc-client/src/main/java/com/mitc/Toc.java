@@ -1,5 +1,6 @@
 package com.mitc;
 
+import com.mitc.services.vertx.VertxService;
 import com.mitc.spring.AppConfig;
 import com.mitc.spring.AppContext;
 import com.mitc.util.crypto.FileEncryptor;
@@ -22,8 +23,8 @@ import java.text.MessageFormat;
 
 public class Toc extends Application {
 
-    private static Stage stage;
     private static Settings settings;
+    private static VertxService vertxService;
 
     private Logger logger = LogManager.getLogger(Toc.class);
 
@@ -33,6 +34,7 @@ public class Toc extends Application {
         AppContext ctx = (AppContext) context.getBean("AppContext");
         ctx.launch();
 
+        vertxService = ctx.getVertxService();
         settings = ctx.getSettings();
 
         launch(args);
@@ -41,13 +43,11 @@ public class Toc extends Application {
     @Override
     public void start(Stage stage) throws IOException, URISyntaxException {
 
-        Toc.stage = stage;
-
         // load the site
         URL url = new File(settings.getRoot() + "site/html/index.html").toURI().toURL();
         logger.info(MessageFormat.format("Browsing file: {0}", url.toString()));
 
-        Browser browser = new Browser(url.toString(), settings.isEncrypted(), true);
+        Browser browser = new Browser(url.toString(), settings, vertxService);
 
         Scene scene = new Scene(browser, settings.getWidth(), settings.getHeight(), Color.web("#000000"));
         scene.setFill(Color.TRANSPARENT);
@@ -61,11 +61,6 @@ public class Toc extends Application {
         stage.setScene(scene);
         stage.show();
 
-    }
-
-    public static void reform() {
-        stage.setWidth(settings.getWidth());
-        stage.setHeight(settings.getHeight());
     }
 
 }

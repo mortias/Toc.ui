@@ -20,8 +20,13 @@
             eb.registerHandler(boReadChannel, function (msg, replyTo) {
 
                 switch (msg.action){
+
+                    case "showGetKeyDialog":
+                        $("#dialog-get-key").dialog();
+                        break;
+
                     case "saveCustomSettings":
-                        $( "#dialog-save-complete" ).dialog({
+                        $("#dialog-save-complete").dialog({
                             modal: true,
                             buttons: {
                                 Ok: function() {

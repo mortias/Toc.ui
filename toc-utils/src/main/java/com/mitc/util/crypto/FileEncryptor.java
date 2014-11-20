@@ -1,28 +1,22 @@
 package com.mitc.util.crypto;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jasypt.util.binary.BasicBinaryEncryptor;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
 
 public class FileEncryptor {
 
     private String key, path;
-    private final String ALGORITHM = "AES";
-    private final String TRANSFORMATION = "AES";
+    private BasicBinaryEncryptor binaryEncryptor = new BasicBinaryEncryptor();
 
     private Logger logger = LogManager.getLogger(FileEncryptor.class);
     private static FileEncryptor instance = null;
@@ -40,26 +34,18 @@ public class FileEncryptor {
             if (inputFile.exists() && !inputFile.isDirectory()) {
 
                 logger.trace(inputFile.getName() + (cipherMode == 1 ? " >> " : " << ") + outputFile.getName());
+                binaryEncryptor.setPassword(getKey());
 
-                Key secretKey = new SecretKeySpec(getKey().getBytes(), ALGORITHM);
-                Cipher cipher = Cipher.getInstance(TRANSFORMATION);
-                cipher.init(cipherMode, secretKey);
+                byte[] outputBytes;
+                if (cipherMode == Cipher.ENCRYPT_MODE)
+                    outputBytes = binaryEncryptor.encrypt(IOUtils.toByteArray(new FileInputStream(inputFile)));
+                else
+                    outputBytes = binaryEncryptor.decrypt(IOUtils.toByteArray(new FileInputStream(inputFile)));
 
-                FileInputStream inputStream = new FileInputStream(inputFile);
-                byte[] inputBytes = new byte[(int) inputFile.length()];
-                inputStream.read(inputBytes);
+                IOUtils.write(outputBytes, new FileOutputStream(outputFile));
 
-                byte[] outputBytes = cipher.doFinal(inputBytes);
-
-                FileOutputStream outputStream = new FileOutputStream(outputFile);
-                outputStream.write(outputBytes);
-
-                inputStream.close();
-                outputStream.close();
             }
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException
-                | InvalidKeyException | BadPaddingException
-                | IllegalBlockSizeException | IOException ex) {
+        } catch (IOException ex) {
             throw new RuntimeException(MessageFormat.format("Error cryptFile: {0}", ex.getMessage()));
         }
 
@@ -117,8 +103,10 @@ public class FileEncryptor {
 
     // scan the site root to encrypt / decrypt the bin folder
     public void init(boolean isEncrypted) {
-        File[] root = new File(getPath()).listFiles();
-        scanFiles(isEncrypted ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
+        if (getKey() != null && getKey().trim().length() > 0) {
+            File[] root = new File(getPath()).listFiles();
+            scanFiles(isEncrypted ? Cipher.ENCRYPT_MODE : Cipher.DECRYPT_MODE, root);
+        }
     }
 
     public String getKey() {

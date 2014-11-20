@@ -59,4 +59,9 @@ public class AppContext {
     public Settings getSettings() {
         return settings;
     }
+
+    public VertxService getVertxService() {
+        return vertxService;
+    }
+
 }

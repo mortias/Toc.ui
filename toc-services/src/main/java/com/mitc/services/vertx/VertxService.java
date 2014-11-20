@@ -3,6 +3,7 @@ package com.mitc.services.vertx;
 import com.mitc.config.Settings;
 import com.mitc.services.hawtio.HawtioService;
 import com.mitc.services.vertx.resources.Channel;
+import com.mitc.util.crypto.FileEncryptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,28 +81,31 @@ public class VertxService implements Executor {
 
                     switch (receivedMsg.getString("action")) {
 
+                        case "sendEncryptionKey":
+                            FileEncryptor crypt = FileEncryptor.getInstance();
+                            crypt.setKey(receivedMsg.getString("encKey"));
+                            crypt.init(true);
+                            break;
+
                         case "saveCustomSettings":
                             settings.setTheme(receivedMsg.getString("theme"));
                             settings.save();
                             replyMsg.putString("action", "saveCustomSettings");
+                            sendMessage(Channel.BO_READ_CHANNEL.getName(), replyMsg);
                             break;
 
                         case "checkIfHawtIoIsRunning":
                             replyMsg.putString("action", "checkIfHawtIoIsRunning");
                             replyMsg.putBoolean("isRunning", settings.getHawtio());
+                            sendMessage(Channel.BO_READ_CHANNEL.getName(), replyMsg);
                             break;
 
                         case "startHawtIoServer":
                             hawtioService.init();
                             break;
-
                     }
-
-                    sendMessage(Channel.BO_READ_CHANNEL.getName(), replyMsg);
-
                 }
             });
-
         }
 
         protected void sendMessage(String channel, JsonObject msg) {
