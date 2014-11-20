@@ -37,7 +37,7 @@ public class HawtioService implements Executor {
     private class HawtioServer implements Runnable {
 
         private org.eclipse.jetty.server.Server jetty;
-        private String artifact = "hawtio-default-offline-1.4.30.war";
+        private String artifact = "hawtio-default-offline.war";
 
         public HawtioServer() {
 

@@ -45,19 +45,21 @@ public class RestService implements Executor {
 
             jetty = new Server(settings.getRestPort());
 
+            System.out.println("rest path : " + getClass().getPackage().toString());
+
             ServletHolder jersey = new ServletHolder(ServletContainer.class);
-            jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, getClass().getPackage().toString());
+            jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.services.restfull.resources");
             jersey.setInitOrder(1);
 
             // Init Swagger
             BeanConfig config = new BeanConfig();
             config.setVersion("1.0.0");
             config.setBasePath("http://" + settings.getHost() + ":" + settings.getRestPort() + "/api");
-            config.setResourcePackage(getClass().getPackage().toString());
+            config.setResourcePackage("com.mitc.services.restfull.resources");
             config.setScan(true);
 
             ServletScanner scanner = new ServletScanner();
-            scanner.setResourcePackage(getClass().getPackage().toString());
+            scanner.setResourcePackage("com.mitc.services.restfull.resources");
             ScannerFactory.setScanner(scanner);
             // --
 
