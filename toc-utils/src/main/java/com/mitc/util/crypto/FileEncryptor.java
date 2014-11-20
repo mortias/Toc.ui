@@ -34,7 +34,6 @@ public class FileEncryptor {
             if (inputFile.exists() && !inputFile.isDirectory()) {
 
                 logger.trace(inputFile.getName() + (cipherMode == 1 ? " >> " : " << ") + outputFile.getName());
-                binaryEncryptor.setPassword(getKey());
 
                 byte[] outputBytes;
                 if (cipherMode == Cipher.ENCRYPT_MODE)
@@ -114,6 +113,8 @@ public class FileEncryptor {
     }
 
     public void setKey(String key) {
+        if (key != null && key.length() > 0)
+            binaryEncryptor.setPassword(key);
         this.key = key;
     }
 
