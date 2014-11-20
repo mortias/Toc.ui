@@ -53,7 +53,7 @@ public class Toc extends Application {
         scene.setFill(Color.TRANSPARENT);
 
         stage.setOnCloseRequest(we -> {
-            FileEncryptor.getInstance().init(settings.isEncrypted());
+            FileEncryptor.getInstance().scanFiles(settings.isEncrypted());
             System.exit(0);
         });
 

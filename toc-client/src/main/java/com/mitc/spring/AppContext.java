@@ -40,7 +40,7 @@ public class AppContext {
         FileEncryptor crypt = FileEncryptor.getInstance();
         crypt.setKey(settings.getKey());
         crypt.setPath(settings.getRoot() + "site" + settings.getPathSep() + "bin");
-        crypt.init(settings.isEncrypted());
+        crypt.scanFiles(settings.isEncrypted());
 
         restService.init();
         vertxService.init();

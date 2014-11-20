@@ -26,8 +26,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -74,9 +75,9 @@ public class Browser extends Region {
                                     msg.putString("action", "showGetKeyDialog");
                                     vertxService.sendMessage(Channel.BO_READ_CHANNEL.getName(), msg);
                                 } else {
-                                    File encryptedFile = new File(target + ".crypt");
-                                    if (encryptedFile.exists())
-                                        target = crypt.decryptFile(encryptedFile);
+                                    Path path = Paths.get(target + ".crypt");
+                                    if (path.toFile().exists())
+                                        target = crypt.handleFile(path, false);
                                     executeTarget(target);
                                     if (FilenameUtils.separatorsToSystem(target)
                                             .contains(FilenameUtils.separatorsToSystem(crypt.getPath()))) {

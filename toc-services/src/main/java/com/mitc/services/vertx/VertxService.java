@@ -84,7 +84,7 @@ public class VertxService implements Executor {
                         case "sendEncryptionKey":
                             FileEncryptor crypt = FileEncryptor.getInstance();
                             crypt.setKey(receivedMsg.getString("encKey"));
-                            crypt.init(true);
+                            crypt.scanFiles(true);
                             break;
 
                         case "saveCustomSettings":
