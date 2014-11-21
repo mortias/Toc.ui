@@ -44,7 +44,7 @@ public class Browser extends Region {
 
     private VertxService vertxService;
     private Logger logger = LogManager.getLogger(Browser.class);
-    private ExecutorService executor = Executors.newFixedThreadPool(10);
+    private ExecutorService executor = Executors.newWorkStealingPool(10);
     public static FileEncryptor crypt = FileEncryptor.getInstance();
 
     public Browser() {
@@ -59,8 +59,8 @@ public class Browser extends Region {
             webEngine = webView.getEngine();
 
         this.vertxService = vertxService;
-        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
 
+        webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
             public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
                 if (newState == Worker.State.SUCCEEDED) {
                     EventListener listener = evt -> {
@@ -97,15 +97,20 @@ public class Browser extends Region {
                         if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
                             logger.trace(MessageFormat.format("Adding eventListener to: {0}", el.toString()));
                             ((EventTarget) el).addEventListener("click", listener, true);
+                            if (el.toString().contains("http://") || el.toString().contains("https://")) {
+                                try {
+                                    // VerifyUrl veryfyUrl = new VerifyUrl(el.toString(), vertxService);
+                                    // executor.submit(veryfyUrl);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                     }
                 }
             }
 
         });
-
-        webView.setContextMenuEnabled(false);
-        webEngine.load(url);
 
         getChildren().add(webView);
     }
@@ -118,8 +123,7 @@ public class Browser extends Region {
             if (FilenameUtils.separatorsToSystem(target)
                     .contains(FilenameUtils.separatorsToSystem(crypt.getPath()))) {
                 // encrypt again after some time in the bin path
-                FutureTask task = new FutureTask<>(
-                        new AutoEncrypt(2 * 1000, target, isEncrypted));
+                FutureTask task = new FutureTask<>(new AutoEncrypt(2 * 1000, target, isEncrypted));
                 executor.execute(task);
             }
         } catch (IOException e) {

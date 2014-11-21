@@ -45,8 +45,6 @@ public class RestService implements Executor {
 
             jetty = new Server(settings.getRestPort());
 
-            System.out.println("rest path : " + getClass().getPackage().toString());
-
             ServletHolder jersey = new ServletHolder(ServletContainer.class);
             jersey.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "com.mitc.services.restfull.resources");
             jersey.setInitOrder(1);

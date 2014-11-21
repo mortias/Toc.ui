@@ -1,25 +1,31 @@
+var eb = null;
 
- var eb = null;
+var boWriteChannel = "boWriteChannel";
+var boReadChannel = "boReadChannel";
 
- var boWriteChannel = "boWriteChannel";
- var boReadChannel = "boReadChannel";
-
- function boWrite(json) {
+function boWrite(json) {
     if (eb) {
         eb.publish(boWriteChannel, json);
     }
- }
+}
 
- function openConn(path) {
+function openConn(path) {
 
-     if (!eb) {
+    if (!eb) {
 
         eb = new vertx.EventBus(path);
 
         eb.onopen = function () {
             eb.registerHandler(boReadChannel, function (msg, replyTo) {
 
-                switch (msg.action){
+                switch (msg.action) {
+
+                    case "handleVerifyUrl":
+
+                        if(msg.text == "Forbidden")
+                         $("a[href*='"+msg.reference+"']").css( "color", "red" );
+
+                        break;
 
                     case "showGetKeyDialog":
                         $("#dialog-get-key").dialog();
@@ -29,19 +35,19 @@
                         $("#dialog-save-complete").dialog({
                             modal: true,
                             buttons: {
-                                Ok: function() {
-                                    $( this ).dialog("close");
+                                Ok: function () {
+                                    $(this).dialog("close");
                                 }
                             }
                         });
                         break;
 
                     case "showSystemStatus":
-                        $('span[id="system_info1"]').text(Math.round((msg.systemCpuLoad.toFixed(2)*100)) + "%");
-                        $('span[id="system_info2"]').text(Math.round((msg.processCpuLoad.toFixed(2)*100)) + "%");
+                        $('span[id="system_info1"]').text(Math.round((msg.systemCpuLoad.toFixed(2) * 100)) + "%");
+                        $('span[id="system_info2"]').text(Math.round((msg.processCpuLoad.toFixed(2) * 100)) + "%");
                         $('span[id="system_info3"]').text(Math.round(msg.processCpuTime) + " seconds");
-                        change(msg.systemCpuLoad,1);
-                        change(msg.processCpuLoad,2);
+                        change(msg.systemCpuLoad, 1);
+                        change(msg.processCpuLoad, 2);
                         break;
 
                     case "showHawtIoStatus":
@@ -49,7 +55,7 @@
                         break;
 
                     case "checkIfHawtIoIsRunning":
-                        if(msg.isRunning){
+                        if (msg.isRunning) {
                             $("#dialog-link-hawtio").dialog({
                                 modal: true,
                                 buttons: {
@@ -83,12 +89,12 @@
             eb = null;
         };
 
-         $('span[id="vertx_info"]').text("Connected");
+        $('span[id="vertx_info"]').text("Connected");
     }
- }
+}
 
- function closeConn() {
+function closeConn() {
     if (eb) {
         eb.close();
     }
- }
+}
