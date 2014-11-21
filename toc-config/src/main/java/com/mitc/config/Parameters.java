@@ -25,6 +25,11 @@ public class Parameters {
     private String pathSep;
     private String host;
 
+    private String proxyUser;
+    private String proxyHost;
+    private String proxyPass;
+    private Integer proxyPort;
+
     private boolean encrypted;
     private boolean undecorated;
 
@@ -161,4 +166,35 @@ public class Parameters {
         this.monitoring = monitoring;
     }
 
+    public String getProxyUser() {
+        return proxyUser;
+    }
+
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
+    }
+
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+
+    public String getProxyPass() {
+        return proxyPass;
+    }
+
+    public void setProxyPass(String proxyPass) {
+        this.proxyPass = proxyPass;
+    }
+
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        this.proxyPort = proxyPort;
+    }
 }

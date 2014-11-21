@@ -158,5 +158,36 @@ public class Settings {
         parameters.setMonitoring(monitoring);
     }
 
+    public String getProxyUser() {
+        return parameters.getProxyUser();
+    }
+
+    public void setProxyUser(String proxyUser) {
+        parameters.setProxyUser(proxyUser);
+    }
+
+    public String getProxyHost() {
+        return parameters.getProxyHost();
+    }
+
+    public void setProxyHost(String proxyHost) {
+        parameters.setProxyHost(proxyHost);
+    }
+
+    public String getProxyPass() {
+        return parameters.getProxyPass();
+    }
+
+    public void setProxyPass(String proxyPass) {
+        parameters.setProxyPass(proxyPass);
+    }
+
+    public Integer getProxyPort() {
+        return parameters.getProxyPort();
+    }
+
+    public void setProxyPort(Integer proxyPort) {
+        parameters.setProxyPort(proxyPort);
+    }
 }
 

@@ -16,3 +16,8 @@
 
   hawtio: false
   monitoring: false
+
+  # proxyUser:
+  # proxyPass:
+  # proxyHost: 147.67.117.13
+  # proxyPort: 8012
