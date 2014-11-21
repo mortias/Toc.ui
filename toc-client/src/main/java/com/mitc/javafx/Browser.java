@@ -89,22 +89,15 @@ public class Browser extends Region {
                             }
                         }
                     };
-                    // add event listeners to all links
+
                     Document doc = webEngine.getDocument();
                     NodeList lst = doc.getElementsByTagName("a");
                     for (int i = 0; i != lst.getLength(); i++) {
                         Element el = (Element) lst.item(i);
-                        if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
-                            logger.trace(MessageFormat.format("Adding eventListener to: {0}", el.toString()));
+                        String target = el.toString();
+                        if (!target.contains("#tabs") && target.length() > 0) {
+                            logger.trace(MessageFormat.format("Adding eventListener to: {0}", target));
                             ((EventTarget) el).addEventListener("click", listener, true);
-                            if (el.toString().contains("http://") || el.toString().contains("https://")) {
-                                try {
-                                    // VerifyUrl veryfyUrl = new VerifyUrl(el.toString(), vertxService);
-                                    // executor.submit(veryfyUrl);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
                         }
                     }
                 }
@@ -112,6 +105,7 @@ public class Browser extends Region {
 
         });
 
+        webEngine.load(url);
         getChildren().add(webView);
     }
 

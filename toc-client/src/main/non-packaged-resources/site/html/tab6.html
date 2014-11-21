@@ -65,9 +65,9 @@
        <div id="cell"><hr></div><div id="cell"><hr></div><div id="cell"><hr></div><div id="cell"><hr></div>      </div>
       <br>
       <div id="row">
-       <div id="cell"><button id="http"><a href="../../tools/swagger/index.html">Swagger</a></button></div>
+       <div id="cell"><button id="http"><a href="../../tools/swagger/index.html" title="">Swagger</a></button></div>
        <div id="cell"><button id="hawtio"><a>Hawt.io</a></button></div>
-       <div id="cell"></div>
+       <div id="cell"><button id="verify"><a>Verify links</a></button></div>
        <div id="cell"></div>
       </div>
       <br>
@@ -187,13 +187,24 @@
      }
     });
 
-  // Submit the  key via SockJs/Vertx
+  // Submit the key via SockJs/Vertx
   $('#submitEncKey').click(function() {
    var json = {
     "action" : "sendEncryptionKey",
     "encKey" : $('#encKey').val()};
    boWrite(json);
    $("#dialog-get-key").dialog("close");
+  });
+
+  // Start verifying all links
+  $('#verify').click(function() {
+   $("a[href*='http']").each(function() {
+      var json = {
+       "action": "checkIfHrefIsValid",
+       "target": this.href
+      };
+      boWrite(json);
+   });
   });
 
   // Call to the settings form via SockJs/Vertx

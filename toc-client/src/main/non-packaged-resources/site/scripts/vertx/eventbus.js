@@ -20,11 +20,15 @@ function openConn(path) {
 
                 switch (msg.action) {
 
-                    case "handleVerifyUrl":
-
-                        if(msg.text == "Forbidden")
-                         $("a[href*='"+msg.reference+"']").css( "color", "red" );
-
+                    case "checkIfHrefIsValid":
+                        if (msg.text == "Forbidden")
+                            $("a[href*='" + msg.reference + "']")
+                                .tooltip({ content:  msg.text})
+                                .css("color", "red");
+                        else
+                            $("a[href*='" + msg.reference + "']")
+                                .tooltip({ content:  msg.text +" - "+msg.proxy+"<br>Status " +msg.code})
+                                .css("color", "green");
                         break;
 
                     case "showGetKeyDialog":

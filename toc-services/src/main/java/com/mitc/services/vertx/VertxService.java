@@ -4,6 +4,7 @@ import com.mitc.config.Settings;
 import com.mitc.services.hawtio.HawtioService;
 import com.mitc.services.vertx.resources.Channel;
 import com.mitc.util.crypto.FileEncryptor;
+import com.mitc.util.net.VerifyUrl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,14 @@ import org.vertx.java.core.http.HttpServer;
 import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
 import org.vertx.java.core.sockjs.SockJSServer;
+import scala.util.parsing.json.JSONObject;
 
 import java.text.MessageFormat;
+import java.util.Map;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Component("VertxService")
 public class VertxService implements Executor {
@@ -55,6 +61,7 @@ public class VertxService implements Executor {
         private Vertx vertx;
         private HttpServer httpServer;
         private SockJSServer sockServer;
+        private ExecutorService executor;
 
         private final Logger logger = LogManager.getLogger(VertxService.class);
 
@@ -62,6 +69,7 @@ public class VertxService implements Executor {
 
             vertx = VertxFactory.newVertx();
             port = settings.getVertxPort();
+            executor = Executors.newWorkStealingPool(10);
 
             // Let everything through
             JsonArray permitted = new JsonArray();
@@ -98,6 +106,21 @@ public class VertxService implements Executor {
                             replyMsg.putString("action", "checkIfHawtIoIsRunning");
                             replyMsg.putBoolean("isRunning", settings.getHawtio());
                             sendMessage(Channel.BO_READ_CHANNEL.getName(), replyMsg);
+                            break;
+
+                        case "checkIfHrefIsValid":
+                            String target = receivedMsg.getString("target");
+                            if (target.contains("http://") || target.contains("https://") & !target.contains("mailto:")) {
+                                try {
+                                    VerifyUrl veryfyUrl = new VerifyUrl(target);
+                                    Future<Map<String,Object>> future = executor.submit(veryfyUrl);
+                                    replyMsg = new JsonObject(future.get());
+                                    replyMsg.putString("action", "checkIfHrefIsValid");
+                                    sendMessage(Channel.BO_READ_CHANNEL.getName(), replyMsg);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
                             break;
 
                         case "startHawtIoServer":
