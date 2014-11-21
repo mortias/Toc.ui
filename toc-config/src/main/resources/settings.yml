@@ -1,7 +1,7 @@
 !settings
 
   encrypted: true
-  # key: Mary has one cat
+  # key: test
 
   # undecorated: false
   # theme: cupertino
@@ -15,4 +15,4 @@
   # hawtioPort: 7777
 
   hawtio: false
-  monitoring: true
+  monitoring: false

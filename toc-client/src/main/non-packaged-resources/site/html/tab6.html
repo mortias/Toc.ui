@@ -188,8 +188,8 @@
 
  $(function () {
 
-  // Set the pre-configured skin
   $('div[name="ui"] select').val("${theme}");
+  $('button[id="submitEncKey"]').button({icons: {primary: "ui-icon-check"}});
 
   $('#ui')
     .selectmenu({

@@ -42,6 +42,7 @@ public class Browser extends Region {
     private WebView webView;
     private WebEngine webEngine;
 
+    private VertxService vertxService;
     private Logger logger = LogManager.getLogger(Browser.class);
     private ExecutorService executor = Executors.newFixedThreadPool(10);
     public static FileEncryptor crypt = FileEncryptor.getInstance();
@@ -57,6 +58,7 @@ public class Browser extends Region {
         if (webEngine == null)
             webEngine = webView.getEngine();
 
+        this.vertxService = vertxService;
         webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
 
             public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
@@ -66,31 +68,24 @@ public class Browser extends Region {
                         if (FilenameUtils.getExtension(target).length() == 0
                                 || target.contains("https:") || target.contains("mailto:")
                                 || target.contains("http:") || target.contains("ftp:")) {
-                            executeTarget(target);
+                            executeTarget(target, settings.isEncrypted());
                         } else {
                             if (settings.isEncrypted()) {
                                 String key = FileEncryptor.getInstance().getKey();
                                 if (key == null || key.trim().length() == 0) {
-                                    JsonObject msg = new JsonObject();
-                                    msg.putString("action", "showGetKeyDialog");
-                                    vertxService.sendMessage(Channel.BO_READ_CHANNEL.getName(), msg);
+                                    getPassPhrase();
                                 } else {
                                     Path path = Paths.get(target + ".crypt");
                                     if (path.toFile().exists())
                                         target = crypt.handleFile(path, false);
-                                    executeTarget(target);
-                                    if (FilenameUtils.separatorsToSystem(target)
-                                            .contains(FilenameUtils.separatorsToSystem(crypt.getPath()))) {
-                                        // encrypt again after some time in the bin path
-                                        FutureTask task = new FutureTask<>(
-                                                new AutoEncrypt(2 * 1000, target, settings.isEncrypted()));
-                                        executor.execute(task);
-                                    }
+                                    if (target.length() == 0)
+                                        getPassPhrase();
+                                    else
+                                        executeTarget(target, settings.isEncrypted());
                                 }
                             } else {
-                                if (target.length() > 0) {
-                                    executeTarget(target);
-                                }
+                                if (target.length() > 0)
+                                    executeTarget(target, settings.isEncrypted());
                             }
                         }
                     };
@@ -101,19 +96,9 @@ public class Browser extends Region {
                         Element el = (Element) lst.item(i);
                         if (!el.toString().contains("#tabs") && el.toString().length() > 0) {
                             logger.trace(MessageFormat.format("Adding eventListener to: {0}", el.toString()));
-                            ((EventTarget) el).addEventListener("mouseup", listener, false);
+                            ((EventTarget) el).addEventListener("click", listener, true);
                         }
                     }
-                }
-            }
-
-            private void executeTarget(String target) {
-                try {
-                    String[] array = {"cmd", "/C", "start", target};
-                    logger.info(MessageFormat.format("Running action: {0}", Arrays.toString(array)));
-                    Runtime.getRuntime().exec(array);
-                } catch (IOException e) {
-                    logger.error(MessageFormat.format("An error occured: {0}", e.getLocalizedMessage()));
                 }
             }
 
@@ -123,6 +108,29 @@ public class Browser extends Region {
         webEngine.load(url);
 
         getChildren().add(webView);
+    }
+
+    private void executeTarget(String target, boolean isEncrypted) {
+        try {
+            String[] array = {"cmd", "/C", "start", target};
+            logger.info(MessageFormat.format("Running action: {0}", Arrays.toString(array)));
+            Runtime.getRuntime().exec(array);
+            if (FilenameUtils.separatorsToSystem(target)
+                    .contains(FilenameUtils.separatorsToSystem(crypt.getPath()))) {
+                // encrypt again after some time in the bin path
+                FutureTask task = new FutureTask<>(
+                        new AutoEncrypt(2 * 1000, target, isEncrypted));
+                executor.execute(task);
+            }
+        } catch (IOException e) {
+            logger.error(MessageFormat.format("An error occured: {0}", e.getLocalizedMessage()));
+        }
+    }
+
+    private void getPassPhrase() {
+        JsonObject msg = new JsonObject();
+        msg.putString("action", "showGetKeyDialog");
+        this.vertxService.sendMessage(Channel.BO_READ_CHANNEL.getName(), msg);
     }
 
     @Override

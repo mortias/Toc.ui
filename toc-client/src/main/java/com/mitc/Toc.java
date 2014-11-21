@@ -1,11 +1,11 @@
 package com.mitc;
 
+import com.mitc.config.Settings;
+import com.mitc.javafx.Browser;
 import com.mitc.services.vertx.VertxService;
 import com.mitc.spring.AppConfig;
 import com.mitc.spring.AppContext;
 import com.mitc.util.crypto.FileEncryptor;
-import com.mitc.javafx.Browser;
-import com.mitc.config.Settings;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
