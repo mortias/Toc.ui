@@ -3,7 +3,6 @@ package com.mitc;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -11,8 +10,6 @@ import javafx.stage.Stage;
 import java.net.URISyntaxException;
 
 public class WebViewScene extends Application {
-
-    private Pane root;
 
     @Override
     public void start(final Stage stage) throws URISyntaxException {
@@ -33,9 +30,9 @@ public class WebViewScene extends Application {
 
     }
 
-
     public static void main(String[] args) {
         launch();
     }
 
 }
+
