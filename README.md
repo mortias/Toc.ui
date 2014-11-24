@@ -22,14 +22,31 @@ You could also use this as a DevOps tool to monitor your services. Also this is 
 - Is able to verify the status/availability of your links
 - Async example service which displays your cpu load with d3js over SockJs
 - JavaFx based, so you can extend the tool at your own will
+
 - Handy Swagger UI (visualize and consume your RESTful services)
 - Hawt.io (deployable on embedded Jetty using jolokia, ideal for showing Camel routes)
 - Link verification (with or without proxy settings)
 
+## Possible new features
+- Adding a project based chat
+- Adding shared "Wiki style" project pages
+- A simple shareable kanban board
+- Adding an embedded mailserver or scheduler
+
 ## The sky is the limit!
 - Appart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, shared content etc. Almost anything is possible because you have access to the underlying OS you are running, and you have an eventbus and restservice at your disposal.
 
-## How to Use It 
+## Architecture overview
+![GitHub Architecture](/toc-docs/toc.ui.png)
+
+## Disclaimer
+This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software.
+
+## How to Run it
+It is a standard maven build so you can create a new project from the main pom you can find in the toc-modules
+mvn clean package and you are good to go to run the com.mitc.Toc class
+
+## How to Use it
 
 ### Simple link 
 ```
@@ -59,15 +76,3 @@ exit
 ```
 <a href="${bin}\remote\rdp-server.rdp" title="">RDP</a>
 ```
-
-## Possible new features
-- Adding a project based chat
-- Adding shared "Wiki style" project pages
-- A simple shareable kanban board
-- Adding an embedded mailserver or scheduler
-
-## Architecture overview
-![GitHub Architecture](/toc-docs/toc.ui.png)
-
-## Disclaimer
-This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software.
