@@ -57,7 +57,7 @@ public class Toc extends Application {
             System.exit(0);
         });
 
-        stage.setTitle("Toc.ui - v1.0");
+        stage.setTitle("Toc.ui - v1.0.0");
         stage.setScene(scene);
         stage.show();
 

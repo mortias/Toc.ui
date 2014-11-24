@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.mitc</groupId>
         <artifactId>toc-modules</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0-rc1</version>
         <relativePath>../toc-modules/pom.xml</relativePath>
     </parent>
 
@@ -21,17 +21,17 @@
         <dependency>
             <groupId>com.mitc</groupId>
             <artifactId>toc-config</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-rc1</version>
         </dependency>
         <dependency>
             <groupId>com.mitc</groupId>
             <artifactId>toc-utils</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-rc1</version>
         </dependency>
         <dependency>
             <groupId>com.mitc</groupId>
             <artifactId>toc-services</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0-rc1</version>
         </dependency>
 
         <!-- Spring DI -->
@@ -63,7 +63,7 @@
                                 <artifactItem>
                                     <groupId>com.mitc</groupId>
                                     <artifactId>toc-config</artifactId>
-                                    <version>1.0.0-SNAPSHOT</version>
+                                    <version>1.0.0-rc1</version>
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
                                 </artifactItem>
@@ -85,7 +85,7 @@
                                 <artifactItem>
                                     <groupId>com.mitc</groupId>
                                     <artifactId>toc-services</artifactId>
-                                    <version>1.0.0-SNAPSHOT</version>
+                                    <version>1.0.0-rc1</version>
                                     <type>jar</type>
                                     <overWrite>true</overWrite>
                                 </artifactItem>
