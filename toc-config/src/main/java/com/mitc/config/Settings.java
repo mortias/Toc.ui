@@ -110,14 +110,6 @@ public class Settings {
         parameters.setEncrypted(encrypted);
     }
 
-    public boolean getUndecorated() {
-        return parameters.getUndecorated();
-    }
-
-    public void setUndecorated(boolean undecorated) {
-        parameters.setUndecorated(undecorated);
-    }
-
     public int getVertxPort() {
         return parameters.getVertxPort();
     }

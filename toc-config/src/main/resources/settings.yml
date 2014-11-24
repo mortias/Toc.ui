@@ -3,10 +3,9 @@
   encrypted: true
   # key: test
 
-  # undecorated: false
   # theme: cupertino
 
-  height: 680
+  height: 700
   width: 500
 
   host: localhost

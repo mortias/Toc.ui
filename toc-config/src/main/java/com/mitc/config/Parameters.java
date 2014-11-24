@@ -31,12 +31,10 @@ public class Parameters {
     private Integer proxyPort;
 
     private boolean encrypted;
-    private boolean undecorated;
 
     public Parameters() {
 
         theme = "cupertino";
-        undecorated = true;
 
         restPort = 9999;
         vertxPort = 8888;
@@ -116,14 +114,6 @@ public class Parameters {
 
     public void setEncrypted(boolean encrypted) {
         this.encrypted = encrypted;
-    }
-
-    public boolean getUndecorated() {
-        return undecorated;
-    }
-
-    public void setUndecorated(boolean undecorated) {
-        this.undecorated = undecorated;
     }
 
     public int getVertxPort() {
