@@ -1,7 +1,7 @@
 
 # Toc.ui
 
-![GitHub Architecture](/toc-docs/toc.ui2.png)
+![GitHub Overview](/toc-docs/toc.ui2.png)
 
 ## Introduction 
 
@@ -23,7 +23,7 @@ You could also use this as a DevOps tool to monitor your services. Also this is 
 - Async example service which displays your cpu load with d3js over SockJs
 - JavaFx based, so you can extend the tool at your own will
 - Handy Swagger UI (visualize and consume your RESTful services)
-- Hawt.io (deployable on embedded Jetty using jolokia)
+- Hawt.io (deployable on embedded Jetty using jolokia, ideal for showing Camel routes)
 - Link verification (with or without proxy settings)
 
 ## The sky is the limit!
@@ -64,6 +64,7 @@ exit
 - Adding a project based chat
 - Adding shared "Wiki style" project pages
 - A simple shareable kanban board
+- Adding an embedded mailserver or scheduler
 
 ## Architecture overview
 ![GitHub Architecture](/toc-docs/toc.ui.png)
