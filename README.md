@@ -25,7 +25,7 @@ You could also use this as a DevOps tool to monitor your services. Also this is 
 - Link verification (with or without proxy settings)
 
 ## The sky is the limit!
-- Appart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, etc. Almost anything is possible because you have access to the underlying OS you are running on via java.
+- Appart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, shared content etc. Almost anything is possible because you have access to the underlying OS you are running, and you have an eventbus and restservice at your disposal.
 
 ## How to Use It 
 
@@ -61,7 +61,7 @@ exit
 ## Possible new features
 - Adding a project based chat
 - Adding shared "Wiki style" project pages
-- A simple kanban board
+- A simple shareable kanban board
 
 ## Disclaimer
 This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software. 
