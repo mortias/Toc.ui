@@ -60,7 +60,8 @@ exit
 
 ## Possible new features
 - Adding a project based chat
-- Adding shared Wiki style project pages
+- Adding shared "Wiki style" project pages
+- A simple kanban board
 
 ## Disclaimer
 This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software. 
