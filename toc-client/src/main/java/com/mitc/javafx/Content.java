@@ -51,15 +51,14 @@ public class Content {
             siteMap.put("restPort", String.valueOf(settings.getRestPort()));
             siteMap.put("vertxPort", String.valueOf(settings.getVertxPort()));
             siteMap.put("hawtioPort", String.valueOf(settings.getHawtioPort()));
-
             handleFile(site + "html" + settings.getPathSep(), templatePath, indexPath, siteMap, true);
 
             String swagger = settings.getRoot() + "tools" + settings.getPathSep() + "swagger" + settings.getPathSep();
             Map<String, String> swaggerMap = new HashMap<>();
             swaggerMap.put("host", settings.getHost());
             swaggerMap.put("restPort", String.valueOf(settings.getRestPort()));
-
             handleFile(swagger, "index.html", "index.html", swaggerMap, false);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -3,7 +3,6 @@ package com.mitc.util.net;
 import com.mitc.config.Settings;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.*;
@@ -14,8 +13,7 @@ import java.util.concurrent.Callable;
 @Component
 public class VerifyUrl implements Callable<Map<String, Object>> {
 
-    @Autowired
-    Settings settings;
+    private Settings settings;
 
     private String url = "";
     private Logger logger = LogManager.getLogger(VerifyUrl.class);
@@ -23,7 +21,8 @@ public class VerifyUrl implements Callable<Map<String, Object>> {
     public VerifyUrl() {
     }
 
-    public VerifyUrl(String url) {
+    public VerifyUrl(String url, Settings settings) {
+        this.settings = settings;
         this.url = url.replace("file:///", "");
     }
 
@@ -36,7 +35,7 @@ public class VerifyUrl implements Callable<Map<String, Object>> {
             return sendResult("direct", this.url, conn.getResponseCode(), conn.getResponseMessage());
         } catch (Exception e) {
             try {
-                if (proxyIsEnabled()) {
+                if (isProxyEnabled()) {
                     Authenticator authenticator = new Authenticator() {
                         public PasswordAuthentication getPasswordAuthentication() {
                             return (new PasswordAuthentication(settings.getProxyUser(), settings.getProxyPass().toCharArray()));
@@ -56,7 +55,7 @@ public class VerifyUrl implements Callable<Map<String, Object>> {
         }
     }
 
-    private boolean proxyIsEnabled() {
+    private boolean isProxyEnabled() {
         return (settings.getProxyUser().length() > 0 &&
                 settings.getProxyPass().length() > 0 &&
                 settings.getProxyHost().length() > 0 &&

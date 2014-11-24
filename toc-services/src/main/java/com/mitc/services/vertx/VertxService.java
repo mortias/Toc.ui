@@ -17,7 +17,6 @@ import org.vertx.java.core.http.HttpServer;
 import org.vertx.java.core.json.JsonArray;
 import org.vertx.java.core.json.JsonObject;
 import org.vertx.java.core.sockjs.SockJSServer;
-import scala.util.parsing.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.Map;
@@ -63,13 +62,14 @@ public class VertxService implements Executor {
         private SockJSServer sockServer;
         private ExecutorService executor;
 
+        private static final int NTHREDS = 10;
         private final Logger logger = LogManager.getLogger(VertxService.class);
 
         public VertxServer() {
 
             vertx = VertxFactory.newVertx();
             port = settings.getVertxPort();
-            executor = Executors.newWorkStealingPool(10);
+            executor = Executors.newFixedThreadPool(NTHREDS);
 
             // Let everything through
             JsonArray permitted = new JsonArray();
@@ -112,7 +112,7 @@ public class VertxService implements Executor {
                             String target = receivedMsg.getString("target");
                             if (target.contains("http://") || target.contains("https://") & !target.contains("mailto:")) {
                                 try {
-                                    VerifyUrl veryfyUrl = new VerifyUrl(target);
+                                    VerifyUrl veryfyUrl = new VerifyUrl(target, settings);
                                     Future<Map<String,Object>> future = executor.submit(veryfyUrl);
                                     replyMsg = new JsonObject(future.get());
                                     replyMsg.putString("action", "checkIfHrefIsValid");

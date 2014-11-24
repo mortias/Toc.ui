@@ -43,11 +43,14 @@ public class Browser extends Region {
     private WebEngine webEngine;
 
     private VertxService vertxService;
+    private static final int NTHREDS = 10;
+    private ExecutorService executor;
+
     private Logger logger = LogManager.getLogger(Browser.class);
-    private ExecutorService executor = Executors.newWorkStealingPool(10);
     public static FileEncryptor crypt = FileEncryptor.getInstance();
 
     public Browser() {
+        executor = Executors.newFixedThreadPool(NTHREDS);
     }
 
     public Browser(String url, Settings settings, VertxService vertxService) {
