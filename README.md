@@ -74,3 +74,6 @@ exit
 ```
 ## Architecture overview
 ![GitHub Architecture](/toc-docs/toc.ui.png)
+
+## License
+Toc.ui is distributed under Apache 2.0 License.
