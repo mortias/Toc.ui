@@ -72,7 +72,7 @@ exit
 ```
 <a href="${bin}\remote\rdp-server.rdp" title="">RDP</a>
 ```
-## Architecture overview
+## Architecture / overview
 ![GitHub Architecture](/toc-docs/toc.ui.png)
 
 ## License
