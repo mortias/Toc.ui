@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Toc.ui by mortias</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Toc.ui</h1>
+        <h2>A Java based project. It mainly manages your links, displayed in a sort of &quot;table of contents&quot; but with executable actions behind it, which is very handy to use as a shortcut tool.</h2>
+        <a href="https://github.com/mortias/Toc.ui" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="tocui" class="anchor" href="#tocui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Toc.ui</h1>
+
+<p><img src="/toc-docs/toc.ui2.png" alt="GitHub Overview"></p>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>The TOC tool is mainly a link manager. It displays your links in a sort of grouped project overview, but with executable actions behind it, which is very handy to use as a shortcut tool.</p>
+
+<p>When you'll start working within a microservice based architecture you'll quickly end up with a lot of different servers, tools, links, etc. For this i've crated a tool that not only acts as a shortcut tool, but also is able to execute programs, and verify the things you link to. The Toc.ui is fully portable.</p>
+
+<p>You could also use this as a DevOps tool to monitor your services. Also this is easy configurable because it's using basic HTML and jQuery as a layout manager. It also comes out of the box with some handy tools like Swagger UI, Hawt.io for Jmx and Link verification.</p>
+
+<h2>
+<a id="main-features" class="anchor" href="#main-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main features</h2>
+
+<ul>
+<li>Simple Html based GUI (using jQuery for layouts, skinnable)</li>
+<li>Can launch ANY command line statement (batch files, programs, documentations, etc.)</li>
+<li>Fully encrypted (PBEWithMD5AndDES), runnable statements with passwords, binaries and executables</li>
+<li>Easy configurable (using a single .yaml file)</li>
+<li>Native REST support (Swagger api running on Jetty)</li>
+<li>Asynchronous embedded task executions supported by Vert.x / SockJs (EventBus)</li>
+<li>Is able to verify the status/availability of your links</li>
+<li>Async example service which displays your cpu load with d3js over SockJs</li>
+<li>JavaFx based, so you can extend the tool at your own will</li>
+<li>Handy Swagger UI (visualize and consume your RESTful services)</li>
+<li>Hawt.io (deployable on embedded Jetty using jolokia, ideal for showing Camel routes)</li>
+<li>Link verification (with or without proxy settings)</li>
+</ul>
+
+<h2>
+<a id="possible-new-features" class="anchor" href="#possible-new-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Possible new features</h2>
+
+<ul>
+<li>Adding a project based chat</li>
+<li>Adding shared "Wiki style" project pages</li>
+<li>A simple shareable kanban board</li>
+<li>Adding an embedded mailserver or scheduler</li>
+</ul>
+
+<h2>
+<a id="the-sky-is-the-limit" class="anchor" href="#the-sky-is-the-limit" aria-hidden="true"><span class="octicon octicon-link"></span></a>The sky is the limit!</h2>
+
+<ul>
+<li>Appart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, shared content etc. Almost anything is possible because you have access to the underlying OS you are running, and you have an eventbus and restservice at your disposal.</li>
+</ul>
+
+<h2>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disclaimer</h2>
+
+<p>This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software.</p>
+
+<h2>
+<a id="how-to-run-it" class="anchor" href="#how-to-run-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Run it</h2>
+
+<p>It is a standard maven build so you can create a new project from the main pom you can find in the toc-modules
+mvn clean package and you are good to go to run the com.mitc.Toc class</p>
+
+<h2>
+<a id="how-to-use-it" class="anchor" href="#how-to-use-it" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to Use it</h2>
+
+<h3>
+<a id="simple-link" class="anchor" href="#simple-link" aria-hidden="true"><span class="octicon octicon-link"></span></a>Simple link</h3>
+
+<pre><code>&lt;a href="http://link.springer.com" title=""&gt;link&lt;/a&gt;
+</code></pre>
+
+<h3>
+<a id="link-to-a-binary-file-in-your-site-folder" class="anchor" href="#link-to-a-binary-file-in-your-site-folder" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a binary file in your site folder</h3>
+
+<pre><code>&lt;a href="${bin}\books\camel_in_action.pdf" title=""&gt;link&lt;/a&gt;
+</code></pre>
+
+<h3>
+<a id="link-to-a-bat-file-which-launches-toad-with-a-specific-schema" class="anchor" href="#link-to-a-bat-file-which-launches-toad-with-a-specific-schema" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to a bat file which launches Toad with a specific schema</h3>
+
+<pre><code>&lt;a href="${bin}\database\dev\db.bat" title=""&gt;link&lt;/a&gt;
+
+bat file:
+start "" "C:/Program Files (x86)/Quest Software/Toad for Oracle 11.6/Toad.exe" -c USER/PASSWORD
+exit
+</code></pre>
+
+<h3>
+<a id="link-to-open-a-ftp-site" class="anchor" href="#link-to-open-a-ftp-site" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to open a ftp site</h3>
+
+<pre><code>&lt;a href="${bin}\ftp\ftp-server.bat" title=""&gt;FTP&lt;/a&gt;
+
+bat file:
+start "" "C:/Program Files (x86)/FileZilla FTP Client/filezilla" --site="0/01 my ftp site"
+exit
+</code></pre>
+
+<h3>
+<a id="link-to-open-a-remote-server-connection" class="anchor" href="#link-to-open-a-remote-server-connection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Link to open a remote server connection</h3>
+
+<pre><code>&lt;a href="${bin}\remote\rdp-server.rdp" title=""&gt;RDP&lt;/a&gt;
+</code></pre>
+
+<h2>
+<a id="architecture--overview" class="anchor" href="#architecture--overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture / overview</h2>
+
+<p><img src="/toc-docs/toc.ui.png" alt="GitHub Architecture"></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Toc.ui is distributed under Apache 2.0 License.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/mortias/Toc.ui/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/mortias/Toc.ui/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/mortias/Toc.ui"></a> is maintained by <a href="https://github.com/mortias">mortias</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
