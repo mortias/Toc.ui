@@ -5,7 +5,7 @@
 
 ## Introduction 
 
-The TOC tool is mainly a link manager. It displays your links in a sort of grouped project overview, but with executable actions behind it, which is very handy to use as a shortcut tool.
+The TOC tool is mainly a link manager. It displays your links in a sort of grouped project overview, but with executable actions behind it, which is very handy to use as a shortcut tool. However it is the architecture behind it which makes it most interesting!
 
 When you'll start working within a microservice based architecture you'll quickly end up with a lot of different servers, tools, links, etc. For this i've crated a tool that not only acts as a shortcut tool, but also is able to execute programs, and verify the things you link to. The Toc.ui is fully portable.
 
