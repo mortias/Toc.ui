@@ -11,6 +11,9 @@ When you'll start working within a microservice based architecture you'll quickl
 
 You could also use this as a DevOps tool to monitor your services. Also this is easy configurable because it's using basic HTML and jQuery as a layout manager. It also comes out of the box with some handy tools like Swagger UI, Hawt.io for Jmx and Link verification.
 
+## Architecture / overview
+![GitHub Architecture](/toc-docs/toc.ui.png)
+
 ## Main features 
 
 - Simple Html based GUI (using jQuery for layouts, skinnable)
@@ -72,8 +75,6 @@ exit
 ```
 <a href="${bin}\remote\rdp-server.rdp" title="">RDP</a>
 ```
-## Architecture / overview
-![GitHub Architecture](/toc-docs/toc.ui.png)
 
 ## License
 Toc.ui is distributed under Apache 2.0 License.
