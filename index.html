@@ -1,46 +1,54 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+    <meta name="description" content="Toc.ui : A Java based project. It mainly manages your links, displayed in a sort of &quot;table of contents&quot; but with executable actions behind it, which is very handy to use as a shortcut tool.">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Toc.ui by mortias</title>
+    <title>Toc.ui</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>Toc.ui</h1>
-        <h2>A Java based project. It mainly manages your links, displayed in a sort of &quot;table of contents&quot; but with executable actions behind it, which is very handy to use as a shortcut tool.</h2>
-        <a href="https://github.com/mortias/Toc.ui" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mortias/Toc.ui">View on GitHub</a>
+
+          <h1 id="project_title">Toc.ui</h1>
+          <h2 id="project_tagline">A Java based project. It mainly manages your links, displayed in a sort of &quot;table of contents&quot; but with executable actions behind it, which is very handy to use as a shortcut tool.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mortias/Toc.ui/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mortias/Toc.ui/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a id="tocui" class="anchor" href="#tocui" aria-hidden="true"><span class="octicon octicon-link"></span></a>Toc.ui</h1>
 
-<p><img src="/toc-docs/toc.ui2.png" alt="GitHub Overview"></p>
+<p><img src="https://github.com/mortias/Toc.ui/raw/master/toc-docs/toc.ui2.png" alt="GitHub Overview"></p>
 
 <h2>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h2>
 
-<p>The TOC tool is mainly a link manager. It displays your links in a sort of grouped project overview, but with executable actions behind it, which is very handy to use as a shortcut tool.</p>
+<p>The TOC tool is mainly a link manager. It displays your links in a sort of grouped project overview, but with executable actions behind it, which is very handy to use as a shortcut tool. However it is the architecture behind it which makes it most interesting!</p>
 
 <p>When you'll start working within a microservice based architecture you'll quickly end up with a lot of different servers, tools, links, etc. For this i've crated a tool that not only acts as a shortcut tool, but also is able to execute programs, and verify the things you link to. The Toc.ui is fully portable.</p>
 
 <p>You could also use this as a DevOps tool to monitor your services. Also this is easy configurable because it's using basic HTML and jQuery as a layout manager. It also comes out of the box with some handy tools like Swagger UI, Hawt.io for Jmx and Link verification.</p>
+
+<h2>
+<a id="architecture--overview" class="anchor" href="#architecture--overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture / overview</h2>
+
+<p><img src="https://github.com/mortias/Toc.ui/raw/master/toc-docs/toc.ui.png" alt="GitHub Architecture"></p>
 
 <h2>
 <a id="main-features" class="anchor" href="#main-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Main features</h2>
@@ -130,34 +138,21 @@ exit
 </code></pre>
 
 <h2>
-<a id="architecture--overview" class="anchor" href="#architecture--overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Architecture / overview</h2>
-
-<p><img src="/toc-docs/toc.ui.png" alt="GitHub Architecture"></p>
-
-<h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Toc.ui is distributed under Apache 2.0 License.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/mortias/Toc.ui/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/mortias/Toc.ui/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/mortias/Toc.ui"></a> is maintained by <a href="https://github.com/mortias">mortias</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
     </div>
 
-            <script type="text/javascript">
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Toc.ui maintained by <a href="https://github.com/mortias">mortias</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -167,6 +162,7 @@ exit
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
