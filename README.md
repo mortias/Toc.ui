@@ -1,7 +1,7 @@
 
 # Toc.ui
 
-![GitHub Overview](/toc-docs/toc.ui2.png)
+![GitHub Overview](https://github.com/mortias/Toc.ui/raw/master/toc-docs/toc.ui2.png)
 
 ## Introduction 
 
@@ -12,7 +12,7 @@ When you'll start working within a microservice based architecture you'll quickl
 You could also use this as a DevOps tool to monitor your services. Also this is easy configurable because it's using basic HTML and jQuery as a layout manager. It also comes out of the box with some handy tools like Swagger UI, Hawt.io for Jmx and Link verification.
 
 ## Architecture / overview
-![GitHub Architecture](/toc-docs/toc.ui.png)
+![GitHub Architecture](https://github.com/mortias/Toc.ui/raw/master/toc-docs/toc.ui.png)
 
 ## Main features 
 
