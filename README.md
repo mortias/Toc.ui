@@ -16,7 +16,7 @@ You could also use this as a DevOps tool to monitor your services. Also this is 
 
 ## Main features 
 
-- Simple Html based GUI (using jQuery for layouts, skinnable)
+- Simple Html based GUI (using jQuery for layouts, skinnable or run it with twitter bootstrap)
 - Can launch ANY command line statement (batch files, programs, documentations, etc.)
 - Fully encrypted (PBEWithMD5AndDES), runnable statements with passwords, binaries and executables
 - Easy configurable (using a single .yaml file)
