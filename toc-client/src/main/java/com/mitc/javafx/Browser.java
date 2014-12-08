@@ -26,7 +26,10 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
@@ -53,7 +56,11 @@ public class Browser extends Region {
         executor = Executors.newFixedThreadPool(NTHREDS);
     }
 
-    public Browser(String url, Settings settings, VertxService vertxService) {
+    public Browser(Settings settings, VertxService vertxService) throws MalformedURLException {
+
+        // load the site
+        URL url = new File(settings.getRoot() + "site/html-"+settings.getMode()+"/index.html").toURI().toURL();
+        logger.info(MessageFormat.format("Browsing file: {0}", url.toString()));
 
         if (webView == null)
             webView = new WebView();
@@ -108,7 +115,7 @@ public class Browser extends Region {
 
         });
 
-        webEngine.load(url);
+        webEngine.load(String.valueOf(url));
         getChildren().add(webView);
     }
 

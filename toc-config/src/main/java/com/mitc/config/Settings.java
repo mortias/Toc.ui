@@ -46,6 +46,14 @@ public class Settings {
         }
     }
 
+    public String getMode() {
+        return parameters.getMode();
+    }
+
+    public void setMode(String mode) {
+        parameters.setMode(mode);
+    }
+
     public String getHost() {
         return parameters.getHost();
     }

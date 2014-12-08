@@ -1,0 +1,109 @@
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 1 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<div role="tabpanel" class="tab-pane fade in active" id="tabs-1">
+
+    <div class="container">
+
+     <div class="row"><div class="col-xs-12"><br><b>Java ERCEA MicroServices - Local</b></div></div>
+     <div class="row"><div class="col-xs-12"><hr><br></div></div>
+     <div class="row">
+      <div class="col-xs-6">Weblogic 158.168.55.14</div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/console" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Console</a></div>
+      <div class="col-xs-3"></div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6">Reporting service</div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/reporting/info" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;INFO</a></div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/reporting/rest/api-docs" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;REST</a></div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6">Research service</div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/research/info" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;INFO</a></div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/research/rest/api-docs" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;REST</a></div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6">Document service</div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/documents/info" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;INFO</a></div>
+      <div class="col-xs-3"><a href="http://158.168.55.14:7001/backoffice/services/documents/rest/api-docs" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;REST</a></div>
+     </div>
+
+     <div class="row"><div class="col-xs-12"><br><b>Java ERCEA MicroServices - Dev</b></div></div>
+     <div class="row"><div class="col-xs-12"><hr><br></div></div>
+     <div class="row">
+      <div class="col-xs-6">Weblogic Norkova</div>
+      <div class="col-xs-3"><a href="http://s-erc-norkova.net1.cec.eu.int:7001/console" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Console</a></div>
+      <div class="col-xs-3"></div>
+     </div>
+
+     <div class="row"><div class="col-xs-12"><br><b>JasperReports Unix</b></div></div>
+     <div class="row"><div class="col-xs-12"><hr><br></div></div>
+     <div class="row">
+      <div class="col-xs-6"><span style="color: green;">Development</span></div>
+      <div class="col-xs-3"><a href="http://s-erc-nanut-d.net1.cec.eu.int:8080/jasperserver/login.html" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;HTTP</a></div>
+      <div class="col-xs-3"></div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6"><span style="color: orange; ">Test</span></div>
+      <div class="col-xs-3"><a href="http://s-erc-nanut-t.net1.cec.eu.int:8080/jasperserver/login.html" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;HTTP</a></div>
+      <div class="col-xs-3"></div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6"><span style="color: red; ">Production</span></div>
+      <div class="col-xs-3"><a href="http://s-erc-nanut-p.net1.cec.eu.int:8080/jasperserver/login.html" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;HTTP</a></div>
+     </div>
+
+     <br>
+     <div class="row">
+      <div class="col-xs-12">
+       <div class="panel-group" id="accordion1" role="tablist" aria-multiselectable="false">
+        <div class="panel panel-default">
+         <div class="panel-heading" role="tab" id="head1">
+          <h4 class="panel-title">
+           <a data-toggle="collapse" data-parent="#accordion1" href="#colla1" aria-expanded="true" aria-controls="colla1">
+            Continuous integration
+           </a>
+          </h4>
+         </div>
+         <div id="colla1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="head1">
+          <div class="panel-body">
+           <div class="container">
+            <div class="row">
+             <div class="col-xs-6">Jenkins Java</div>
+             <div class="col-xs-3">
+              <a href="http://s-erc-saratoga.net1.cec.eu.int:8080" title="" class="btn btn-default btn-sm">HTTP</a>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="panel panel-default">
+         <div class="panel-heading" role="tab" id="head2">
+          <h4 class="panel-title">
+           <a class="collapsed" data-toggle="collapse" data-parent="#accordion1" href="#colla2" aria-expanded="false" aria-controls="colla2">
+            Artifact repository
+           </a>
+          </h4>
+         </div>
+         <div id="colla2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="head2">
+          <div class="panel-body">
+           <div class="container">
+            <div class="row">
+             <div class="col-xs-6">Nexus</div>
+             <div class="col-xs-3">
+              <a href="https://webgate.ec.europa.eu/CITnet/nexus/index.html" title="" class="btn btn-default btn-sm">HTTP</a>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+
+</div>

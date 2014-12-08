@@ -24,14 +24,12 @@ import java.util.Map;
 @Component("Content")
 public class Content {
 
-    @Autowired
-    Settings settings;
-
-    private Logger logger = LogManager.getLogger(Content.class);
-    private Charset charset = StandardCharsets.UTF_8;
-
     private final String templatePath = "site.html";
     private final String indexPath = "index.html";
+    @Autowired
+    Settings settings;
+    private Logger logger = LogManager.getLogger(Content.class);
+    private Charset charset = StandardCharsets.UTF_8;
 
     public Content() {
     }
@@ -51,7 +49,7 @@ public class Content {
             siteMap.put("restPort", String.valueOf(settings.getRestPort()));
             siteMap.put("vertxPort", String.valueOf(settings.getVertxPort()));
             siteMap.put("hawtioPort", String.valueOf(settings.getHawtioPort()));
-            handleFile(site + "html" + settings.getPathSep(), templatePath, indexPath, siteMap, true);
+            handleFile(site + "html-" + settings.getMode() + settings.getPathSep(), templatePath, indexPath, siteMap, true);
 
             String swagger = settings.getRoot() + "tools" + settings.getPathSep() + "swagger" + settings.getPathSep();
             Map<String, String> swaggerMap = new HashMap<>();

@@ -17,6 +17,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.MessageFormat;
@@ -41,13 +42,9 @@ public class Toc extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, URISyntaxException {
+    public void start(Stage stage) throws MalformedURLException {
 
-        // load the site
-        URL url = new File(settings.getRoot() + "site/html/index.html").toURI().toURL();
-        logger.info(MessageFormat.format("Browsing file: {0}", url.toString()));
-
-        Browser browser = new Browser(url.toString(), settings, vertxService);
+        Browser browser = new Browser(settings, vertxService);
 
         Scene scene = new Scene(browser, settings.getWidth(), settings.getHeight(), Color.web("#000000"));
         scene.setFill(Color.TRANSPARENT);

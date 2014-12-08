@@ -1,0 +1,207 @@
+
+<!-- ------------------------------------------------- -->
+<!-- --------------------- TAB 6 --------------------- -->
+<!-- ------------------------------------------------- -->
+
+<script src="../scripts/vertx/sockjs-0.3.4.min.js"></script>
+<script src="../scripts/vertx/vertxbus.js"></script>
+<script src="../scripts/vertx/eventbus-bootstrap.js"></script>
+
+<script src="../scripts/d3js/d3.process.js"></script>
+<script src="../scripts/d3js/d3.v3.min.js"></script>
+
+<div role="tabpanel" class="tab-pane fade active" id="tabs-6">
+
+    <div class="container">
+     <div class="row"><div class="col-xs-12"><br><b>Embedded tools</b></div></div>
+     <div class="row"><div class="col-xs-12"><hr><br></div></div>
+     <div class="row">
+      <div class="col-xs-12" style="white-space:nowrap;">
+        <a href="../../tools/swagger/index.html" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Swagger</a></button>&nbsp;&nbsp;&nbsp;
+        <a id="hawtio" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Hawt.io</a></button>&nbsp;&nbsp;&nbsp;
+        <a id="verify" title="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Verify links</a></button>
+      </div>
+     </div>
+     <div class="row">
+      <div class="col-xs-6"><br><b>Health checks</b></div>
+      <div class="col-xs-6"><br><b>CPU Monitoring</b></div>
+     </div>
+     <div class="row"><div class="col-xs-12"><hr><br></div></div>
+     <div class="row">
+      <div class="col-xs-6" style="vertical-align: top">
+       Rest <span id="rest_info">Not connected</span><br>
+       Vertx <span id="vertx_info">Not connected</span><br>
+       Hawt.io <span id="hawt_info">Not connected</span><br>
+      </div>
+      <div class="col-xs-6">
+       <table>
+        <tr>
+         <td colspan="2" align="center">
+          Uptime <span id="system_info3">N/A</span><br><br>
+         </td>
+        </tr>
+        <tr>
+          <td align="center" valign="top" nowrap>
+           &nbsp;
+           <svg width="85" height="85">
+            <defs>
+             <clipPath id="clip1"><rect x="-30" y="-30" width="100" height="100"></rect></clipPath>
+            </defs>
+            <g transform="translate(35,35)">
+             <circle fill="steelblue" clip-path="url(#clip1)" r="30"></circle>
+             <circle fill="none" stroke="black" stroke-width="1.5" r="30"></circle>
+            </g>
+           </svg>
+          </td>
+          <td align="center" valign="top" nowrap>
+           &nbsp;
+           <svg width="85" height="85">
+            <defs>
+             <clipPath id="clip2"><rect x="-30" y="-30" width="100" height="100"></rect></clipPath>
+            </defs>
+            <g transform="translate(35,35)">
+             <circle fill="steelblue" clip-path="url(#clip2)" r="30"></circle>
+             <circle fill="none" stroke="black" stroke-width="1.5" r="30"></circle>
+            </g>
+           </svg>
+          </td>
+         </tr>
+         <tr>
+          <td align="center">System CPU<br><span id="system_info1">N/A</span></td>
+          <td align="center">Process CPU<br><span id="system_info2">N/A</span></td>
+         </tr>
+        </table>
+      </div>
+     </div>
+   </div>
+
+</div>
+
+
+<!-- Dialogs -->
+<style>
+
+ .modal-dialog {
+   position:absolute;
+   top:50% !important;
+   transform: translate(0, -50%) !important;
+    -ms-transform: translate(0, -50%) !important;
+    -webkit-transform: translate(0, -50%) !important;
+   margin:auto 5%;
+   width:90%;
+   height:40%;
+  }
+</style>
+
+<div class="modal fade" id="dialog-start-hawtio" tabindex="-1" role="dialog" aria-labelledby="lbl1" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="lbl1">Hawt.io disabled</h4>
+   </div>
+   <div class="modal-body">Hawt.io is currently not running.. Would you like to start it?</div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="launch">Launch</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="modal fade" id="dialog-link-hawtio" tabindex="-1" role="dialog" aria-labelledby="lbl2" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="lbl2">Hawt.io started</h4>
+   </div>
+   <div class="modal-body">Hawt.io is started! You can find it here:<br>
+    <a href="http://${host}:${hawtioPort}/hawtio">http://${host}:${hawtioPort}/hawtio</a>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="modal fade" id="dialog-get-key" tabindex="-1" role="dialog" aria-labelledby="lbl3" aria-hidden="true">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h4 class="modal-title" id="lbl3">Authorization required</h4>
+   </div>
+   <div class="modal-body">
+    <label for="encKey">Encryption key:</label>
+    <input id="encKey" name="encKey" type="text"/>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-primary" id="submitEncKey">Unlock</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- Scripts -->
+<script>
+
+ $(document).ready(function () {
+  openConn("http://${host}:${vertxPort}/eventbus");
+ });
+
+ $(function () {
+
+  $('[data-toggle="tooltip"]').tooltip();
+
+  // Submit the key via SockJs/Vertx
+  $('#submitEncKey').click(function() {
+   var json = {
+    "action" : "sendEncryptionKey",
+    "encKey" : $('#encKey').val()};
+   boWrite(json);
+   $("#dialog-get-key").modal('hide');
+  });
+
+  // Submit the key via SockJs/Vertx
+  $('#launch').click(function() {
+     var json = {"action": "startHawtIoServer"};
+     boWrite(json);
+     $("#dialog-start-hawtio").modal('hide');
+  });
+
+  // Start verifying all links
+  $('#verify').click(function() {
+   $("a[href*='http']").each(function() {
+      var json = {
+       "action": "checkIfHrefIsValid",
+       "target": this.href
+      };
+      boWrite(json);
+   });
+  });
+
+  // Check if hawt.io is running
+  $('#hawtio').click(function() {
+   var json = {"action" : "checkIfHawtIoIsRunning"};
+   boWrite(json);
+  });
+
+  // Get the toc version via REST
+  $.ajax({
+   type: "GET",
+   dataType: "html",
+   url: "http://${host}:${restPort}/api/toc/info",
+   beforeSend: function(xhr) {
+    xhr.setRequestHeader("Accept", "text/html");
+   },
+   success: function(response) {
+    $('span[id="rest_info"]').text(response);
+   }
+  });
+
+ });
+
+</script>

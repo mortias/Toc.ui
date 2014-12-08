@@ -22,6 +22,7 @@ public class Parameters {
     private String key;
     private String root;
     private String theme;
+    private String mode;
     private String pathSep;
     private String host;
 
@@ -35,6 +36,7 @@ public class Parameters {
     public Parameters() {
 
         theme = "cupertino";
+        mode = "jquery-ui";
 
         restPort = 9999;
         vertxPort = 8888;
@@ -187,4 +189,13 @@ public class Parameters {
     public void setProxyPort(Integer proxyPort) {
         this.proxyPort = proxyPort;
     }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+
 }
