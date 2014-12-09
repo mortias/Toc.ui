@@ -16,7 +16,7 @@
   # hawtioPort: 7777
 
   hawtio: false
-  monitoring: true
+  monitoring: false
 
   # proxyUser:
   # proxyPass:
