@@ -105,7 +105,7 @@ public class Browser extends Region {
                     for (int i = 0; i != lst.getLength(); i++) {
                         Element el = (Element) lst.item(i);
                         String target = el.toString();
-                        if (!target.contains("#tabs") && target.length() > 0) {
+                        if (!target.contains("index.html#") && target.length() > 0) {
                             logger.trace(MessageFormat.format("Adding eventListener to: {0}", target));
                             ((EventTarget) el).addEventListener("click", listener, true);
                         }

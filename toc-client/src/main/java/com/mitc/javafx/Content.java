@@ -83,7 +83,8 @@ public class Content {
                         }
                     });
             res = new StrSubstitutor(files).replace(res);
-            res = res.replace("a href=\"", "a href=\"file:\\\\\\");
+            res = res.replace("a href=\"", "a href=\"file:\\\\\\")
+                     .replace("a href=\"file:\\\\\\#", "a href=\"#");
         }
 
         res = new StrSubstitutor(props).replace(res);
