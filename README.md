@@ -36,7 +36,7 @@ You could also use this as a DevOps tool to monitor your services. Also this is 
 - Adding an embedded mailserver or scheduler
 
 ## The sky is the limit!
-- Appart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, shared content etc. Almost anything is possible because you have access to the underlying OS you are running, and you have an eventbus and restservice at your disposal.
+- Apart from creating shortcuts and verifying links you can make the most out of the embedded Vert.x/SockJs and Rest servers, for project monitoring, notifications, automation, shared content etc. Almost anything is possible because you have access to the underlying OS you are running, and you have an eventbus and restservice at your disposal.
 
 ## Disclaimer
 This tool provides the possibility to run and execute binaries on your OS, use this with care as i'm not responsible for direct, indirect, incidental or consequential damages resulting from any defect, error or failure of this software.
